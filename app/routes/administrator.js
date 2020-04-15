@@ -1,5 +1,7 @@
 
 
+import NotFoundPage from 'containers/NotFoundPage'
+
 export default function (LazyLoadedRoute) {
 
     return [
@@ -8,17 +10,23 @@ export default function (LazyLoadedRoute) {
             title: "Login Page",
             path: "/",
             exact: true,
-            component: LazyLoadedRoute('LoginPage') 
+            component: LazyLoadedRoute({
+                name: 'session',
+                container: 'LoginPage'
+            }) 
         },
         {
             name: "register",
             title: "Register Page",
             path: "/register",
-            component: LazyLoadedRoute('RegisterPage')
+            component: LazyLoadedRoute({
+                name: 'session',
+                container: 'RegisterPage'
+            }) 
         },
         {
             path: "*",
-            component: LazyLoadedRoute('NotFoundPage')
+            component: NotFoundPage
         }
     ];
 

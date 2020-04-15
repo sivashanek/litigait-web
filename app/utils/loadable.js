@@ -7,7 +7,7 @@ const loadable = (name, importFunc, { fallback = null } = { fallback: null }) =>
   const LazyComponent = lazy(importFunc);
   const LazyStorage = storage(name);
   console.log('LazyStorage', LazyStorage);
-  const { reducer, sagas} = LazyStorage;
+ // const { reducer, sagas} = LazyStorage;
  
   return props => (
       <Suspense fallback={fallback}>

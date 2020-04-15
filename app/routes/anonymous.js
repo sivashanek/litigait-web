@@ -20,9 +20,9 @@ export default function (LazyLoadedRoute) {
             title: "Register Page",
             path: "/register",
             component: LazyLoadedRoute({
-                name: 'register',
+                name: 'session',
                 container: 'RegisterPage'
-            })
+            }) 
         },
         {
             path: "*",

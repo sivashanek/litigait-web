@@ -8,7 +8,7 @@ import RouteWithoutSubRoutes from 'utils/RouteWithoutSubRoutes';
 import LazyLoadedRouteProvider from 'utils/LazyLoadedRoute';
 
 export default function routes(store) {
-
+  
   const LazyLoadedRoute = LazyLoadedRouteProvider(store);
 
   const routeSwitcher = (user, loggedIn) => {
@@ -23,6 +23,6 @@ export default function routes(store) {
     }
   };
 
-  return <RouteWithoutSubRoutes pages={anonymousRoutesProvider(LazyLoadedRoute)} />;
+  return <RouteWithSubRoutes pages={anonymousRoutesProvider(LazyLoadedRoute)} />;
 
 }
