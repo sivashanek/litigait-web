@@ -37,8 +37,10 @@ export function LoginPage({
       <div>
           <h1>Welcome to Login Page</h1>
           <Link to="/register">SignUp</Link>
+          <div>
           {!loggedIn ? <button onClick={()=>dispatch(logIn())}>Login Here..</button> :
           <button onClick={()=>alert()}>Logout</button> }
+          </div>
       </div>
   );
 }

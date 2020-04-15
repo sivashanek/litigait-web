@@ -21,19 +21,27 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
-export default function App({pages, children}) {
-  return (
-    <AppWrapper>
-      <Helmet
-        titleTemplate="Litigait"
-        defaultTitle="Litigait"
-      >
-        <meta name="description" content="A Litigait application" />
-      </Helmet>
-      <div>
-        {children}
-      </div>
-      <GlobalStyle />
-    </AppWrapper>
-  );
+export default function (pages) {
+
+  class App extends React.Component{
+    render() {
+      return (
+        <AppWrapper>
+          <Helmet
+            titleTemplate="Litigait"
+            defaultTitle="Litigait"
+          >
+            <meta name="description" content="A Litigait application" />
+          </Helmet>
+          <div>
+            {this.props.children}
+          </div>
+          <GlobalStyle />
+        </AppWrapper>
+      );
+    }
+  }
+
+  return App;
+  
 }

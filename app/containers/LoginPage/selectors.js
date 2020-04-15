@@ -5,29 +5,29 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectGlobal = state => state.session;
+const selectSession = state => state.session || initialState;
 
 const makeSelectLoading = () =>
   createSelector(
-    selectGlobal,
-    globalState => globalState && globalState.loading || false,
+    selectSession,
+    session => session.loading || false,
   );
 
 const makeSelectError = () =>
   createSelector(
-    selectGlobal,
-    globalState => globalState && globalState.error || false,
+    selectSession,
+    session => session.error || false,
   );
 
   const makeSelectLoggedIn = () =>
   createSelector(
-    selectGlobal,
-    globalState => globalState && globalState.loggedIn || false,
+    selectSession,
+    session => session.loggedIn || false,
   );
 
 
 export {
-  selectGlobal,
+  selectSession,
   makeSelectLoading,
   makeSelectError,
   makeSelectLoggedIn
