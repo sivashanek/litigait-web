@@ -16,7 +16,7 @@ export default function records(name) {
     actions: actualActions,
     constants: actualConstants,
     reducer: actualReducer,
-    sagas: actualSagas,
+    saga: actualSagas,
     selectors: actualSelectors,
   };
 }

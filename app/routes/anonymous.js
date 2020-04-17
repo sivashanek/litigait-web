@@ -11,7 +11,6 @@ export default function (LazyLoadedRoute) {
             path: "/",
             exact: true,
             component: LazyLoadedRoute({
-                name: 'session',
                 container: 'LoginPage'
             }) 
         },
@@ -20,7 +19,7 @@ export default function (LazyLoadedRoute) {
             title: "Register Page",
             path: "/register",
             component: LazyLoadedRoute({
-                name: 'session',
+                name: 'register',
                 container: 'RegisterPage'
             }) 
         },

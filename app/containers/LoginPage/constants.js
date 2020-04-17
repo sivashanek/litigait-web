@@ -1,12 +1,17 @@
 /*
- * AppConstants
- * Each action has a corresponding type, which the reducer knows and picks up on.
- * To avoid weird typos between the reducer and the actions, we save them as
- * constants here. We prefix them with 'yourproject/YourComponent' so we avoid
- * reducers accidentally picking up actions they shouldn't.
  *
- * Follow this format:
- * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
+ * Session constants
+ *
  */
 
-export const LOG_IN = 'app/session/LOG_IN';
+export const VERIFY_SESSION = 'ds/session/VERIFY_SESSION';
+export const VERIFY_SESSION_SUCCESS = 'ds/session/VERIFY_SESSION_SUCCESS';
+export const VERIFY_SESSION_ERROR = 'ds/session/VERIFY_SESSION_ERROR';
+
+export const LOG_IN = 'ds/session/LOG_IN';
+export const LOG_IN_SUCCESS = 'ds/session/LOG_IN_SUCCESS';
+export const LOG_IN_ERROR = 'ds/session/LOG_IN_ERROR';
+
+export const LOG_OUT = 'ds/session/LOG_OUT';
+export const LOG_OUT_SUCCESS = 'ds/session/LOG_OUT_SUCCESS';
+export const LOG_OUT_ERROR = 'ds/session/LOG_OUT_ERROR';

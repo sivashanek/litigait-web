@@ -88,12 +88,14 @@
     "react-intl": "2.8.0",
     "react-redux": "7.0.2",
     "react-router-dom": "5.0.0",
+    "react-router-redux": "^4.0.8",
     "react-table": "^7.0.4",
     "redux": "4.0.1",
     "redux-form": "^8.3.5",
     "redux-saga": "1.0.2",
     "reselect": "4.0.0",
     "sanitize.css": "8.0.0",
+    "store2": "^2.11.1",
     "styled-components": "4.2.0"
   },
   "devDependencies": {

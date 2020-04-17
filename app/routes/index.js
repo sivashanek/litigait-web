@@ -6,9 +6,13 @@ import administratorRoutesProvider from './administrator';
 import RouteWithSubRoutes from 'utils/RouteWithSubRoutes';
 import RouteWithoutSubRoutes from 'utils/RouteWithoutSubRoutes';
 import LazyLoadedRouteProvider from 'utils/LazyLoadedRoute';
+import { Map as iMap } from "immutable";
 
 export default function routes(store) {
-  
+  console.log('store', store);
+  store.subscribe(()=> {
+    console.log('sks', store.getState());
+  })
   const LazyLoadedRoute = LazyLoadedRouteProvider(store);
 
   const routeSwitcher = (user, loggedIn) => {

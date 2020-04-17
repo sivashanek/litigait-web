@@ -14,9 +14,9 @@ import { Link } from 'react-router-dom';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
-  makeSelectLoggedIn,
-  makeSelectLoading,
-  makeSelectError,
+  selectLoggedIn,
+  selectUser,
+  selectError,
 } from './selectors';
 
 import reducer from './reducer';
@@ -25,7 +25,7 @@ import { logIn } from './actions';
 
 export function LoginPage({
   loggedIn,
-  loading,
+  user,
   error,
   dispatch
 }) {
@@ -38,7 +38,7 @@ export function LoginPage({
           <h1>Welcome to Login Page</h1>
           <Link to="/register">SignUp</Link>
           <div>
-          {!loggedIn ? <button onClick={()=>dispatch(logIn())}>Login Here..</button> :
+          {!loggedIn ? <button onClick={()=>dispatch(logIn('admin@test.com','test'))}>Login Here..</button> :
           <button onClick={()=>alert()}>Logout</button> }
           </div>
       </div>
@@ -46,15 +46,15 @@ export function LoginPage({
 }
 
 LoginPage.propTypes = {
-  loading: PropTypes.bool,
+  user: PropTypes.object,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   loggedIn: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-  loggedIn: makeSelectLoggedIn(),
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
+  loggedIn: selectLoggedIn(),
+  user: selectUser(),
+  error: selectError(),
 });
 
 export function mapDispatchToProps(dispatch) {

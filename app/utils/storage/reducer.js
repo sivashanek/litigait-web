@@ -4,13 +4,12 @@
  *
  */
 
-import { fromJS } from 'immutable';
 
-const initialState = fromJS({
+const initialState = {
   loading: false,
   error: false,
   lastUpdate: null
-});
+};
 
 export default function reducer(constants, name) {
   const {
@@ -48,7 +47,7 @@ export default function reducer(constants, name) {
           .delete('success');
       case LOAD_RECORD_SUCCESS:
         return state
-          .updateIn(['records', state.get('records').findIndex((row) => row.get('id') === record.id)], (rows) => rows.merge(fromJS(Object.assign({}, record))))
+          .updateIn(['records', state.get('records').findIndex((row) => row.get('id') === record.id)], (rows) => rows.merge(Object.assign({}, record)))
           // TODO: This should not be here, it belongs in some sort of "globals" reducer. This is a temporary hack and should be fixed!!!
           .delete('error')
           .delete('updateError')
@@ -68,7 +67,7 @@ export default function reducer(constants, name) {
       case LOAD_RECORDS_SUCCESS:
         return state
           .set('loading', false)
-          .set('records', fromJS(records))
+          .set('records', records)
           .delete('error')
           .delete('updateError')
           .delete('success');
@@ -85,7 +84,7 @@ export default function reducer(constants, name) {
       case CREATE_RECORD_SUCCESS:
         return state
           .set('loading', false)
-          .update('records', fromJS([]), (rows) => rows.unshift(fromJS(record)))
+          .update('records', [], (rows) => rows.unshift(record))
           .delete('updateError')
           .delete('success');
       case CREATE_RECORD_ERROR:
@@ -102,7 +101,7 @@ export default function reducer(constants, name) {
         return state
           .set('loading', false)
           .set('success', true)
-          .updateIn(['records', state.get('records').findIndex((row) => row.get('id') === record.id)], (rows) => rows.merge(fromJS(record)))
+          .updateIn(['records', state.get('records').findIndex((row) => row.get('id') === record.id)], (rows) => rows.merge(record))
           .delete('updateError');
       case UPDATE_RECORD_ERROR:
         return state

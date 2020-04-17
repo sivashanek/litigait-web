@@ -43,7 +43,7 @@ const render = messages => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <Routes />
+          <Routes {...store} />
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

@@ -1,5 +1,5 @@
 import { delay } from 'redux-saga';
-import { call, take, put, race, select } from 'redux-saga/effects';
+import { call, take, put, race, select, all } from 'redux-saga/effects';
 import { startSubmit, stopSubmit } from 'redux-form/immutable';
 const VALID_CACHE_DIFF = -30;
 
@@ -170,12 +170,14 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
     }
   }
 
+  return function* rootSaga(){
+    yield all([
+      loadRecordSaga(),
+      loadRecordsSaga(),
+      createRecordSaga(),
+      editRecordSaga(),
+      deleteRecordSaga()
+    ])
+  }
  
-  return [
-    loadRecordSaga,
-    loadRecordsSaga,
-    createRecordSaga,
-    editRecordSaga,
-    deleteRecordSaga,
-  ];
 }

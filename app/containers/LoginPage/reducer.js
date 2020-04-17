@@ -1,31 +1,32 @@
 /*
- * AppReducer
  *
- * The reducer takes care of our data. Using actions, we can
- * update our application state. To add a new action,
- * add it to the switch statement in the reducer function
+ * Session reducer
  *
  */
 
 import produce from 'immer';
-import { LOG_IN } from './constants';
 
-// The initial state of the App
-export const initialState = {
-  loading: false,
-  error: false
-};
+import {
+  VERIFY_SESSION_SUCCESS,
+  VERIFY_SESSION_ERROR,
+  LOG_IN_SUCCESS,
+  LOG_OUT_SUCCESS,
+  LOG_IN_ERROR,
+  LOG_OUT_ERROR,
+} from './constants';
 
-/* eslint-disable default-case, no-param-reassign */
-const sessionReducer = (state = initialState, action) =>
+const initialState = { error: {}, success: {}, version: '1.0' };
+
+
+const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case LOG_IN:
+      case LOG_IN_SUCCESS:
         draft.loggedIn = true;
-        draft.error = false;
-        draft.loading = false;
+        draft.user = action.user;
+        draft.error = {};
         break;
+
     }
   });
-
-export default sessionReducer;
+export default appReducer;

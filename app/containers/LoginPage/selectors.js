@@ -1,34 +1,36 @@
-/**
- * The global state selectors
- */
-
 import { createSelector } from 'reselect';
-import { initialState } from './reducer';
+import { Map } from 'immutable';
 
-const selectSession = state => state.session || initialState;
+const selectSession = () => (state) => {
+  console.log('state',state);
+  return state ? state.session : Map()
+};
 
-const makeSelectLoading = () =>
-  createSelector(
-    selectSession,
-    session => session.loading || false,
-  );
+const selectLoggedIn = () => createSelector(
+  selectSession(),
+  (sessionState) => sessionState && sessionState.loggedIn || false,
+);
 
-const makeSelectError = () =>
-  createSelector(
-    selectSession,
-    session => session.error || false,
-  );
+const selectUser = () => createSelector(
+  selectSession(),
+  (sessionState) => sessionState && sessionState.user || {},
+);
 
-  const makeSelectLoggedIn = () =>
-  createSelector(
-    selectSession,
-    session => session.loggedIn || false,
-  );
+const selectError = () => createSelector(
+  selectSession(),
+  (sessionState) => sessionState && sessionState.error || {},
+);
+
+const selectSuccess = () => createSelector(
+  selectSession(),
+  (sessionState) => sessionState && sessionState.success || {},
+);
 
 
 export {
   selectSession,
-  makeSelectLoading,
-  makeSelectError,
-  makeSelectLoggedIn
+  selectLoggedIn,
+  selectUser,
+  selectError,
+  selectSuccess,
 };
