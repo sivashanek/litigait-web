@@ -38,6 +38,11 @@ export default function selectors(name) {
     (domain) => domain.get('updateError'),
   );
 
+  const selectUpdateTimestamp = () => createSelector(
+    selectDomain(),
+    (domain) => domain.get('lastUpdate'),
+  );
+
 
   return {
     selectDomain,
@@ -46,5 +51,6 @@ export default function selectors(name) {
     selectRecord,
     selectError,
     selectUpdateError,
+    selectUpdateTimestamp
   };
 }

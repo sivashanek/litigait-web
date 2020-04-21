@@ -1,21 +1,23 @@
+
+
+/**
+ * 
+ * Vew Record Page
+ * 
+ */
+
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+export default function (name, path, actions, selectors) {
 
-export default function() {
-    class ViewRecordPage extends React.Component {
-        constructor(props){
-            super(props);
-        }
-    
-        render() {
-            return <div>
-                <h1>Welcome to View Record Page</h1>
-                <Link to="/">Home</Link>
-            </div>
-        }
+    function ViewRecordPage() {
+
+        return (<div>
+            <h1>Welcome to View Record Page</h1>
+        </div>);
     }
-    
-    return ViewRecordPage;
+
+    return connect()(ViewRecordPage);
 
 }

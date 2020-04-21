@@ -79,3 +79,14 @@ export function logOutError(error) {
   };
 }
 
+export default {
+  verifySession,
+  verifySessionSuccess,
+  verifySessionError,
+  logIn,
+  logInSuccess,
+  logInError,
+  logOut,
+  logOutSuccess,
+  logOutError
+}

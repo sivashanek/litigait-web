@@ -10,16 +10,10 @@ import { FormattedMessage } from 'react-intl';
 
 import messages from './messages';
 
-
-
-class NotFoundPage extends React.Component {
-  render() {
-    return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
-    )
-  }
+export default function NotFound() {
+  return (
+    <h1>
+      <FormattedMessage {...messages.header} />
+    </h1>
+  );
 }
-
-export default NotFoundPage;

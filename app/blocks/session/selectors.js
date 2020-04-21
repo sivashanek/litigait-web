@@ -1,33 +1,30 @@
 import { createSelector } from 'reselect';
 import { Map } from 'immutable';
 
-const selectSession = () => (state) => {
-  console.log('state',state);
-  return state ? state.session : Map()
-};
+export const selectSession = () => (state) => state ? state.session : Map();
 
-const selectLoggedIn = () => createSelector(
+export const selectLoggedIn = () => createSelector(
   selectSession(),
   (sessionState) => sessionState && sessionState.loggedIn || false,
 );
 
-const selectUser = () => createSelector(
+export const selectUser = () => createSelector(
   selectSession(),
   (sessionState) => sessionState && sessionState.user || {},
 );
 
-const selectError = () => createSelector(
+export const selectError = () => createSelector(
   selectSession(),
   (sessionState) => sessionState && sessionState.error || {},
 );
 
-const selectSuccess = () => createSelector(
+export const selectSuccess = () => createSelector(
   selectSession(),
   (sessionState) => sessionState && sessionState.success || {},
 );
 
 
-export {
+export default {
   selectSession,
   selectLoggedIn,
   selectUser,

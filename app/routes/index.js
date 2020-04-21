@@ -1,32 +1,43 @@
 
 
+
 import React from 'react';
-import anonymousRoutesProvider from './anonymous';
-import administratorRoutesProvider from './administrator';
-import RouteWithSubRoutes from 'utils/RouteWithSubRoutes';
-import RouteWithoutSubRoutes from 'utils/RouteWithoutSubRoutes';
-import LazyLoadedRouteProvider from 'utils/LazyLoadedRoute';
-import { Map as iMap } from "immutable";
+import { Route, Switch } from 'react-router-dom';
 
-export default function routes(store) {
-  console.log('store', store);
-  store.subscribe(()=> {
-    console.log('sks', store.getState());
-  })
-  const LazyLoadedRoute = LazyLoadedRouteProvider(store);
+import App from 'containers/App';
+import Auth from 'utils/routing/auth';
+import routes from './routes';
+import simpleLazyLoadedRouteProvider from 'utils/routing/SimpleLazyLoadedRoute';
+import { useInjectSaga } from 'utils/injectSaga';
+import getInjectors from 'utils/reducerInjectors';
+import NotFoundPage from 'containers/NotFoundPage';
+import sessionSagas from 'blocks/session/saga';
 
-  const routeSwitcher = (user, loggedIn) => {
-    if (!loggedIn) {
-      return <RouteWithoutSubRoutes pages={anonymousRoutesProvider(LazyLoadedRoute)} />;
-    }
-    switch (user.role) {
-      case 'admin':
-        return <RouteWithSubRoutes pages={administratorRoutesProvider(LazyLoadedRoute)} />;
-      default:
-        return <RouteWithoutSubRoutes pages={anonymousRoutesProvider(LazyLoadedRoute)} />;
-    }
-  };
 
-  return <RouteWithSubRoutes pages={anonymousRoutesProvider(LazyLoadedRoute)} />;
+export default function (store) {
+
+    useInjectSaga({key: 'session', saga: sessionSagas});
+
+    const { injectReducer } = getInjectors(store);
+    const simpleLazyLoadedRoute = simpleLazyLoadedRouteProvider(injectReducer, useInjectSaga);
+    const routesProvider = routes(simpleLazyLoadedRoute);
+
+    return (<App>
+        <Switch>
+            {routesProvider.map((route, i) => {
+                const { path, childRoutes = [] } = route;
+                return <Auth key={i} {...route} {...store} path={`${process.env.PUBLIC_PATH || ''}/${path}`} >
+                    <div>
+                        <Switch>
+                            {childRoutes.map((child, c) => {
+                                return <Auth key={c} {...child} {...store} path={`${process.env.PUBLIC_PATH || ''}/${path}/${child.path}`} />
+                            })}
+                        </Switch>
+                    </div>
+                </Auth>
+            })}
+            <Route path="*" component={NotFoundPage} />
+        </Switch>
+    </App>)
 
 }

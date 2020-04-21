@@ -55,7 +55,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
       const currentTimestamp = Math.floor(Date.now() / 1000);
       
       if (explicitLoad) {
-        if (!invalidateCache && (lastLoad && (lastLoad - currentTimestamp) > VALID_CACHE_DIFF) && entityUrl != 'patients') {
+        if (!invalidateCache && (lastLoad && (lastLoad - currentTimestamp) > VALID_CACHE_DIFF)) {
           yield put(loadRecordsCacheHit());
         } else {
           try {

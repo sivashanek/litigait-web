@@ -50,6 +50,7 @@ export function* verifySessionSaga() {
       try {
         const user = apiData;
         yield put(verifySessionSuccess(user));
+        yield put(push(process.env.PUBLIC_PATH || '/'));
       } catch (error) {
         store2.remove('secret');
         yield put(verifySessionError(DEFAULT_SESSION_TOKEN_ERROR));
@@ -66,15 +67,13 @@ export function* verifySessionSaga() {
 export function* loginSaga() {
   while (true) { // eslint-disable-line no-constant-condition
     const { identifier, secret, form } = yield take(LOG_IN);
-    console.log('identifier', identifier);
-    console.log('secret', secret);
-    yield put(startSubmit(form));
-
+    
     try {
       const result = apiData;
       store2.set('secret', result.secret);
+      yield put(startSubmit(form));
       yield put(logInSuccess(result));
-      yield put(push(process.env.PUBLIC_PATH || '/'));
+      yield put(push(process.env.PUBLIC_PATH || '/cases'));
     } catch (error) {
       store2.remove('secret');
       yield put(logInError(error));
