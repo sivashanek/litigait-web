@@ -114,6 +114,14 @@ module.exports = options => ({
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        PUBLIC_PATH: JSON.stringify(process.env.PUBLIC_PATH),
+        API_URL: JSON.stringify(process.env.API_URL || 'http://localhost:3000'),
+        TIME_UPDATED: JSON.stringify(process.env.TIME_UPDATED),
+      },
+    }),
   ]),
   resolve: {
     modules: ['node_modules', 'app'],

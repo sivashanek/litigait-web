@@ -15,7 +15,9 @@ import sessionSagas from 'blocks/session/saga';
 
 
 export default function (store) {
-
+    store.subscribe(() => {
+        console.log('store', store.getState());
+    });
     useInjectSaga({key: 'session', saga: sessionSagas});
 
     const { injectReducer } = getInjectors(store);

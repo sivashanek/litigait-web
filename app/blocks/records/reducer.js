@@ -3,7 +3,7 @@
  *   reducer
  *
  */
-
+import produce from 'immer';
 
 const initialState = {
   loading: false,
@@ -19,113 +19,85 @@ export default function reducer(constants, name) {
     LOAD_RECORDS,
     LOAD_RECORDS_SUCCESS,
     LOAD_RECORDS_ERROR,
-    CREATE_RECORD,
     CREATE_RECORD_SUCCESS,
     CREATE_RECORD_ERROR,
-    UPDATE_RECORD,
     UPDATE_RECORD_SUCCESS,
     UPDATE_RECORD_ERROR,
-    DELETE_RECORD,
     DELETE_RECORD_SUCCESS,
     DELETE_RECORD_ERROR,
     LOAD_RECORDS_VALID_CACHE,
   } = constants;
 
   return function recordsReducer(state = initialState, { type, id, record, records, error }) {
-    switch (type) {
-      case LOAD_RECORDS_VALID_CACHE:
-        return state
-          .set('loading', false)
-          .delete('error')
-          .delete('updateError')
-          .delete('success');
-      case LOAD_RECORD:
-        return state
-          .set('loading', true)
-          .delete('error')
-          .delete('updateError')
-          .delete('success');
-      case LOAD_RECORD_SUCCESS:
-        return state
-          .updateIn(['records', state.get('records').findIndex((row) => row.get('id') === record.id)], (rows) => rows.merge(Object.assign({}, record)))
-          // TODO: This should not be here, it belongs in some sort of "globals" reducer. This is a temporary hack and should be fixed!!!
-          .delete('error')
-          .delete('updateError')
-          .delete('success')
-          .set('loading', false);
-      case LOAD_RECORD_ERROR:
-        return state
-          .set('loading', false)
-          .set('error', true)
-          .delete('success');
-      case LOAD_RECORDS:
-        return state
-          .set('loading', true)
-          .delete('error')
-          .delete('updateError')
-          .delete('success');
-      case LOAD_RECORDS_SUCCESS:
-        return state
-          .set('loading', false)
-          .set('records', records)
-          .delete('error')
-          .delete('updateError')
-          .delete('success');
-      case LOAD_RECORDS_ERROR:
-        return state
-          .set('loading', false)
-          .set('error', true)
-          .delete('success');
-      case CREATE_RECORD:
-        return state
-          .set('loading', true)
-          .delete('updateError')
-          .delete('success');
-      case CREATE_RECORD_SUCCESS:
-        return state
-          .set('loading', false)
-          .update('records', [], (rows) => rows.unshift(record))
-          .delete('updateError')
-          .delete('success');
-      case CREATE_RECORD_ERROR:
-        return state
-          .set('loading', false)
-          .set('updateError', error)
-          .delete('success');
-      case UPDATE_RECORD:
-        return state
-          .set('loading', true)
-          .delete('updateError')
-          .delete('success');
-      case UPDATE_RECORD_SUCCESS:
-        return state
-          .set('loading', false)
-          .set('success', true)
-          .updateIn(['records', state.get('records').findIndex((row) => row.get('id') === record.id)], (rows) => rows.merge(record))
-          .delete('updateError');
-      case UPDATE_RECORD_ERROR:
-        return state
-          .set('loading', false)
-          .set('updateError', error)
-          .delete('success');
-      case DELETE_RECORD:
-        return state
-          .set('loading', true)
-          .delete('updateError')
-          .delete('success');
-      case DELETE_RECORD_SUCCESS:
-        return state
-          .set('loading', false)
-          .update('records', (rows) => (rows ? rows.filterNot((row) => row.get('id') === id) : rows))
-          .delete('updateError')
-          .delete('success');
-      case DELETE_RECORD_ERROR:
-        return state
-          .set('loading', false)
-          .set('updateError', error)
-          .delete('success');
-      default:
-        return state;
-    }
+
+    return produce(state, draft => {
+      switch (type) {
+        case LOAD_RECORDS_VALID_CACHE:
+          draft.loading = false;
+          draft.error = false;
+          draft.updateError = false;
+          draft.success = false;
+          break;
+        case LOAD_RECORDS:
+        case LOAD_RECORD:
+          draft.loading = true;
+          draft.error = false;
+          draft.updateError = false;
+          draft.success = false;
+          break;
+        case LOAD_RECORDS_SUCCESS:
+          draft.records = records;
+          draft.loading = false;
+          draft.error = false;
+          draft.updateError = false;
+          draft.success = false;
+          break;
+        case LOAD_RECORD_SUCCESS:
+          draft.records = state.records;
+          draft.loading = false;
+          draft.error = false;
+          draft.updateError = false;
+          draft.success = false;
+          break;
+        case LOAD_RECORDS_ERROR:
+        case LOAD_RECORD_ERROR:
+          draft.loading = false;
+          draft.error = true;
+          draft.updateError = false;
+          draft.success = false;
+          break;
+        case CREATE_RECORD_SUCCESS:
+          draft.records = state.records.push(record);
+          draft.loading = false;
+          draft.error = false;
+          draft.updateError = false;
+          draft.success = false;
+          break;
+        case UPDATE_RECORD_SUCCESS:
+          draft.records = state.records;
+          draft.loading = false;
+          draft.error = false;
+          draft.updateError = false;
+          draft.success = false;
+          break;
+        case CREATE_RECORD_ERROR:
+        case UPDATE_RECORD_ERROR:
+        case DELETE_RECORD_ERROR:  
+          draft.loading = false;
+          draft.error = false;
+          draft.updateError = error;
+          draft.success = false;
+          break;
+        case DELETE_RECORD_SUCCESS:  
+          draft.records = state.records.filter(record => record.id !== id);
+          draft.loading = false;
+          draft.error = false;
+          draft.updateError = false;
+          draft.success = false;
+          break;
+
+      }
+    });
+
   };
 }

@@ -1,4 +1,4 @@
-import { delay } from 'redux-saga';
+
 import { call, take, put, all } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { startSubmit, stopSubmit } from 'redux-form/immutable';
@@ -18,21 +18,20 @@ import {
   logOutError,
 } from './actions';
 
-import store2 from 'store2';
 
-const apiData = {
-  "id": 1,
-  "name": "Siva",
-  "role": "admin",
-  "secret": "11be01d560593a2176fd99ce1f01b9e06d1f955e7304b2e16a50eeea532051208cca4e195bbab3f29d7e85f1a664662c0aa94f9f8f8829e24aab00cf611cdd7db8e8cd7757fec84152bde7f190b8668efda5812c93cea1815bf51ef63ed89e56aaed35ad77d74c4536e77716b2ce3ce509bc266d643a1aac52c5bb2d526919b0",
-  "version": "1.0"
-};
+import {
+  logIn,
+  logOut,
+  verifySession
+} from './remotes';
+
+import store2 from 'store2';
 
 export function* verifyInitialSessionSaga() {
   const secret = store2.get('secret');
   if (secret) {
     try {
-      const user = apiData;
+      const user = yield call(verifySession, secret);
       store2.set('secret', secret);
       yield put(verifySessionSuccess(user));
     } catch (error) {
@@ -48,7 +47,7 @@ export function* verifySessionSaga() {
     const { secret } = yield take(VERIFY_SESSION);
     if (secret) {
       try {
-        const user = apiData;
+        const user = yield call(verifySession, secret);
         yield put(verifySessionSuccess(user));
         yield put(push(process.env.PUBLIC_PATH || '/'));
       } catch (error) {
@@ -67,13 +66,13 @@ export function* verifySessionSaga() {
 export function* loginSaga() {
   while (true) { // eslint-disable-line no-constant-condition
     const { identifier, secret, form } = yield take(LOG_IN);
-    
+    yield put(startSubmit(form));
+     
     try {
-      const result = apiData;
-      store2.set('secret', result.secret);
-      yield put(startSubmit(form));
+      const result = yield call(logIn, identifier, secret);
+      store2.set('secret', result.authToken);
       yield put(logInSuccess(result));
-      yield put(push(process.env.PUBLIC_PATH || '/cases'));
+      yield put(push(process.env.PUBLIC_PATH || '/'));
     } catch (error) {
       store2.remove('secret');
       yield put(logInError(error));
@@ -89,6 +88,7 @@ export function* logOutSaga() {
 
     if (watcher) {
       try {
+        yield call(logOut);
         yield put(logOutSuccess());
       } catch (error) {
         yield put(logOutError(error));
