@@ -28,7 +28,7 @@ export default function (store) {
     const simpleLazyLoadedRoute = simpleLazyLoadedRouteProvider(injectReducer, injectSaga);
     const routesProvider = routes(simpleLazyLoadedRoute);
 
-    return (<App>
+    return (<App pages={routesProvider.filter(_=>_.data && !_.data.route)}>
         <Switch>
             {routesProvider.map((route, i) => {
                 const { path, childRoutes = [] } = route;

@@ -19,6 +19,11 @@ export default function (simpleLazyLoadedRoute){
             path: `clients`,
             name: 'clients',
             require: ['RecordsPage', 'clients'],
+            data: {
+                path: '/clients',
+                title: 'Clients',
+                icon: 'Group'
+            },
             container: function RecordsPage(clients){
                 return this('clients', `${process.env.PUBLIC_PATH || ''}/clients`, clients.actions, clients.selectors)
             },
@@ -53,6 +58,11 @@ export default function (simpleLazyLoadedRoute){
             path: `cases`,
             name: 'cases',
             require: ['RecordsPage', 'cases'],
+            data: {
+                path: '/cases',
+                title: 'Cases',
+                icon: 'Business'
+            },
             container: function RecordsPage(cases){
                 return this('cases', `${process.env.PUBLIC_PATH || ''}/cases`, cases.actions, cases.selectors)
             },
@@ -89,6 +99,11 @@ export default function (simpleLazyLoadedRoute){
             require: ['RecordsPage', 'orders'],
             container: function RecordsPage(orders){
                 return this('orders', `${process.env.PUBLIC_PATH || ''}/orders`, orders.actions, orders.selectors)
+            },
+            data: {
+                path: '/orders',
+                title: 'Orders',
+                icon: 'ShoppingCart'
             },
             childRoutes: [
                 simpleLazyLoadedRoute({

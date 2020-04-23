@@ -21,6 +21,7 @@ export default function (name, path, actions, selectors) {
     } = selectors;
 
     function RecordsPage(props) {
+        console.log('Recordd', props);
         const { dispatch, records } = props;
         
         useEffect(() => {
@@ -28,7 +29,7 @@ export default function (name, path, actions, selectors) {
         });
 
         return (<div>
-            <h1>Welcome to Records Page</h1>
+            <h1>{name}</h1>
             <ul>
                 <li><Link to={`${props.match.path}/create`}>Create Page</Link></li>
                 <li><Link to={`${props.match.path}/2/edit`}>Edit Page</Link></li>
@@ -38,7 +39,7 @@ export default function (name, path, actions, selectors) {
                 {records && records.length > 0 ? 
                     records.map((record, index) => {
                     return <div style={{display:'flex'}}>
-                        name: record.name, 
+                        name: {record.name}, 
                         Email: {record.email},
                         <Link to={`${props.match.path}/${index}`}>View</Link>
                         <button onClick={()=> dispatch(actions.deleteRecord(index))}> Delete </button>
