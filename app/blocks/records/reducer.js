@@ -29,7 +29,7 @@ export default function reducer(constants, name) {
   } = constants;
 
   return function recordsReducer(state = initialState, { type, id, record, records, error }) {
-
+    
     return produce(state, draft => {
       switch (type) {
         case LOAD_RECORDS_VALID_CACHE:
@@ -47,13 +47,14 @@ export default function reducer(constants, name) {
           break;
         case LOAD_RECORDS_SUCCESS:
           draft.records = records;
+          draft.lastUpdate = Math.floor(Date.now() / 1000);
           draft.loading = false;
           draft.error = false;
           draft.updateError = false;
           draft.success = false;
           break;
         case LOAD_RECORD_SUCCESS:
-          draft.records = state.records;
+          draft.records.push(record);
           draft.loading = false;
           draft.error = false;
           draft.updateError = false;
@@ -67,14 +68,14 @@ export default function reducer(constants, name) {
           draft.success = false;
           break;
         case CREATE_RECORD_SUCCESS:
-          draft.records = state.records.push(record);
+          draft.records.push(record);
           draft.loading = false;
           draft.error = false;
           draft.updateError = false;
           draft.success = false;
           break;
         case UPDATE_RECORD_SUCCESS:
-          draft.records = state.records;
+          draft.records = draft.records.map((r ,i) => parseInt(record.id) === parseInt(i) ? Object.assign({}, record) : Object.assign({}, r));
           draft.loading = false;
           draft.error = false;
           draft.updateError = false;
@@ -89,7 +90,7 @@ export default function reducer(constants, name) {
           draft.success = false;
           break;
         case DELETE_RECORD_SUCCESS:  
-          draft.records = state.records.filter(record => record.id !== id);
+          draft.records = draft.records.filter((r, i) => parseInt(i) !== parseInt(id));
           draft.loading = false;
           draft.error = false;
           draft.updateError = false;

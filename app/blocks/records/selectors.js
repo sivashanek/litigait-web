@@ -3,7 +3,7 @@ import { List, Map } from 'immutable';
 
 
 export default function selectors(name) {
-  const selectDomain = () => (state) => state.name;
+  const selectDomain = () => (state) => state[name] || false;
   
   const selectLoading = () => createSelector(
     selectDomain(),

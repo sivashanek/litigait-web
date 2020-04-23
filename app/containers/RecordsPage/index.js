@@ -6,7 +6,7 @@
 
 
 
-import React, { memo } from 'react';
+import React, { useEffect, memo } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -14,9 +14,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default function (name, path, actions, selectors) {
-    console.log('actions', actions);
-    console.log('selectors', selectors);
-
     const {
         selectLoading,
         selectRecords,
@@ -24,13 +21,31 @@ export default function (name, path, actions, selectors) {
     } = selectors;
 
     function RecordsPage(props) {
+        const { dispatch, records } = props;
+        
+        useEffect(() => {
+            dispatch(actions.loadRecords());
+        });
+
         return (<div>
             <h1>Welcome to Records Page</h1>
             <ul>
                 <li><Link to={`${props.match.path}/create`}>Create Page</Link></li>
                 <li><Link to={`${props.match.path}/2/edit`}>Edit Page</Link></li>
-                <li><Link to={`${props.match.path}/2`}>View Page</Link></li>
             </ul>
+            <div>
+                Records:
+                {records && records.length > 0 ? 
+                    records.map((record, index) => {
+                    return <div style={{display:'flex'}}>
+                        name: record.name, 
+                        Email: {record.email},
+                        <Link to={`${props.match.path}/${index}`}>View</Link>
+                        <button onClick={()=> dispatch(actions.deleteRecord(index))}> Delete </button>
+                    </div>
+                    }) : null}
+                    
+            </div>
             <div>
                 {props.children}
             </div>
@@ -64,7 +79,7 @@ export default function (name, path, actions, selectors) {
 
     return compose(
         withConnect,
-        memo,
+        memo
     )(RecordsPage);
 
 }

@@ -27,6 +27,14 @@ import {
 
 import store2 from 'store2';
 
+const dummyData = {
+  "authToken": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJmYWIxNDRjLWU3NjctNGFhYi04ODdhLTk3NDFmNGY4ZDNmOCIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNTg3NTIxMDUyLCJleHAiOjE1ODc2MDc0NTJ9.q5WBjgc79tL_QwFnIcOn7njESt1V-WFqx25K_-R2wI8",
+  "user": {
+      "name": "Siva",
+      "role": "superAdmin"
+  }
+};
+
 export function* verifyInitialSessionSaga() {
   const secret = store2.get('secret');
   if (secret) {
@@ -69,7 +77,8 @@ export function* loginSaga() {
     yield put(startSubmit(form));
      
     try {
-      const result = yield call(logIn, identifier, secret);
+      //const result = yield call(logIn, identifier, secret);
+      const result = dummyData;
       store2.set('secret', result.authToken);
       yield put(logInSuccess(result));
       yield put(push(process.env.PUBLIC_PATH || '/'));

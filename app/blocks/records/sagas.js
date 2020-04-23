@@ -4,6 +4,7 @@ import { startSubmit, stopSubmit } from 'redux-form/immutable';
 const VALID_CACHE_DIFF = -30;
 
 export default function sagas(constants, actions, remotes, selectors, entityUrl) {
+  
   const {
     LOAD_RECORD,
     LOAD_RECORDS,
@@ -25,6 +26,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
     updateRecordError,
     deleteRecordSuccess,
     deleteRecordError,
+    loadRecordsCacheHit 
   } = actions;
 
   const {
@@ -53,19 +55,19 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
       const { invalidateCache } = explicitLoad || {};
       const lastLoad = yield select(selectUpdateTimestamp());
       const currentTimestamp = Math.floor(Date.now() / 1000);
-      
       if (explicitLoad) {
         if (!invalidateCache && (lastLoad && (lastLoad - currentTimestamp) > VALID_CACHE_DIFF)) {
           yield put(loadRecordsCacheHit());
         } else {
           try {
-            const records = yield call(loadRecords);
+            yield put(loadRecordsSuccess([{name: 'shhid', email: 'a@g.com'}]));
+            /*const records = yield call(loadRecords);
 
             if (records) {
               yield put(loadRecordsSuccess(records));
             } else {
               yield put(loadRecordsError());
-            }
+            }*/
           } catch (error) {
             yield put(loadRecordsError(error));
           }
@@ -116,7 +118,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         yield put(startSubmit(form));
 
         try {
-          yield call(createRecord, record);
+          //yield call(createRecord, record);
           yield put(createRecordSuccess(record));
                
           yield put(stopSubmit(form));
@@ -138,7 +140,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         yield put(startSubmit(form));
 
         try {
-          yield call(updateRecord, record);
+          //yield call(updateRecord, record);
           yield put(updateRecordSuccess(record));
 
         } catch (error) {
@@ -159,7 +161,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
       if (del) {
         yield put(startSubmit(form));
         try {
-          yield call(deleteRecord, id);
+          //yield call(deleteRecord, id);
           yield put(deleteRecordSuccess(id));
           yield put(stopSubmit(form));
         } catch (error) {

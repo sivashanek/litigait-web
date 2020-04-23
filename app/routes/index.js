@@ -8,20 +8,24 @@ import App from 'containers/App';
 import Auth from 'utils/routing/auth';
 import routes from './routes';
 import simpleLazyLoadedRouteProvider from 'utils/routing/SimpleLazyLoadedRoute';
-import { useInjectSaga } from 'utils/injectSaga';
-import getInjectors from 'utils/reducerInjectors';
+import reducerInjectors from 'utils/reducerInjectors';
+import sagaInjectors from 'utils/sagaInjectors';
 import NotFoundPage from 'containers/NotFoundPage';
 import sessionSagas from 'blocks/session/saga';
 
 
 export default function (store) {
+    const { injectReducer } = reducerInjectors(store);
+    const { injectSaga } = sagaInjectors(store);
+    
+    injectSaga('session', {saga: sessionSagas});
+
     store.subscribe(() => {
         console.log('store', store.getState());
     });
-    useInjectSaga({key: 'session', saga: sessionSagas});
 
-    const { injectReducer } = getInjectors(store);
-    const simpleLazyLoadedRoute = simpleLazyLoadedRouteProvider(injectReducer, useInjectSaga);
+    
+    const simpleLazyLoadedRoute = simpleLazyLoadedRouteProvider(injectReducer, injectSaga);
     const routesProvider = routes(simpleLazyLoadedRoute);
 
     return (<App>

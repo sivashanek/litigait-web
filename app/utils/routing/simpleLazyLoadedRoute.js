@@ -1,7 +1,7 @@
 
 import records from 'blocks/records';
 
-export default (injectReducer, injectSagas) => ({ path, pageName, exact, require, container, childRoutes, data }) => ({
+export default (injectReducer, injectSaga) => ({ path, pageName, exact, require, container, childRoutes, data }) => ({
     path,
     pageName,
     exact,
@@ -15,14 +15,14 @@ export default (injectReducer, injectSagas) => ({ path, pageName, exact, require
               
             return Promise.all(promises).then(([container, ...blocks]) => { // eslint-disable-line no-shadow
               blocks.forEach((block) => {
-                const { name, reducer, sagas } = block.default || block;
+                const { name, reducer, saga } = block.default || block;
       
                 if (reducer) {
                   injectReducer(name, reducer);
                 }
       
-                if (sagas) {
-                    injectSagas({key: name, sagas});
+                if (saga) {
+                  injectSaga(name ,{saga});
                 }
               });
               
