@@ -118,7 +118,9 @@ module.exports = options => ({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         PUBLIC_PATH: JSON.stringify(process.env.PUBLIC_PATH),
-        API_URL: JSON.stringify(process.env.API_URL || 'http://localhost:3000'),
+        API_URL: JSON.stringify(
+          process.env.API_URL || 'http://localhost:3000/test',
+        ),
         TIME_UPDATED: JSON.stringify(process.env.TIME_UPDATED),
       },
     }),

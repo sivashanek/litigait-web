@@ -13,9 +13,11 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
-import { selectLoggedIn, selectUser, selectError } from 'blocks/session/selectors';
-import GlobalStyle from '../../global-styles';
-
+import {
+  selectLoggedIn,
+  selectUser,
+  selectError,
+} from 'blocks/session/selectors';
 
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -35,9 +37,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import SVG from 'react-inlinesvg';
 import Icons from 'components/Icons';
+import GlobalStyle from '../../global-styles';
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
@@ -53,21 +56,21 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: drawerWidth,
     },
     background: 'none',
-    boxShadow: 'none'
+    boxShadow: 'none',
   },
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     },
-    color: '#2DA01D'
+    color: '#2DA01D',
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
     background: '#393A3D',
-    color: '#F1F1F1'
+    color: '#F1F1F1',
   },
   content: {
     flexGrow: 1,
@@ -77,28 +80,28 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   icons: {
-    color: '#F1F1F1'
+    color: '#F1F1F1',
   },
   title: {
     color: '#2DA01D',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   link: {
     textDecoration: 'none',
-    color: '#F1F1F1'
+    color: '#F1F1F1',
   },
   settings: {
     position: 'relative',
     left: '55%',
     color: '#A6A6A9',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   help: {
     position: 'relative',
     left: '56%',
     color: '#A6A6A9',
-    cursor: 'pointer'
-  }
+    cursor: 'pointer',
+  },
 }));
 
 function App(props) {
@@ -117,17 +120,23 @@ function App(props) {
     <div>
       <div className={classes.toolbar} />
       <List>
-        <Link to={'/'} className={classes.link}>
+        {/* <Link to={'/'} className={classes.link}>
           <ListItem button key={'Dashboard'} >
             <ListItemIcon>{<Icons className={classes.icons} />}</ListItemIcon>
             <ListItemText primary={'Dashboard'} />
           </ListItem>
-        </Link>
+        </Link> */}
         {pages.map((page, index) => (
-          <Link to={page.data && page.data.path || '/'} className={classes.link}>
-            <ListItem button key={page.data && page.data.title || ''} selected={activePath.indexOf(page.data.path) > -1 ? true : false }>
-              <ListItemIcon>{<Icons className={classes.icons} type={page.data && page.data.icon || ''} />}</ListItemIcon>
-              <ListItemText primary={page.data && page.data.title || ''} />
+          <Link
+            to={(page.data && page.data.path) || '/'}
+            className={classes.link}
+          >
+            <ListItem
+              button
+              key={(page.data && page.data.title) || ''}
+              selected={activePath.indexOf(page.data.path) > -1}
+            >
+              <ListItemText primary={(page.data && page.data.title) || ''} />
             </ListItem>
           </Link>
         ))}
@@ -137,59 +146,72 @@ function App(props) {
 
   return (
     <div className={classes.root}>
-      {loggedIn ? <div>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <IconButton
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              className={classes.menuButton}>
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h5" noWrap className={classes.title}>
-              D & J Law Firm
-            </Typography>
-            <Typography noWrap className={classes.settings}>
-              <SVG src={require('images/icons/settins.svg')} style={{width: '23px'}} /> rifluxyss@gmail.com
-            </Typography>
-            
-            <Typography noWrap className={classes.help}>
-              <SVG src={require('images/icons/help.svg')} style={{width: '23px'}} /> Help
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <nav className={classes.drawer} aria-label="mailbox folders">
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Hidden smUp implementation="css">
-            <Drawer
-              container={container}
-              variant="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              ModalProps={{
-                keepMounted: true, // Better open performance on mobile.
-              }}>
-              {drawer}
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              variant="permanent"
-              open>
-              {drawer}
-            </Drawer>
-          </Hidden>
-        </nav>
-      </div> : null}
+      {loggedIn ? (
+        <div>
+          <CssBaseline />
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+              <IconButton
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                className={classes.menuButton}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h5" noWrap className={classes.title}>
+                D & J Law Firm
+              </Typography>
+              <Typography noWrap className={classes.settings}>
+                <SVG
+                  src={require('images/icons/settins.svg')}
+                  style={{ width: '23px' }}
+                />{' '}
+                rifluxyss@gmail.com
+              </Typography>
+
+              <Typography noWrap className={classes.help}>
+                <SVG
+                  src={require('images/icons/help.svg')}
+                  style={{ width: '23px' }}
+                />{' '}
+                Help
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <nav className={classes.drawer} aria-label="mailbox folders">
+            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+            <Hidden smUp implementation="css">
+              <Drawer
+                container={container}
+                variant="temporary"
+                anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                classes={{
+                  paper: classes.drawerPaper,
+                }}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile.
+                }}
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+            <Hidden xsDown implementation="css">
+              <Drawer
+                classes={{
+                  paper: classes.drawerPaper,
+                }}
+                variant="permanent"
+                open
+              >
+                {drawer}
+              </Drawer>
+            </Hidden>
+          </nav>
+        </div>
+      ) : null}
       <main className={loggedIn ? classes.content : classes.login}>
         {loggedIn ? <div className={classes.toolbar} /> : null}
         {props.children}
@@ -198,7 +220,6 @@ function App(props) {
     </div>
   );
 }
-
 
 App.propTypes = {
   user: PropTypes.object,
@@ -210,10 +231,7 @@ const mapStateToProps = createStructuredSelector({
   error: selectError(),
 });
 
-
-const withConnect = connect(
-  mapStateToProps
-);
+const withConnect = connect(mapStateToProps);
 
 export default compose(
   withConnect,

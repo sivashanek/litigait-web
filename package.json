@@ -57,7 +57,8 @@
     "*.json": [
       "prettier --write",
       "git add --force"
-    ]
+    ],
+    "concurrent": false
   },
   "pre-commit": "lint:staged",
   "resolutions": {

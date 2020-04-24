@@ -1,14 +1,10 @@
-
 import { call, take, put, all } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { startSubmit, stopSubmit } from 'redux-form/immutable';
 import { DEFAULT_SESSION_TOKEN_ERROR } from 'utils/errors.js';
 
-import {
-  LOG_IN,
-  LOG_OUT,
-  VERIFY_SESSION
-} from './constants';
+import store2 from 'store2';
+import { LOG_IN, LOG_OUT, VERIFY_SESSION } from './constants';
 import {
   verifySessionSuccess,
   verifySessionError,
@@ -18,21 +14,15 @@ import {
   logOutError,
 } from './actions';
 
-
-import {
-  logIn,
-  logOut,
-  verifySession
-} from './remotes';
-
-import store2 from 'store2';
+import { logIn, logOut, verifySession } from './remotes';
 
 const dummyData = {
-  "authToken": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJmYWIxNDRjLWU3NjctNGFhYi04ODdhLTk3NDFmNGY4ZDNmOCIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNTg3NTIxMDUyLCJleHAiOjE1ODc2MDc0NTJ9.q5WBjgc79tL_QwFnIcOn7njESt1V-WFqx25K_-R2wI8",
-  "user": {
-      "name": "Siva",
-      "role": "superAdmin"
-  }
+  authToken:
+    'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJmYWIxNDRjLWU3NjctNGFhYi04ODdhLTk3NDFmNGY4ZDNmOCIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNTg3NTIxMDUyLCJleHAiOjE1ODc2MDc0NTJ9.q5WBjgc79tL_QwFnIcOn7njESt1V-WFqx25K_-R2wI8',
+  user: {
+    name: 'Siva',
+    role: 'superAdmin',
+  },
 };
 
 export function* verifyInitialSessionSaga() {
@@ -51,7 +41,8 @@ export function* verifyInitialSessionSaga() {
 }
 
 export function* verifySessionSaga() {
-  while (true) { // eslint-disable-line no-constant-condition
+  while (true) {
+    // eslint-disable-line no-constant-condition
     const { secret } = yield take(VERIFY_SESSION);
     if (secret) {
       try {
@@ -72,16 +63,17 @@ export function* verifySessionSaga() {
 }
 
 export function* loginSaga() {
-  while (true) { // eslint-disable-line no-constant-condition
+  while (true) {
+    // eslint-disable-line no-constant-condition
     const { identifier, secret, form } = yield take(LOG_IN);
     yield put(startSubmit(form));
-     
+
     try {
-      //const result = yield call(logIn, identifier, secret);
-      const result = dummyData;
+      const result = yield call(logIn, identifier, secret);
+      // const result = dummyData;
       store2.set('secret', result.authToken);
       yield put(logInSuccess(result));
-      yield put(push(process.env.PUBLIC_PATH || '/'));
+      yield put(push(process.env.PUBLIC_PATH || '/clients'));
     } catch (error) {
       store2.remove('secret');
       yield put(logInError(error));
@@ -92,7 +84,8 @@ export function* loginSaga() {
 }
 
 export function* logOutSaga() {
-  while (true) { // eslint-disable-line no-constant-condition
+  while (true) {
+    // eslint-disable-line no-constant-condition
     const watcher = yield take(LOG_OUT);
 
     if (watcher) {
@@ -109,13 +102,11 @@ export function* logOutSaga() {
   }
 }
 
-
-
-export default function* rootSaga(){
+export default function* rootSaga() {
   yield all([
     verifyInitialSessionSaga(),
     verifySessionSaga(),
     loginSaga(),
-    logOutSaga()
-  ])
+    logOutSaga(),
+  ]);
 }
