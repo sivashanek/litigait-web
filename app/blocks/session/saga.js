@@ -69,8 +69,8 @@ export function* loginSaga() {
     yield put(startSubmit(form));
 
     try {
-      const result = yield call(logIn, identifier, secret);
-      // const result = dummyData;
+      // const result = yield call(logIn, identifier, secret);
+      const result = dummyData;
       store2.set('secret', result.authToken);
       yield put(logInSuccess(result));
       yield put(push(process.env.PUBLIC_PATH || '/clients'));

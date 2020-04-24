@@ -49,14 +49,16 @@ const useStyles = makeStyles(theme => ({
       width: drawerWidth,
       flexShrink: 0,
     },
+    background: '#393a3d',
+
   },
   appBar: {
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
-    background: 'none',
     boxShadow: 'none',
+    background: 'none',
   },
   menuButton: {
     marginRight: theme.spacing(2),

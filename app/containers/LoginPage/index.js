@@ -134,9 +134,7 @@ export function LoginPage(props) {
               className={classes.submit}
               onClick={() =>
                 dispatch(logIn(updatedValue.email, updatedValue.password))
-              }
-            >
-              } > Sign In
+              }> Sign In
             </Button>
             <Grid container>
               <Grid item xs>

@@ -60,7 +60,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
           yield put(loadRecordsCacheHit());
         } else {
           try {
-            yield put(loadRecordsSuccess([{name: 'shhid', email: 'a@g.com'}]));
+            yield put(loadRecordsSuccess([{name: 'test', email: 'a@g.com'}]));
             /*const records = yield call(loadRecords);
 
             if (records) {
