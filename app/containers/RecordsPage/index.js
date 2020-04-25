@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default function (name, path, actions, selectors) {
+export default function (name, path, columns, actions, selectors) {
     const {
         selectLoading,
         selectRecords,
@@ -21,7 +21,6 @@ export default function (name, path, actions, selectors) {
     } = selectors;
 
     function RecordsPage(props) {
-        console.log('Recordd', props);
         const { dispatch, records } = props;
         
         useEffect(() => {
@@ -38,7 +37,7 @@ export default function (name, path, actions, selectors) {
                 Records:
                 {records && records.length > 0 ? 
                     records.map((record, index) => {
-                    return <div style={{display:'flex'}}>
+                    return <div key={index} style={{display:'flex'}}>
                         name: {record.name}, 
                         Email: {record.email},
                         <Link to={`${props.match.path}/${index}`}>View</Link>

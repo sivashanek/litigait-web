@@ -9,7 +9,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-export default function (name, path, actions, selectors) {
+export default function (name, path, columns, actions, selectors) {
 
     function CreateRecordPage(props) {
         

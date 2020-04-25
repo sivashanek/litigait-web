@@ -17,6 +17,7 @@ import {
   selectLoggedIn,
   selectUser,
   selectError,
+  selectLocation,
 } from 'blocks/session/selectors';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -109,7 +110,6 @@ const useStyles = makeStyles(theme => ({
 function App(props) {
   const { loggedIn, container, pages } = props;
   const activePath = location.pathname;
-  console.log('activePath', activePath);
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -122,22 +122,15 @@ function App(props) {
     <div>
       <div className={classes.toolbar} />
       <List>
-        {/* <Link to={'/'} className={classes.link}>
-          <ListItem button key={'Dashboard'} >
-            <ListItemIcon>{<Icons className={classes.icons} />}</ListItemIcon>
-            <ListItemText primary={'Dashboard'} />
-          </ListItem>
-        </Link> */}
         {pages.map((page, index) => (
           <Link
+            key={index}
             to={(page.data && page.data.path) || '/'}
-            className={classes.link}
-          >
+            className={classes.link}>
             <ListItem
               button
               key={(page.data && page.data.title) || ''}
-              selected={activePath.indexOf(page.data.path) > -1}
-            >
+              selected={activePath.indexOf(page.data.path) > -1}>
               <ListItemText primary={(page.data && page.data.title) || ''} />
             </ListItem>
           </Link>
@@ -157,8 +150,7 @@ function App(props) {
                 aria-label="open drawer"
                 edge="start"
                 onClick={handleDrawerToggle}
-                className={classes.menuButton}
-              >
+                className={classes.menuButton}>
                 <MenuIcon />
               </IconButton>
               <Typography variant="h5" noWrap className={classes.title}>
@@ -195,8 +187,7 @@ function App(props) {
                 }}
                 ModalProps={{
                   keepMounted: true, // Better open performance on mobile.
-                }}
-              >
+                }}>
                 {drawer}
               </Drawer>
             </Hidden>
@@ -206,8 +197,7 @@ function App(props) {
                   paper: classes.drawerPaper,
                 }}
                 variant="permanent"
-                open
-              >
+                open>
                 {drawer}
               </Drawer>
             </Hidden>
@@ -231,6 +221,8 @@ App.propTypes = {
 const mapStateToProps = createStructuredSelector({
   loggedIn: selectLoggedIn(),
   error: selectError(),
+  user: selectUser(),
+  location: selectLocation()
 });
 
 const withConnect = connect(mapStateToProps);

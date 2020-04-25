@@ -1,7 +1,9 @@
 
+import schema from './schema';
 
-
-
+const clientsColumns = schema().clients().columns;
+const casesColumns = schema().cases().columns;
+const ordersColumns = schema().orders().columns;
 
 
 export default function (simpleLazyLoadedRoute){
@@ -25,7 +27,7 @@ export default function (simpleLazyLoadedRoute){
                 icon: 'Group'
             },
             container: function RecordsPage(clients){
-                return this('clients', `${process.env.PUBLIC_PATH || ''}/clients`, clients.actions, clients.selectors)
+                return this('clients', `${process.env.PUBLIC_PATH || ''}/clients`, clientsColumns, clients.actions, clients.selectors)
             },
             childRoutes: [
                 simpleLazyLoadedRoute({
@@ -33,7 +35,7 @@ export default function (simpleLazyLoadedRoute){
                     name: 'clients.create',
                     require: ['CreateRecordPage', 'clients'],
                     container: function CreateRecordPage(clients){
-                        return this('clients.create', `${process.env.PUBLIC_PATH || ''}/clients`, clients.actions, clients.selectors)
+                        return this('clients.create', `${process.env.PUBLIC_PATH || ''}/clients`, clientsColumns, clients.actions, clients.selectors)
                     }
                 }),
                 simpleLazyLoadedRoute({
@@ -41,7 +43,7 @@ export default function (simpleLazyLoadedRoute){
                     name: 'clients.edit',
                     require: ['EditRecordPage', 'clients'],
                     container: function EditRecordPage(clients){
-                        return this('clients.edit', `${process.env.PUBLIC_PATH || ''}/clients`, clients.actions, clients.selectors)
+                        return this('clients.edit', `${process.env.PUBLIC_PATH || ''}/clients`, clientsColumns, clients.actions, clients.selectors)
                     }
                 }),
                 simpleLazyLoadedRoute({
@@ -49,7 +51,7 @@ export default function (simpleLazyLoadedRoute){
                     name: 'clients.view',
                     require: ['ViewRecordPage', 'clients'],
                     container: function ViewRecordPage(clients){
-                        return this('clients.view', `${process.env.PUBLIC_PATH || ''}/clients`, clients.actions, clients.selectors)
+                        return this('clients.view', `${process.env.PUBLIC_PATH || ''}/clients`, clientsColumns, clients.actions, clients.selectors)
                     }
                 })
             ]
@@ -64,7 +66,7 @@ export default function (simpleLazyLoadedRoute){
                 icon: 'Business'
             },
             container: function RecordsPage(cases){
-                return this('cases', `${process.env.PUBLIC_PATH || ''}/cases`, cases.actions, cases.selectors)
+                return this('cases', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors)
             },
             childRoutes: [
                 simpleLazyLoadedRoute({
@@ -72,7 +74,7 @@ export default function (simpleLazyLoadedRoute){
                     name: 'cases.create',
                     require: ['CreateRecordPage', 'cases'],
                     container: function CreateRecordPage(cases){
-                        return this('cases.create', `${process.env.PUBLIC_PATH || ''}/cases`, cases.actions, cases.selectors)
+                        return this('cases.create', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors)
                     }
                 }),
                 simpleLazyLoadedRoute({
@@ -80,7 +82,7 @@ export default function (simpleLazyLoadedRoute){
                     name: 'cases.edit',
                     require: ['EditRecordPage', 'cases'],
                     container: function EditRecordPage(cases){
-                        return this('cases.edit', `${process.env.PUBLIC_PATH || ''}/cases`, cases.actions, cases.selectors)
+                        return this('cases.edit', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors)
                     }
                 }),
                 simpleLazyLoadedRoute({
@@ -88,7 +90,7 @@ export default function (simpleLazyLoadedRoute){
                     name: 'cases.view',
                     require: ['ViewRecordPage', 'cases'],
                     container: function ViewRecordPage(cases){
-                        return this('cases.view', `${process.env.PUBLIC_PATH || ''}/cases`, cases.actions, cases.selectors)
+                        return this('cases.view', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors)
                     }
                 })
             ]
@@ -98,7 +100,7 @@ export default function (simpleLazyLoadedRoute){
             name: 'orders',
             require: ['RecordsPage', 'orders'],
             container: function RecordsPage(orders){
-                return this('orders', `${process.env.PUBLIC_PATH || ''}/orders`, orders.actions, orders.selectors)
+                return this('orders', `${process.env.PUBLIC_PATH || ''}/orders`, ordersColumns, orders.actions, orders.selectors)
             },
             data: {
                 path: '/orders',
@@ -111,7 +113,7 @@ export default function (simpleLazyLoadedRoute){
                     name: 'orders.create',
                     require: ['CreateRecordPage', 'orders'],
                     container: function CreateRecordPage(orders){
-                        return this('orders.create', `${process.env.PUBLIC_PATH || ''}/orders`, orders.actions, orders.selectors)
+                        return this('orders.create', `${process.env.PUBLIC_PATH || ''}/orders`, ordersColumns, orders.actions, orders.selectors)
                     }
                 }),
                 simpleLazyLoadedRoute({
@@ -119,7 +121,7 @@ export default function (simpleLazyLoadedRoute){
                     name: 'orders.edit',
                     require: ['EditRecordPage', 'orders'],
                     container: function EditRecordPage(orders){
-                        return this('orders.edit', `${process.env.PUBLIC_PATH || ''}/orders`, orders.actions, orders.selectors)
+                        return this('orders.edit', `${process.env.PUBLIC_PATH || ''}/orders`, ordersColumns, orders.actions, orders.selectors)
                     }
                 }),
                 simpleLazyLoadedRoute({
@@ -127,7 +129,7 @@ export default function (simpleLazyLoadedRoute){
                     name: 'orders.view',
                     require: ['ViewRecordPage', 'orders'],
                     container: function ViewRecordPage(orders){
-                        return this('orders.view', `${process.env.PUBLIC_PATH || ''}/orders`, orders.actions, orders.selectors)
+                        return this('orders.view', `${process.env.PUBLIC_PATH || ''}/orders`, ordersColumns, orders.actions, orders.selectors)
                     }
                 })
             ]
