@@ -21,7 +21,7 @@ export default function (store) {
     injectSaga('session', {saga: sessionSagas});
 
     store.subscribe(() => {
-        //console.log('store', store.getState());
+        console.log('store', store.getState());
     });
 
     

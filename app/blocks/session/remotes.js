@@ -2,7 +2,7 @@ import api from 'utils/api';
 
 export function verifySession() {
   return api
-    .post(`/session`)
+    .get(`/users/me`)
     .then(response => response.data)
     .catch(error => Promise.reject(error));
 }

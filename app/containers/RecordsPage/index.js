@@ -25,7 +25,7 @@ export default function (name, path, columns, actions, selectors) {
         
         useEffect(() => {
             dispatch(actions.loadRecords());
-        });
+        },[]);
 
         return (<div>
             <h1>{name}</h1>

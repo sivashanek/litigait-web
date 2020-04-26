@@ -2,6 +2,7 @@ import { call, take, put, all } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { startSubmit, stopSubmit } from 'redux-form/immutable';
 import { DEFAULT_SESSION_TOKEN_ERROR } from 'utils/errors.js';
+import {setAuthToken} from 'utils/api';
 
 import store2 from 'store2';
 import { LOG_IN, LOG_OUT, VERIFY_SESSION } from './constants';
@@ -29,9 +30,11 @@ export function* verifyInitialSessionSaga() {
   const secret = store2.get('secret');
   if (secret) {
     try {
+      setAuthToken(secret);
       const user = yield call(verifySession, secret);
       store2.set('secret', secret);
       yield put(verifySessionSuccess(user));
+      yield put(push(process.env.PUBLIC_PATH || '/clients'));
     } catch (error) {
       store2.remove('secret');
       yield put(verifySessionError(DEFAULT_SESSION_TOKEN_ERROR));
@@ -48,7 +51,7 @@ export function* verifySessionSaga() {
       try {
         const user = yield call(verifySession, secret);
         yield put(verifySessionSuccess(user));
-        yield put(push(process.env.PUBLIC_PATH || '/'));
+        yield put(push(process.env.PUBLIC_PATH || '/clients'));
       } catch (error) {
         store2.remove('secret');
         yield put(verifySessionError(DEFAULT_SESSION_TOKEN_ERROR));
@@ -69,10 +72,11 @@ export function* loginSaga() {
     yield put(startSubmit(form));
 
     try {
-      // const result = yield call(logIn, identifier, secret);
-      const result = dummyData;
+      const result = yield call(logIn, identifier, secret);
+      // const result = dummyData;
       store2.set('secret', result.authToken);
       yield put(logInSuccess(result));
+      setAuthToken(result.authToken);
       yield put(push(process.env.PUBLIC_PATH || '/clients'));
     } catch (error) {
       store2.remove('secret');

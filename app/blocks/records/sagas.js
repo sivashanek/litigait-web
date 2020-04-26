@@ -60,14 +60,14 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
           yield put(loadRecordsCacheHit());
         } else {
           try {
-            yield put(loadRecordsSuccess([{name: 'test', email: 'a@g.com'}]));
-            /*const records = yield call(loadRecords);
+            // yield put(loadRecordsSuccess([{name: 'test', email: 'a@g.com'}]));
+            const records = yield call(loadRecords);
 
             if (records) {
               yield put(loadRecordsSuccess(records));
             } else {
               yield put(loadRecordsError());
-            }*/
+            }
           } catch (error) {
             yield put(loadRecordsError(error));
           }
@@ -118,7 +118,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         yield put(startSubmit(form));
 
         try {
-          //yield call(createRecord, record);
+          yield call(createRecord, record);
           yield put(createRecordSuccess(record));
                
           yield put(stopSubmit(form));

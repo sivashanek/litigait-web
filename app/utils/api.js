@@ -7,7 +7,7 @@ const api = axios.create({
   });
   
   export function setAuthToken(authToken) {
-    api.defaults.headers.common['X-Auth-Token'] = authToken;
+    api.defaults.headers.common['Authorization'] = authToken;
   }
   
   export default api;
