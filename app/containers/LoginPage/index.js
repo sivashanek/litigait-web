@@ -75,6 +75,19 @@ export function LoginPage(props) {
 
   const classes = useStyles();
 
+  const test = {
+      "error": [
+        "The email field is required.",
+        "The password field is required."
+      ]
+  }
+
+  console.log("error ",(error && error.login && error.login.response
+  && error.login.response.data && error.login.response.data.error.email[0]) || null);
+
+
+  console.log("test ",test.error[0]);
+  
   const onChangeHandler = (event, type) => {
     if (type == 'email') {
       updatedValue.email = event.target.value;

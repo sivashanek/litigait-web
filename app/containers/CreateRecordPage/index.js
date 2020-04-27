@@ -68,6 +68,9 @@ export default function (name, path, columns, actions, selectors) {
                 <button type="button" onClick={() => props.dispatch(path=='\clients'?actions.createRecord({name,email,phone}): actions.createRecord({client_id,case_title,case_number,start_date,status}))} >Create</button>
                 <button type="button" onClick={() => props.dispatch(path=='\clients'?actions.updateRecord({name,email,phone,id}): actions.updateRecord({client_id,case_title,case_number,id}))} >Update</button>
 
+                <button type="button" onClick={() => props.dispatch(actions.createRecord({name,email,phone}))} >Client Create</button>
+                <button type="button" onClick={() => props.dispatch(actions.updateRecord({name,email,phone,id}))} >Client Update</button>
+
             </form>
         </div>)
 

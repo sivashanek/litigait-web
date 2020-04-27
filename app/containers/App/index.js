@@ -13,6 +13,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
+
+
 import {
   selectLoggedIn,
   selectUser,
@@ -42,6 +45,7 @@ import SVG from 'react-inlinesvg';
 import Icons from 'components/Icons';
 import GlobalStyle from '../../global-styles';
 const drawerWidth = 240;
+import store2 from 'store2';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -116,8 +120,15 @@ function App(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleLogout = () => {
+    store2.clearAll();
+    // return (<Link path="/clients" to="/clients"></Link>);
+    // this.props.history.push('/');
   };
 
   const drawer = (
@@ -158,10 +169,10 @@ function App(props) {
               <Typography variant="h5" noWrap className={classes.title}>
                 D & J Law Firm
               </Typography>
-              <Typography noWrap className={classes.settings}>
+              <Typography noWrap className={classes.settings}   onClick={handleLogout}>
                 <SVG
                   src={require('images/icons/settins.svg')}
-                  style={{ width: '23px' }}
+                  style={{ width: '23px' }} 
                 />{' '}
                 rifluxyss@gmail.com
               </Typography>
