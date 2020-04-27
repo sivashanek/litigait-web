@@ -16,11 +16,12 @@ import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 
-// Import root app
-import App from 'containers/App';
-
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
+
+//Material UI Theme Provider
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
 
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
@@ -43,13 +44,15 @@ const MOUNT_NODE = document.getElementById('app');
 
 const render = messages => {
   ReactDOM.render(
-    <Provider store={store}>
-      <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
-          <Routes {...store} />
-        </ConnectedRouter>
-      </LanguageProvider>
-    </Provider>,
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <LanguageProvider messages={messages}>
+          <ConnectedRouter history={history}>
+            <Routes {...store} />
+          </ConnectedRouter>
+        </LanguageProvider>
+      </Provider>
+    </ThemeProvider >,
     MOUNT_NODE,
   );
 };

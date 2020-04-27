@@ -12,8 +12,12 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import TableWrapper from 'components/TableWrapper';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 export default function (name, path, columns, actions, selectors) {
+    
     const {
         selectLoading,
         selectRecords,
@@ -21,38 +25,32 @@ export default function (name, path, columns, actions, selectors) {
     } = selectors;
 
     function RecordsPage(props) {
-        const { dispatch, records } = props;
-        
+        const { dispatch, records, children, location } = props;
+
         useEffect(() => {
             dispatch(actions.loadRecords());
-        },[]);
+        }, []);
 
-        return (<div>
-            <h1>{name}</h1>
-            <ul>
-                <li><Link to={`${props.match.path}/create`}>Create Page</Link></li>
-                <li><Link to={`${props.match.path}/2/edit`}>Edit Page</Link></li>
-            </ul>
-            <div>
-                Records:
-                {records && records.length > 0 ? 
-                    records.map((record, index) => {
-                    return <div key={index} style={{display:'flex'}}>
-                        name: {record.name}, 
-                        Email: {record.email},
-                        <Link to={`${props.match.path}/${index}`}>View</Link>
-                        {/* <button onClick={()=> dispatch(actions.deleteRecord("index"))}> Delete </button> */}
-                        {/* <button onClick={()=> dispatch(actions.deleteRecord("f5ea8a00-8f82-4107-9b19-2f9e2a8a385c"))}> Delete </button> */}
-                        <button onClick={()=> dispatch(actions.deleteRecord("f2f12d9e-5449-4560-be0d-bc7c33959041"))}> Delete </button>
-
-                    </div>
-                    }) : null}
-                    
-            </div>
-            <div>
-                {props.children}
-            </div>
-        </div>)
+        return (<Grid container>
+            <Grid item xs={12}>
+            <Typography component="h1" variant="h5">
+            {name}
+          </Typography>
+          </Grid>
+            <Grid item xs={12}>
+                <TableWrapper
+                    records={records}
+                    columns={columns}
+                    children={children}
+                    path={path}
+                    name={name}
+                    locationState={location.state}
+                />
+            </Grid>
+            <Grid item xs={12}>
+                {children}
+            </Grid>
+        </Grid>)
 
     }
 

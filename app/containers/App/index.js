@@ -20,6 +20,8 @@ import {
   selectLocation,
 } from 'blocks/session/selectors';
 
+
+import '../../../src/main.css';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';

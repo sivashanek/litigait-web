@@ -14,6 +14,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: true,
+                    visible: true,
                     type: 'input'
                 },
                 {
@@ -23,6 +24,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'input'
                 },
                 {
@@ -32,6 +34,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'date'
                 },
                 {
@@ -41,6 +44,7 @@ export default function() {
                     editRecord: false,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'input'
                 },
                 {
@@ -51,6 +55,7 @@ export default function() {
                     viewRecord: true,
                     viewMode: false,
                     number: true,
+                    visible: true,
                     type: 'input'
                 },
                 {
@@ -60,6 +65,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'input'
                 },
                 {
@@ -69,6 +75,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'checkbox'
                 },
                 {
@@ -78,6 +85,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'input'
                 }
             ]
@@ -94,6 +102,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: true,
+                    visible: true,
                     type: 'input'  
                 },
                 {
@@ -103,6 +112,7 @@ export default function() {
                     editRecord: false,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'input'  
                 },
                 {
@@ -112,6 +122,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'date'  
                 },
                 {
@@ -121,6 +132,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'input'  
                 },
                 {
@@ -130,6 +142,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     oneOf: ['New', 'Active', 'Closed'],
                     type: 'select'  
                 }
@@ -147,6 +160,7 @@ export default function() {
                     editRecord: false,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'input' 
                 },
                 {
@@ -156,6 +170,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'date' 
                 },
                 {
@@ -165,6 +180,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'input' 
                 },
                 {
@@ -174,6 +190,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     type: 'input' 
                 },
                 {
@@ -183,6 +200,7 @@ export default function() {
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
                     oneOf: ['New', 'Active', 'Closed'],
                     type: 'select' 
                 }
