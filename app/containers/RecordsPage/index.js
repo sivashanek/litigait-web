@@ -41,7 +41,10 @@ export default function (name, path, columns, actions, selectors) {
                         name: {record.name}, 
                         Email: {record.email},
                         <Link to={`${props.match.path}/${index}`}>View</Link>
-                        <button onClick={()=> dispatch(actions.deleteRecord(index))}> Delete </button>
+                        {/* <button onClick={()=> dispatch(actions.deleteRecord("index"))}> Delete </button> */}
+                        {/* <button onClick={()=> dispatch(actions.deleteRecord("f5ea8a00-8f82-4107-9b19-2f9e2a8a385c"))}> Delete </button> */}
+                        <button onClick={()=> dispatch(actions.deleteRecord("f2f12d9e-5449-4560-be0d-bc7c33959041"))}> Delete </button>
+
                     </div>
                     }) : null}
                     

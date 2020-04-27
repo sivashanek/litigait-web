@@ -140,7 +140,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         yield put(startSubmit(form));
 
         try {
-          //yield call(updateRecord, record);
+          yield call(updateRecord, record);
           yield put(updateRecordSuccess(record));
 
         } catch (error) {
@@ -161,7 +161,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
       if (del) {
         yield put(startSubmit(form));
         try {
-          //yield call(deleteRecord, id);
+          yield call(deleteRecord, id);
           yield put(deleteRecordSuccess(id));
           yield put(stopSubmit(form));
         } catch (error) {
