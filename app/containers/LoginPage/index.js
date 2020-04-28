@@ -166,6 +166,7 @@ export function LoginPage(props) {
     email: '',
     password: '',
     showPassword: false,
+    remember: false
   });
 
   const classes = useStyles();
@@ -222,6 +223,10 @@ export function LoginPage(props) {
   };
 
   const handleChange = (prop) => (event) => {
+    if (prop == 'remember') {
+      setValues({ ...values, [prop]: event.target.checked });
+      return setValues.remember = event.target.checked;
+    }
     setValues({ ...values, [prop]: event.target.value });
     if (prop == 'email') {
       setValues.email = event.target.value;
@@ -288,7 +293,7 @@ export function LoginPage(props) {
                 </Grid>
               </Grid>
               <FormControlLabel className={classes.formControlLabel}
-                control={<Checkbox value="remember" color="#ffffff" />}
+                control={<Checkbox value="remember" color="#ffffff" checked={values.remember} onChange={handleChange('remember')}/>}
                 label="Remember Me" />
               <Button
                 type="button"
@@ -296,7 +301,7 @@ export function LoginPage(props) {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={() => dispatch(logIn(setValues.email, setValues.password))} >
+                onClick={() => dispatch(logIn(setValues.email, setValues.password, setValues.remember))} >
                 <SVG src={require('images/login/lock.svg')} className={classes.lockIcon} />Sign In
                         </Button>
 

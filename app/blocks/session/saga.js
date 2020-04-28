@@ -68,13 +68,15 @@ export function* verifySessionSaga() {
 export function* loginSaga() {
   while (true) {
     // eslint-disable-line no-constant-condition
-    const { identifier, secret, form } = yield take(LOG_IN);
+    const { identifier, secret, remember, form } = yield take(LOG_IN);
     yield put(startSubmit(form));
-
+    console.log("remember == "+remember);
     try {
       const result = yield call(logIn, identifier, secret);
       // const result = dummyData;
-      store2.set('secret', result.authToken);
+      if(remember){
+        store2.set('secret', result.authToken);
+      }
       yield put(logInSuccess(result));
       setAuthToken(result.authToken);
       yield put(push(process.env.PUBLIC_PATH || '/clients'));

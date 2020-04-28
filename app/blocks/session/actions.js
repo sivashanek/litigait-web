@@ -37,11 +37,12 @@ export function verifySessionError(error) {
   };
 }
 
-export function logIn(identifier, secret, form) {
+export function logIn(identifier, secret, remember, form) {
   return {
     type: LOG_IN,
     identifier,
     secret,
+    remember,
     form,
   };
 }
