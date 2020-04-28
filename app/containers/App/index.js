@@ -45,7 +45,7 @@ import SVG from 'react-inlinesvg';
 import Icons from 'components/Icons';
 import GlobalStyle from '../../global-styles';
 const drawerWidth = 240;
-import store2 from 'store2';
+import { logOut } from '../../blocks/session/actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -114,7 +114,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App(props) {
-  const { loggedIn, container, pages } = props;
+  const { loggedIn, container, pages, dispatch } = props;
   const activePath = location.pathname;
   const classes = useStyles();
   const theme = useTheme();
@@ -126,9 +126,7 @@ function App(props) {
   };
 
   const handleLogout = () => {
-    store2.clearAll();
-    // return (<Link path="/clients" to="/clients"></Link>);
-    // this.props.history.push('/');
+    dispatch(logOut())
   };
 
   const drawer = (

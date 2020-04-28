@@ -23,6 +23,13 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import Input from '@material-ui/core/Input';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
 
 import {
   selectLoggedIn,
@@ -63,36 +70,58 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+
+  remember: {
+    marginTop: theme.spacing(1),
+  },
 }));
 
 export function LoginPage(props) {
   const { loggedIn, user, error, dispatch } = props;
 
-  const [initialValue, updatedValue] = useState({
+  const [values, setValues] = React.useState({
     email: '',
     password: '',
+    showPassword: false,
   });
 
   const classes = useStyles();
 
   const test = {
-      "error": [
-        "The email field is required.",
-        "The password field is required."
-      ]
+    "error": [
+      "The email field is required.",
+      "The password field is required."
+    ]
   }
 
-  console.log("error ",(error && error.login && error.login.response
-  && error.login.response.data && error.login.response.data.error.email[0]) || null);
+  console.log("error ", (error && error.login && error.login.response
+    && error.login.response.data && error.login.response.data.error.email[0]) || null);
 
 
-  console.log("test ",test.error[0]);
-  
+  console.log("test ", test.error[0]);
+
   const onChangeHandler = (event, type) => {
     if (type == 'email') {
-      updatedValue.email = event.target.value;
+      setValues.email = event.target.value;
     } else {
-      updatedValue.password = event.target.value;
+      setValues.password = event.target.value;
+    }
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({ ...values, showPassword: !values.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+    if(prop=='email'){
+      setValues.email = event.target.value;
+    }else{
+      setValues.password = event.target.value;
     }
   };
 
@@ -118,24 +147,33 @@ export function LoginPage(props) {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  onChange={event => onChangeHandler(event, 'email')}
+                  onChange={handleChange('email')}
                   autoFocus
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  onChange={event => onChangeHandler(event, 'password')}
-                  autoComplete="current-password"
-                />
+                <FormControl style={{width:'100%'}}>
+                  <InputLabel>Password</InputLabel>
+                  <Input 
+                    type={values.showPassword ? 'text' : 'password'}
+                    value={values.password}
+                    onChange={handleChange('password')}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
               </Grid>
             </Grid>
-            <FormControlLabel
+            <FormControlLabel className={classes.remember}
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
@@ -146,7 +184,7 @@ export function LoginPage(props) {
               color="primary"
               className={classes.submit}
               onClick={() =>
-                dispatch(logIn(updatedValue.email, updatedValue.password))
+                dispatch(logIn(setValues.email, setValues.password))
               }> Sign In
             </Button>
             <Grid container>
