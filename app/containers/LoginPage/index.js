@@ -45,7 +45,7 @@ const CssTextField = withStyles({
     '& label.Mui-focused': {
       color: 'green',
     },
-    '& .MuiInput-underline:after': {
+    '& .MuiInput-underline-227:after': {
       borderBottomColor: 'green',
     },
     '& .MuiOutlinedInput-root': {
@@ -53,7 +53,7 @@ const CssTextField = withStyles({
         borderColor: 'red',
       },
       '&:hover fieldset': {
-        borderColor: 'yellow',
+        borderColor: 'green',
       },
       '&.Mui-focused fieldset': {
         borderColor: 'green',
@@ -65,7 +65,6 @@ const CssTextField = withStyles({
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
-
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -117,6 +116,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   copyRight: {
+    position: 'relative',
+  },
+
+  copyRightBottom: {
     bottom: '-50px',
     position: 'relative',
   },
@@ -134,6 +137,23 @@ const useStyles = makeStyles((theme) => ({
   remember: {
     marginTop: theme.spacing(1),
   },
+
+  fieldColor: {
+    '& :after': {
+      borderBottomColor: 'green',
+    },
+    '& :before': {
+      borderBottomColor: 'green',
+    },
+    color: 'green !important',
+    '& label.Mui-focused': {
+      color: 'green',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'green',
+    },
+  },
+
 }));
 
 export function LoginPage(props) {
@@ -148,6 +168,8 @@ export function LoginPage(props) {
 
   const classes = useStyles();
 
+  let err = null;
+
   //    const onChangeHandler = (event,type) => {
   //            if(type=='email'){
   //                updatedValue.email = event.target.value
@@ -156,18 +178,30 @@ export function LoginPage(props) {
   //            }
   //    }
 
-  const test = {
-    "error": [
-      "The email field is required.",
-      "The password field is required."
-    ]
-  }
+    if(error && error.login && error.login.response
+      && error.login.response.data && error.login.response.data.error){
+        const data = error.login.response.data;
+        console.log("err ", data);
+        // console.log("object ", data["error"]);
+        // console.log("object length", Object.keys(data.error)[0]);
+        err = data['error'][Object.keys(data.error)[0]][0];
+        console.log("err ", err);
+        // {Object.keys(err).map((item, i) => {
+        //   console.log("i value ", item[i]);
+        // })}
 
-  console.log("error ", (error && error.login && error.login.response
-    && error.login.response.data && error.login.response.data.error.email[0]) || null);
+        // Object.keys(err).map((key, i) => (
+        //   console.log("i value ", err.object[key]))
+
+        // )
 
 
-  console.log("test ", test.error[0]);
+        // console.log("err object",[Object.keys(err)[0]][]);
+      }
+
+
+
+  // console.log("test ", test.error[0]);
 
   const onChangeHandler = (event, type) => {
     if (type == 'email') {
@@ -195,7 +229,6 @@ export function LoginPage(props) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={6} md={8} className={classes.image} />
@@ -204,9 +237,9 @@ export function LoginPage(props) {
             <Grid container direction="row"
               justify="center"
               alignItems="center">
-              <Avatar className={classes.avatar} src="/static/images/avatar/1.jpg">
+              {/* <Avatar className={classes.avatar} src="/static/images/avatar/1.jpg">
                 <LockOutlinedIcon />
-              </Avatar>
+              </Avatar> */}
               <Typography component="h1" variant="h5" className={classes.marginLeftMedium}>
                 D & J Law Firm</Typography>
             </Grid>
@@ -219,7 +252,7 @@ export function LoginPage(props) {
                   </FormControl>
                 </Grid> */}
                 <Grid item xs={12}>
-                  <TextField
+                  <TextField className={classes.fieldColor}
                     required
                     fullWidth
                     id="email"
@@ -230,7 +263,7 @@ export function LoginPage(props) {
                     autoFocus />
                 </Grid>
                 <Grid item xs={12}>
-                  <FormControl style={{ width: '100%' }}>
+                  <FormControl style={{ width: '100%' }} className={classes.fieldColor}>
                     <InputLabel required>Password</InputLabel>
                     <Input
                       required
@@ -265,7 +298,7 @@ export function LoginPage(props) {
                 <SVG src={require('images/login/lock.svg')} className={classes.lockIcon} />Sign In
                         </Button>
 
-              <Alert severity="error" variant="filled">This is an error alert — check it out!</Alert>
+              {err!=null?<Alert severity="error" variant="filled">{err}</Alert>:null}
 
               <div className={classes.div}>
                 <Grid item xs>
@@ -285,7 +318,7 @@ export function LoginPage(props) {
 
             </form>
           </div>
-          <div className={classes.copyRight} >
+          <div className={err!=null?classes.copyRight:classes.copyRightBottom} >
 
             <Box mt={5}>
               <Copyright />
@@ -293,7 +326,6 @@ export function LoginPage(props) {
           </div>
         </Grid>
       </Grid>
-    </ThemeProvider>
   );
 }
 
