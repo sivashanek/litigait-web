@@ -140,17 +140,17 @@ const useStyles = makeStyles((theme) => ({
 
   fieldColor: {
     '& :after': {
-      borderBottomColor: 'green',
+      borderBottomColor: '#2ca01c',
     },
     '& :before': {
-      borderBottomColor: 'green',
+      borderBottomColor: '#2ca01c',
     },
     color: 'green !important',
     '& label.Mui-focused': {
-      color: 'green',
+      color: '#2ca01c',
     },
     '&.Mui-focused fieldset': {
-      borderColor: 'green',
+      borderColor: '#2ca01c',
     },
   },
 
