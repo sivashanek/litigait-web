@@ -6,6 +6,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 
 
 const theme = createMuiTheme({
+    button: {
+        textTransform: 'none'
+    },
     typography: {
         "fontFamily": "Avenir-Regular",
         "fontSize": 14,

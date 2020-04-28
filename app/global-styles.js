@@ -20,6 +20,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: Avenir-Regular;;
     line-height: 1.5em;
   }
+
+  .MuiButton-containedPrimary{
+      background-color: #2ca01c !important;
+    }
+
 `;
 
 export default GlobalStyle;

@@ -9,12 +9,10 @@ import Link from '@material-ui/core/Link';
 class Copyright extends React.Component {
     render(){
         return (
-            <Typography variant="body2" color="textSecondary" align="center">
-              {'Copyright © '}
-              <Link color="inherit" href="https://litigait.com/">
-                Litigait
-              </Link>{' '}
-              {new Date().getFullYear()}
+            <Typography variant="body2" color="#000" align="center">
+              {'© '}  {new Date().getFullYear()} 
+             {' D&J Law Firm. All rights Reserved'}
+             
               {'.'}
             </Typography>
           );

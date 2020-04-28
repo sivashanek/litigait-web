@@ -22,7 +22,15 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles, ThemeProvider } from '@material-ui/core/styles'
+
+import { selectLoggedIn, selectUser, selectError } from 'blocks/session/selectors';
+import { logIn } from 'blocks/session/actions';
+import Copyright from 'components/Copyright';
+import theme from '../../theme';
+import lockIcon from '../../images/login/lock.svg';
+import SVG from 'react-inlinesvg';
+import Alert from '@material-ui/lab/Alert';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
@@ -31,25 +39,39 @@ import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 
-import {
-  selectLoggedIn,
-  selectUser,
-  selectError,
-} from 'blocks/session/selectors';
-import { logIn } from 'blocks/session/actions';
-import Copyright from 'components/Copyright';
 
-const useStyles = makeStyles(theme => ({
+const CssTextField = withStyles({
+  root: {
+    '& label.Mui-focused': {
+      color: 'green',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'green',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'red',
+      },
+      '&:hover fieldset': {
+        borderColor: 'yellow',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'green',
+      },
+    },
+  },
+})(TextField);
+
+const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
+
   },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/random)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === 'light'
-        ? theme.palette.grey[50]
-        : theme.palette.grey[900],
+      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
@@ -65,10 +87,48 @@ const useStyles = makeStyles(theme => ({
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(4),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: '#2ca01c',
+    textTransform: 'none',
+    "&:hover": {
+      //you want this to be the same as the backgroundColor above
+      backgroundColor: '#2ca01c',
+    }
+  },
+  marginLeftMedium: {
+    marginLeft: theme.spacing(0.5),
+    fontFamily: 'Avenir-Bold'
+  },
+
+  formControlLabel: {
+    marginTop: theme.spacing(2),
+  },
+
+  marginTopMedium: {
+    marginTop: theme.spacing(4),
+  },
+
+  div: {
+    textAlign: 'center',
+    marginTop: theme.spacing(1.3),
+  },
+
+  copyRight: {
+    bottom: '-50px',
+    position: 'relative',
+  },
+
+  lockIcon: {
+    width: '20px',
+    height: '20px',
+    marginRight: '4px',
+  },
+
+  linkColor: {
+    color: '#0077c5',
   },
 
   remember: {
@@ -77,6 +137,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export function LoginPage(props) {
+
   const { loggedIn, user, error, dispatch } = props;
 
   const [values, setValues] = React.useState({
@@ -86,6 +147,14 @@ export function LoginPage(props) {
   });
 
   const classes = useStyles();
+
+  //    const onChangeHandler = (event,type) => {
+  //            if(type=='email'){
+  //                updatedValue.email = event.target.value
+  //            }else{
+  //                updatedValue.password = event.target.value
+  //            }
+  //    }
 
   const test = {
     "error": [
@@ -118,94 +187,113 @@ export function LoginPage(props) {
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
-    if(prop=='email'){
+    if (prop == 'email') {
       setValues.email = event.target.value;
-    }else{
+    } else {
       setValues.password = event.target.value;
     }
   };
 
   return (
-    <Grid container component="main" className={classes.root}>
-      <CssBaseline />
-      <Grid item xs={false} sm={6} md={8} className={classes.image} />
-      <Grid item xs={12} sm={6} md={4} component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
-          <form className={classes.form} noValidate>
-            <Grid container spacing={3}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  onChange={handleChange('email')}
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl style={{width:'100%'}}>
-                  <InputLabel>Password</InputLabel>
-                  <Input 
-                    type={values.showPassword ? 'text' : 'password'}
-                    value={values.password}
-                    onChange={handleChange('password')}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                        >
-                          {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                  />
-                </FormControl>
-              </Grid>
+    <ThemeProvider theme={theme}>
+      <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+        <Grid item xs={false} sm={6} md={8} className={classes.image} />
+        <Grid style={{ backgroundColor: '#eceef1' }} item xs={12} sm={6} md={4} component={Paper} elevation={6} square>
+          <div className={classes.paper}>
+            <Grid container direction="row"
+              justify="center"
+              alignItems="center">
+              <Avatar className={classes.avatar} src="/static/images/avatar/1.jpg">
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5" className={classes.marginLeftMedium}>
+                D & J Law Firm</Typography>
             </Grid>
-            <FormControlLabel className={classes.remember}
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={() =>
-                dispatch(logIn(setValues.email, setValues.password))
-              }> Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
+            <form className={classes.form} noValidate >
+              <Grid container spacing={3}>
+                {/* <Grid item xs={12}>
+                  <FormControl>
+                    <InputLabel>Name</InputLabel>
+                    <Input id="name" type="text"/>
+                  </FormControl>
+                </Grid> */}
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    onChange={(event) => onChangeHandler(event, "email")}
+                    autoFocus />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl style={{ width: '100%' }}>
+                    <InputLabel required>Password</InputLabel>
+                    <Input
+                      required
+                      type={values.showPassword ? 'text' : 'password'}
+                      value={values.password}
+                      onChange={handleChange('password')}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+              <FormControlLabel className={classes.formControlLabel}
+                control={<Checkbox value="remember" color="#ffffff" />}
+                label="Remember Me" />
+              <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={() => dispatch(logIn(setValues.email, setValues.password))} >
+                <SVG src={require('images/login/lock.svg')} className={classes.lockIcon} />Sign In
+                        </Button>
+
+              <Alert severity="error" variant="filled">This is an error alert — check it out!</Alert>
+
+              <div className={classes.div}>
+                <Grid item xs>
+                  <Link href="#" variant="body2" className={classes.linkColor}>
+                    Forgot your Password?
+                                </Link>
+                </Grid>
+                <Typography variant="body2" className={classes.marginTopMedium}>
+                  New to D&J Law Firm</Typography>
+                <Grid item xs>
+                  <Link href="#" variant="body2" className={classes.linkColor}>
+                    {"Create account"}
+                  </Link>
+                </Grid>
+              </div>
+
+
+            </form>
+          </div>
+          <div className={classes.copyRight} >
+
             <Box mt={5}>
               <Copyright />
             </Box>
-          </form>
-        </div>
+          </div>
+        </Grid>
       </Grid>
-    </Grid>
+    </ThemeProvider>
   );
 }
 
@@ -223,7 +311,7 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    dispatch
   };
 }
 
