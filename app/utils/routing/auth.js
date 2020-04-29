@@ -2,7 +2,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import * as Loads from 'react-loads';
-import LoginPage from 'containers/LoginPage';
+import HomePage from 'containers/HomePage';
 import { selectLoggedIn } from 'blocks/session/selectors';
 
 export default function ({ Component, path, exact = false, children, getState, data, childRoutes }) {
@@ -27,13 +27,13 @@ export default function ({ Component, path, exact = false, children, getState, d
                     {Page && <Page {...props}>{children}</Page>}
                 </div>) :
                 data && data.route ?
-                <LoginPage {...props} /> :
+                <HomePage {...props} /> :
                 <Redirect 
                     to={{
                         pathname: '/',
                         state: {
-                            message: 'Login Required',
-                            requestedPath: path
+                            children: 'LoginForm',
+                            form: 'login'
                         }
                     }}
                 />
