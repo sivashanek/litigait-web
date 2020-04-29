@@ -5,7 +5,7 @@ import { DEFAULT_SESSION_TOKEN_ERROR } from 'utils/errors.js';
 import {setAuthToken} from 'utils/api';
 
 import store2 from 'store2';
-import { LOG_IN, LOG_OUT, VERIFY_SESSION } from './constants';
+import { LOG_IN, LOG_OUT, VERIFY_SESSION, SIGN_UP } from './constants';
 import {
   verifySessionSuccess,
   verifySessionError,
@@ -13,9 +13,11 @@ import {
   logInError,
   logOutSuccess,
   logOutError,
+  signUpSuccess,
+  signUpError
 } from './actions';
 
-import { logIn, logOut, verifySession } from './remotes';
+import { logIn, logOut, verifySession, signUp} from './remotes';
 
 const dummyData = {
   authToken:
@@ -108,11 +110,39 @@ export function* logOutSaga() {
   }
 }
 
+export function* signUpSaga() {
+  while (true) {
+    // eslint-disable-line no-constant-condition
+    const { name, email, password, role, form } = yield take(SIGN_UP);
+    yield put(startSubmit(form));
+    console.log("identifier == "+name);
+    console.log("secret == "+email);
+    console.log("remember == "+password);
+    console.log("role == "+role);
+    try {
+      const result = yield call(signUp, name, email, password, role);
+      // const result = dummyData;
+      // if(remember){
+      //   store2.set('secret', result.authToken);
+      // }
+      yield put(signUpSuccess(result));
+      setAuthToken(result.authToken);
+      yield put(push(process.env.PUBLIC_PATH || '/clients'));
+    } catch (error) {
+      store2.remove('secret');
+      yield put(signUpError(error));
+    } finally {
+      yield put(stopSubmit(form));
+    }
+  }
+}
+
 export default function* rootSaga() {
   yield all([
     verifyInitialSessionSaga(),
     verifySessionSaga(),
     loginSaga(),
     logOutSaga(),
+    signUpSaga(),
   ]);
 }

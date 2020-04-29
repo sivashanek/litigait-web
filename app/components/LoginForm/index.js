@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import SVG from 'react-inlinesvg';
 import Typography from '@material-ui/core/Typography';
+import Error from '../Error';
 
 import InputField from 'Components/InputField';
 import PasswordField from 'Components/PasswordField';
@@ -14,9 +15,12 @@ import CheckboxField from 'Components/CheckboxField';
 
 import Styles from './styles';
 
-function LoginForm({ handleSubmit }) {
+function LoginForm({ handleSubmit, errorMessage }) {
 
     const classes = Styles();
+
+    console.log("errorMessage = ", errorMessage);
+
 
     return (
         <form onSubmit={handleSubmit} className={classes.form} noValidate >
@@ -28,7 +32,7 @@ function LoginForm({ handleSubmit }) {
                     <Field name="password" label="Password" component={PasswordField} type="text" required />
                 </Grid>
             </Grid>
-                <Field name="remember" label="Remember Me" component={CheckboxField} type="checkbox" />
+            <Field name="remember" label="Remember Me" component={CheckboxField} type="checkbox" />
             <Button
                 type="submit"
                 fullWidth
@@ -38,15 +42,15 @@ function LoginForm({ handleSubmit }) {
                 <SVG src={require('images/login/lock.svg')} className={classes.lockIcon} />
                 Sign In
             </Button>
-
+            <Error errorMessage={errorMessage}/>
             <Grid className={classes.div}>
                 <Grid item xs>
                     <Link to={{
                         pathname: '/',
                         state: {
-                            form: 'forgot' 
+                            form: 'forgot'
                         }
-                    }}  className={classes.linkColor}>
+                    }} className={classes.linkColor}>
                         Forgot your Password?
                     </Link>
                 </Grid>
@@ -57,7 +61,7 @@ function LoginForm({ handleSubmit }) {
                     <Link to={{
                         pathname: '/',
                         state: {
-                            form: 'register' 
+                            form: 'register'
                         }
                     }} className={classes.linkColor}>
                         Create account

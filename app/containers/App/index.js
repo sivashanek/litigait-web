@@ -40,12 +40,29 @@ import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
 import SVG from 'react-inlinesvg';
 import Icons from 'components/Icons';
 import GlobalStyle from '../../global-styles';
 const drawerWidth = 240;
 import { logOut } from '../../blocks/session/actions';
+
+const StyledListItem = withStyles({
+  root: {
+    "&$selected": {
+      backgroundColor: "black"
+    },
+    "&:hover": {
+      //you want this to be the same as the backgroundColor above
+      backgroundColor: '#2C2C2F',
+    },
+    "&.MuiListItem-root.Mui-selected": {
+      backgroundColor: "black"
+    },
+  },
+  selected: {}
+})(ListItem);
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -138,12 +155,12 @@ function App(props) {
             key={index}
             to={(page.data && page.data.path) || '/'}
             className={classes.link}>
-            <ListItem
+            <StyledListItem
               button
               key={(page.data && page.data.title) || ''}
               selected={activePath.indexOf(page.data.path) > -1}>
               <ListItemText primary={(page.data && page.data.title) || ''} />
-            </ListItem>
+            </StyledListItem>
           </Link>
         ))}
       </List>

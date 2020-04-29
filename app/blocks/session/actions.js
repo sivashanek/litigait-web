@@ -14,6 +14,9 @@ import {
   LOG_OUT,
   LOG_OUT_SUCCESS,
   LOG_OUT_ERROR,
+  SIGN_UP,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_ERROR,
 } from './constants';
 
 export function verifySession(secret) {
@@ -79,6 +82,32 @@ export function logOutError(error) {
     error,
   };
 }
+
+export function signUp(name, email, password, role, form) {
+  return {
+    type: SIGN_UP,
+    name,
+    email,
+    password,
+    role,
+    form,
+  };
+}
+
+export function signUpSuccess(user) {
+  return {
+    type: SIGN_UP_SUCCESS,
+    user,
+  };
+}
+
+export function signUpError(error) {
+  return {
+    type: SIGN_UP_ERROR,
+    error,
+  };
+}
+
 
 export default {
   verifySession,

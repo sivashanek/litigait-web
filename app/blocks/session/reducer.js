@@ -13,6 +13,8 @@ import {
   LOG_OUT_SUCCESS,
   LOG_IN_ERROR,
   LOG_OUT_ERROR,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_ERROR,
 } from './constants';
 
 const initialState = { error: {}, success: {}, version: '1.0' };
@@ -23,12 +25,14 @@ const appReducer = (state = initialState, action) =>
     switch (action.type) {
       case VERIFY_SESSION_SUCCESS:
       case LOG_IN_SUCCESS:
+      case SIGN_UP_SUCCESS:
         draft.loggedIn = true;
         draft.user = action.user;
         draft.error = {};
         break;
       case VERIFY_SESSION_ERROR:  
       case LOG_IN_ERROR:
+      case SIGN_UP_ERROR:
         draft.loggedIn = false;
         draft.user = false;
         draft.error = { login: action.error};

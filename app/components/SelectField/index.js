@@ -14,7 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 export default function ({ input, label, required, options, meta: { touched, error } }) {
 
     const classes = Styles();
-
+    
     const { name, value } = input;
     return (
         <FormControl className={classes.formControl}>

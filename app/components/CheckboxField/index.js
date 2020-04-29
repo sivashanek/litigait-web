@@ -16,7 +16,7 @@ import Styles from './styles';
     
     return (
         <FormControlLabel className={classes.formControlLabel}
-        control={<Checkbox defaultChecked={input.value || false} onChange={(e)=>input.onChange(e.target.checked)} />}
+        control={<Checkbox  style={{color:"grey"}} defaultChecked={input.value || false} onChange={(e)=>input.onChange(e.target.checked)} />}
         label={label} />
     )
  }

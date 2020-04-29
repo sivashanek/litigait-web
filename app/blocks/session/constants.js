@@ -15,3 +15,7 @@ export const LOG_IN_ERROR = 'lg/session/LOG_IN_ERROR';
 export const LOG_OUT = 'lg/session/LOG_OUT';
 export const LOG_OUT_SUCCESS = 'lg/session/LOG_OUT_SUCCESS';
 export const LOG_OUT_ERROR = 'lg/session/LOG_OUT_ERROR';
+
+export const SIGN_UP = 'lg/session/SIGN_UP';
+export const SIGN_UP_SUCCESS = 'lg/session/SIGN_UP_SUCCESS';
+export const SIGN_UP_ERROR = 'lg/session/SIGN_UP_ERROR';

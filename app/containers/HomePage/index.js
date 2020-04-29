@@ -17,7 +17,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import { selectLoggedIn, selectUser, selectError } from 'blocks/session/selectors';
-import { logIn } from 'blocks/session/actions';
+import { logIn, signUp } from 'blocks/session/actions';
 import Copyright from 'components/Copyright';
 import useStyles from './styles';
 
@@ -45,13 +45,17 @@ export function HomePage(props) {
     err = data['error'][Object.keys(data.error)[0]][0];
   }
 
-  const form = location && location.state && location.state.form || false;
-  const Component = form && ImplementationFor[form] || ImplementationFor['login'];
+  console.log("err = ",err);
+
+  const form = location && location.state && location.state.form || 'login';
+  const Component = form && ImplementationFor[form]
 
   const handleSubmit = (data) => {
     console.log('data', data);
     if (form === 'login') {
       dispatch(logIn(data.email, data.password, data.remember))
+    } else if (form === 'register') {
+      dispatch(signUp(data.name, data.email, data.password, data.role))
     }
   }
   return (
@@ -66,9 +70,9 @@ export function HomePage(props) {
             <Typography component="h1" variant="h5" className={classes.marginLeftMedium}>
               D & J Law Firm</Typography>
           </Grid>
-          {<Component onSubmit={handleSubmit.bind(this)} />}
+          {<Component onSubmit={handleSubmit.bind(this)} errorMessage={err}/>}
         </div>
-        <div className={err != null ? classes.copyRight : classes.copyRightBottom} >
+        <div >
           <Box mt={5}>
             <Copyright />
           </Box>

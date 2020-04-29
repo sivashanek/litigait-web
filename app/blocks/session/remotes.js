@@ -21,4 +21,11 @@ export function logOut() {
     .catch(error => Promise.reject(error));
 }
 
-export default [verifySession, logIn, logOut];
+export function signUp(name, email, password, role) {
+  return api
+    .post(`/users/signup`, { name, email, password, role })
+    .then(response => response.data)
+    .catch(error => Promise.reject(error));
+}
+
+export default [verifySession, logIn, logOut, signUp];

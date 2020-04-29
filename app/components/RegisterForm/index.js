@@ -10,12 +10,24 @@ import Typography from '@material-ui/core/Typography';
 import InputField from 'Components/InputField';
 import PasswordField from 'Components/PasswordField';
 import SelectField from 'Components/SelectField';
+import Error from '../Error';
 
 import Styles from './styles';
 
-function RegisterForm({ handleSubmit }) {
+function RegisterForm({ handleSubmit, errorMessage }) {
 
     const classes = Styles();
+
+    const userOptions = [
+        {
+          label: 'Super Admin',
+          value: 'superAdmin',
+        },
+        {
+          label: 'User',
+          value: 'user',
+        },
+      ];
 
     return (
         <form onSubmit={handleSubmit} className={classes.form} noValidate >
@@ -33,7 +45,8 @@ function RegisterForm({ handleSubmit }) {
                     <Field name="confirmPassword" label="Confirm Password" component={PasswordField} type="text" required />
                 </Grid>
                 <Grid item xs={12}>
-                    <Field name="role" label="Role" component={SelectField} type="select" options={['Super Admin', 'User']} required />
+                    {/* <Field name="role" label="Role" component={SelectField} type="select" options={['Super Admin', 'User']} required /> */}
+                    <Field name="role" label="Role" component={SelectField} type="select" options={['superAdmin', 'user']} required />
                 </Grid>
             </Grid>
             <Button
@@ -44,18 +57,8 @@ function RegisterForm({ handleSubmit }) {
                 className={classes.submit} >
                 Register
             </Button>
-
+            <Error errorMessage={errorMessage}/>
             <Grid className={classes.div}>
-                <Grid item xs>
-                    <Link to={{
-                        pathname: '/',
-                        state: {
-                            form: 'forgot' 
-                        }
-                    }} className={classes.linkColor}>
-                        Forgot your Password?
-                    </Link>
-                </Grid>
                 <Typography variant="body2" className={classes.marginTopMedium}>
                     Already have an account?
                 </Typography>
