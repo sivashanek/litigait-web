@@ -19,9 +19,6 @@ function LoginForm({ handleSubmit, errorMessage, clearError }) {
 
     const classes = Styles();
 
-    console.log("errorMessage = ", errorMessage);
-
-
     return (
         <form onSubmit={handleSubmit} className={classes.form} noValidate >
             <Grid container spacing={3}>

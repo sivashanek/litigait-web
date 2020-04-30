@@ -6,6 +6,7 @@
 import produce from 'immer';
 
 const initialState = {
+  records: [],
   loading: false,
   error: false,
   lastUpdate: null

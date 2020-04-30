@@ -35,6 +35,7 @@ export function* verifyInitialSessionSaga() {
     try {
       setAuthToken(secret);
       const user = yield call(verifySession, secret);
+      //const user = dummyData;
       store2.set('secret', secret);
       yield put(verifySessionSuccess(user));
       yield put(push(process.env.PUBLIC_PATH || '/clients'));
@@ -73,10 +74,10 @@ export function* loginSaga() {
     // eslint-disable-line no-constant-condition
     const { identifier, secret, remember, form } = yield take(LOG_IN);
     yield put(startSubmit(form));
-    console.log("remember == "+remember);
+    
     try {
       const result = yield call(logIn, identifier, secret);
-      // const result = dummyData;
+      //const result = dummyData;
       if(remember){
         store2.set('secret', result.authToken);
       }
@@ -116,16 +117,10 @@ export function* signUpSaga() {
     // eslint-disable-line no-constant-condition
     const { name, email, password, role, form } = yield take(SIGN_UP);
     yield put(startSubmit(form));
-    console.log("identifier == "+name);
-    console.log("secret == "+email);
-    console.log("remember == "+password);
-    console.log("role == "+role);
+    
     try {
       const result = yield call(signUp, name, email, password, role);
       // const result = dummyData;
-      // if(remember){
-      //   store2.set('secret', result.authToken);
-      // }
       setAuthToken(result.authToken);
       yield put(verifySessionAction(result.authToken));
       yield put(push(process.env.PUBLIC_PATH || '/clients'));

@@ -23,7 +23,7 @@ export default function() {
                     label: 'EMAIL',
                     editRecord: true,
                     viewRecord: true,
-                    viewMode: false,
+                    viewMode: true,
                     visible: true,
                     type: 'input'
                 },
@@ -31,7 +31,7 @@ export default function() {
                     id: 3,
                     value: 'registeredDate',
                     label: 'REGISTERED DATE',
-                    editRecord: true,
+                    editRecord: false,
                     viewRecord: true,
                     viewMode: false,
                     visible: true,

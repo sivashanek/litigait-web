@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 100%;
     font-family: Avenir-Regular;
+    background-color: #fff;
   }
 
   #app {
@@ -25,6 +26,9 @@ const GlobalStyle = createGlobalStyle`
       background-color: #2ca01c !important;
     }
 
+  a {
+    text-decoration: none;
+  }  
 `;
 
 export default GlobalStyle;

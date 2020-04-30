@@ -45,13 +45,11 @@ export function HomePage(props) {
     err = data['error'][Object.keys(data.error)[0]][0];
   }
 
-  console.log("err = ",err);
 
   const form = location && location.state && location.state.form || 'login';
   const Component = form && ImplementationFor[form]
 
   const handleSubmit = (data) => {
-    console.log('data', data);
     if (form === 'login') {
       dispatch(logIn(data.email, data.password, data.remember))
     } else if (form === 'register') {

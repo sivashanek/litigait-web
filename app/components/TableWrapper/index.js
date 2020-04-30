@@ -26,7 +26,7 @@ class TableWrapper extends React.Component { // eslint-disable-line react/prefer
     render() {
         const { records, columns, children, path, locationState = {} } = this.props;
         const activePath = location.pathname;
-        const tableColumns = columns.filter((column) => column.visible);
+        const tableColumns = children ? columns.filter((column) => column.visible && column.viewMode) : columns.filter((column) => column.visible);
 
         let rows = records.map((record) => Object.assign(
             {},
