@@ -15,7 +15,7 @@ import CheckboxField from 'Components/CheckboxField';
 
 import Styles from './styles';
 
-function LoginForm({ handleSubmit, errorMessage }) {
+function LoginForm({ handleSubmit, errorMessage, clearError }) {
 
     const classes = Styles();
 
@@ -63,7 +63,8 @@ function LoginForm({ handleSubmit, errorMessage }) {
                         state: {
                             form: 'register'
                         }
-                    }} className={classes.linkColor}>
+                    }} className={classes.linkColor} onClick = {clearError}
+                    >
                         Create account
                     </Link>
                 </Grid>

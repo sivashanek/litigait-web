@@ -15,6 +15,7 @@ import {
   LOG_OUT_ERROR,
   SIGN_UP_SUCCESS,
   SIGN_UP_ERROR,
+  SESSION_RESET_ERROR
 } from './constants';
 
 const initialState = { error: {}, success: {}, version: '1.0' };
@@ -36,6 +37,9 @@ const appReducer = (state = initialState, action) =>
         draft.loggedIn = false;
         draft.user = false;
         draft.error = { login: action.error};
+        break;
+      case SESSION_RESET_ERROR:
+        draft.error ={};
         break;
       case LOG_OUT_ERROR:
       case LOG_OUT_SUCCESS:

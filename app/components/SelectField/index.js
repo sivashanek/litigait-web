@@ -25,7 +25,7 @@ export default function ({ input, label, required, options, meta: { touched, err
                 labelId={`${name}-id`}
                 defaultValue={value}
                 onChange={(e) => input.onChange(e.target.value)}>
-                {options.map((opt, index) => <MenuItem key={index} value={opt}>{opt}</MenuItem>)}
+                {options.map((opt, index) => <MenuItem key={index} value={opt.value}>{opt.label}</MenuItem>)}
             </Select>
         </FormControl>
     )

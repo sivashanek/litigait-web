@@ -14,7 +14,7 @@ import Error from '../Error';
 
 import Styles from './styles';
 
-function RegisterForm({ handleSubmit, errorMessage }) {
+function RegisterForm({ handleSubmit, errorMessage, clearError }) {
 
     const classes = Styles();
 
@@ -46,7 +46,7 @@ function RegisterForm({ handleSubmit, errorMessage }) {
                 </Grid>
                 <Grid item xs={12}>
                     {/* <Field name="role" label="Role" component={SelectField} type="select" options={['Super Admin', 'User']} required /> */}
-                    <Field name="role" label="Role" component={SelectField} type="select" options={['superAdmin', 'user']} required />
+                    <Field name="role" label="Role" component={SelectField} type="select" options={userOptions} required />
                 </Grid>
             </Grid>
             <Button
@@ -68,7 +68,7 @@ function RegisterForm({ handleSubmit, errorMessage }) {
                         state: {
                             form: 'login'
                         }
-                    }} className={classes.linkColor}>
+                    }} className={classes.linkColor} onClick = {clearError}>
                         Sign In
                     </Link>
                 </Grid>

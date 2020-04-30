@@ -14,7 +14,8 @@ import {
   logOutSuccess,
   logOutError,
   signUpSuccess,
-  signUpError
+  signUpError,
+  verifySession as verifySessionAction,
 } from './actions';
 
 import { logIn, logOut, verifySession, signUp} from './remotes';
@@ -125,8 +126,8 @@ export function* signUpSaga() {
       // if(remember){
       //   store2.set('secret', result.authToken);
       // }
-      yield put(signUpSuccess(result));
       setAuthToken(result.authToken);
+      yield put(verifySessionAction(result.authToken));
       yield put(push(process.env.PUBLIC_PATH || '/clients'));
     } catch (error) {
       store2.remove('secret');

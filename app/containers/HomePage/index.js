@@ -17,7 +17,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 import { selectLoggedIn, selectUser, selectError } from 'blocks/session/selectors';
-import { logIn, signUp } from 'blocks/session/actions';
+import { logIn, signUp, sessionResetError} from 'blocks/session/actions';
 import Copyright from 'components/Copyright';
 import useStyles from './styles';
 
@@ -58,6 +58,10 @@ export function HomePage(props) {
       dispatch(signUp(data.name, data.email, data.password, data.role))
     }
   }
+  const clearError = () => {
+    dispatch(sessionResetError());
+  }
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -70,7 +74,7 @@ export function HomePage(props) {
             <Typography component="h1" variant="h5" className={classes.marginLeftMedium}>
               D & J Law Firm</Typography>
           </Grid>
-          {<Component onSubmit={handleSubmit.bind(this)} errorMessage={err}/>}
+          {<Component onSubmit={handleSubmit.bind(this)} errorMessage={err} clearError={clearError}/>}
         </div>
         <div >
           <Box mt={5}>

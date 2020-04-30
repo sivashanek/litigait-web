@@ -17,6 +17,7 @@ import {
   SIGN_UP,
   SIGN_UP_SUCCESS,
   SIGN_UP_ERROR,
+  SESSION_RESET_ERROR
 } from './constants';
 
 export function verifySession(secret) {
@@ -36,6 +37,13 @@ export function verifySessionSuccess(user) {
 export function verifySessionError(error) {
   return {
     type: VERIFY_SESSION_ERROR,
+    error,
+  };
+}
+
+export function sessionResetError(error) {
+  return {
+    type: SESSION_RESET_ERROR,
     error,
   };
 }
