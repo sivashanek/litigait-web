@@ -51,7 +51,7 @@ export default function (name, path, columns, actions, selectors) {
                     </Button>
                 </Link>
             </Grid>
-            <Grid item xs={activeChildren ? 6 : 12} className={classes.table}>
+            <Grid item xs={12} md={activeChildren ? 6 : 12} className={classes.table}>
                 <TableWrapper
                     records={records}
                     columns={columns}
@@ -62,8 +62,8 @@ export default function (name, path, columns, actions, selectors) {
                 />
             </Grid>
             {activeChildren ?
-                <Grid item xs={6}>
-                    <Grid container className={classes.children}>
+                <Grid item xs={12} md={6}>
+                    <Grid container className="children">
                         {children}
                     </Grid>
                 </Grid> : null}

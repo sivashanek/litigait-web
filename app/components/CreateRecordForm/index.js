@@ -22,9 +22,9 @@ function createRecordForm(props) {
             <Grid container spacing={3}>
                 {(fields || []).map((field, index) => {
                     const InputComponent = ImplementationFor[field.type];
-                    return <Grid item xs={12}>
-                            <Field key={index} name={field.value} label={field.label} component={InputComponent} required={field.required} />
-                        </Grid>    
+                    return <Grid key={index} item xs={12}>
+                            <Field name={field.value} label={field.label} component={InputComponent} required={field.required} {...field} />
+                        </Grid>   
                 })}
             </Grid>
             <Grid>

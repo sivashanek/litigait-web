@@ -63,7 +63,6 @@ const StyledListItem = withStyles({
   selected: {}
 })(ListItem);
 
-
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -81,8 +80,11 @@ const useStyles = makeStyles(theme => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
-    boxShadow: 'none',
-    background: 'none',
+    boxShadow: '0px 1px 6px -1px lightgrey',
+    background: '#fff',
+    zIndex: '9999',
+    position: 'fixed',
+    overflow: 'hidden'
   },
   menuButton: {
     marginRight: theme.spacing(2),

@@ -160,3 +160,18 @@
   }
 
   
+
+  
+  .children {
+    box-shadow: 0px 0px 8px 1px lightgrey;
+    border-radius: 8px;
+    padding: 18px;
+    margin-top: 40px;
+    margin-left: 20px
+  }
+
+  @media (max-width: 959px) {
+    .children {
+      margin-left: 0px !important;
+    }
+  }

@@ -119,7 +119,7 @@ export default function() {
                     id: 3,
                     value: 'startDate',
                     label: 'START DATE',
-                    editRecord: true,
+                    editRecord: false,
                     viewRecord: true,
                     viewMode: false,
                     visible: true,
@@ -143,7 +143,7 @@ export default function() {
                     viewRecord: true,
                     viewMode: false,
                     visible: true,
-                    oneOf: ['New', 'Active', 'Closed'],
+                    options: ['New', 'Active', 'Closed'],
                     type: 'select'  
                 }
             ]
@@ -167,7 +167,7 @@ export default function() {
                     id: 2,
                     value: 'orderDate',
                     label: 'ORDER DATE',
-                    editRecord: true,
+                    editRecord: false,
                     viewRecord: true,
                     viewMode: false,
                     visible: true,
@@ -177,7 +177,7 @@ export default function() {
                     id: 3,
                     value: 'caseId',
                     label: 'CASE ID',
-                    editRecord: true,
+                    editRecord: false,
                     viewRecord: true,
                     viewMode: false,
                     visible: true,
