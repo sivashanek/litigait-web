@@ -1,10 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-        header: {
-            display: 'flex',
-            justifyContent: 'space-between'
-        },
         create: {
             fontWeight: 'bold',
             borderRadius: '28px',

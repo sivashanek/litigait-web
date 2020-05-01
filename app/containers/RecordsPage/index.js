@@ -28,7 +28,7 @@ export default function (name, path, columns, actions, selectors) {
 
     function RecordsPage(props) {
         const classes = Styles();
-        const { dispatch, records, children, location } = props;
+        const { dispatch, records, children, location, history } = props;
 
         useEffect(() => {
             dispatch(actions.loadRecords());
@@ -37,7 +37,8 @@ export default function (name, path, columns, actions, selectors) {
         const activeChildren = path !== location.pathname;
         
         return (<Grid container>
-            <Grid item xs={12} className={classes.header}>
+            <Grid item xs={12}>
+                <Grid container justify="space-between">
                 <Typography component="h1" variant="h5">
                     {name}
                 </Typography>
@@ -50,6 +51,7 @@ export default function (name, path, columns, actions, selectors) {
                         New {name}
                     </Button>
                 </Link>
+                </Grid>
             </Grid>
             <Grid item xs={12} md={activeChildren ? 6 : 12} className={classes.table}>
                 <TableWrapper
@@ -58,14 +60,15 @@ export default function (name, path, columns, actions, selectors) {
                     children={activeChildren}
                     path={path}
                     name={name}
+                    history={history}
                     locationState={location.state}
                 />
             </Grid>
             {activeChildren ?
                 <Grid item xs={12} md={6}>
-                    <Grid container className="children">
+                    <div className="children">
                         {children}
-                    </Grid>
+                    </div>
                 </Grid> : null}
         </Grid>)
     }

@@ -13,7 +13,7 @@ class TableWrapper extends React.Component { // eslint-disable-line react/prefer
     static propTypes = {
         records: PropTypes.array,
         columns: PropTypes.array,
-        children: PropTypes.object,
+        children: PropTypes.bool,
         path: PropTypes.string,
         locationState: PropTypes.object,
     };
@@ -72,9 +72,10 @@ class TableWrapper extends React.Component { // eslint-disable-line react/prefer
         );
     }
 
-    handleClick(id, locationState) {
-        const { path } = this.props;
-
+    handleClick(id) {
+        const { path, history } = this.props;
+        if(id)
+            history.push(`${path}/${id}`);
     }
 
 

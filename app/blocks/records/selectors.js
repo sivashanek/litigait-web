@@ -18,7 +18,7 @@ export default function selectors(name) {
   const selectRecord = (id) => createSelector(
     selectRecords(),
     (records) => {
-      let record = records.find(r => r.id === id);
+      let record = records && records.find(r => r.id === id) || {};
       return record;
     }
   );

@@ -109,7 +109,7 @@ export default function() {
                     id: 2,
                     value: 'id',
                     label: 'ID',
-                    editRecord: false,
+                    editRecord: true,
                     viewRecord: true,
                     viewMode: false,
                     visible: true,
