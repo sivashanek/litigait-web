@@ -23,7 +23,7 @@ export default function (name, path, columns, actions, selectors) {
 
     function EditRecordPage({ location, record }) {
         return (<div>
-            <EditRecordForm
+            {Object.keys(record).length > 0 ? <EditRecordForm
                 initialValues={record || {}}
                 form={`editRecord.${record.id}`}
                 name={name}
@@ -31,7 +31,7 @@ export default function (name, path, columns, actions, selectors) {
                 fields={columns.filter(_=>_.editRecord)}
                 onSubmit={handleEdit.bind(this)}
                 locationState={location.state}
-            />
+            /> : null}
         </div>)
 
     }

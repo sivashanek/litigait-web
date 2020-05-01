@@ -7,12 +7,12 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
-import { ImplementationFor } from 'components/createRecordForm/utils';
+import { ImplementationFor } from 'components/CreateRecordForm/utils';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Styles from './styles';
 
-function createRecordForm(props) {
+function editRecordForm(props) {
 
     const classes = Styles();
     const { handleSubmit, pristine, submitting, fields, path, error, metaData, locationState } = props;
@@ -23,7 +23,7 @@ function createRecordForm(props) {
                 {(fields || []).map((field, index) => {
                     const InputComponent = ImplementationFor[field.type];
                     return <Grid key={index} item xs={12}>
-                            <Field name={field.value} label={field.label} component={InputComponent} required={field.required} {...field} />
+                            <Field name={field.value} label={field.label} type="text" component={InputComponent} required={field.required} {...field} />
                         </Grid>   
                 })}
             </Grid>
@@ -56,4 +56,4 @@ function createRecordForm(props) {
 export default reduxForm({
     form: 'EditRecord',
     enableReinitialize: true
-})(createRecordForm);
+})(editRecordForm);
