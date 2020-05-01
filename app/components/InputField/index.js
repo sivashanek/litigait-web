@@ -20,7 +20,7 @@ export default function ({ input, label, autoFocus, required, meta: { touched, e
             name={name}
             label={label}
             onChange={(e) => onChange(e.target.value)}
-            defaultValue={value || ''}
+            value={value || ''}
             autoFocus={autoFocus} />
     )
 }

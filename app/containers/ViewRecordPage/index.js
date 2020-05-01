@@ -28,7 +28,7 @@ export default function (name, path, columns, actions, selectors) {
         return (
             <Grid container>
                 <Grid item xs={12}>
-                    <Grid container justify="space-between">
+                    <Grid container justify="space-between" className={classes.action}>
                         <Link to={path} className={classes.link}>Close</Link>
                         <Grid>
                             <Link to={`${path}/${record.id}/edit`} className={classes.link}>Edit</Link>
@@ -47,7 +47,7 @@ export default function (name, path, columns, actions, selectors) {
                                     <Grid item xs={12} key={column.id}>
                                         <div>
                                             <div className={classes.label}>{column.label}:</div>
-                                            {record[column.value]}
+                                            {record[column.value] || '-'}
                                             <hr/>
                                         </div>
                                     </Grid>

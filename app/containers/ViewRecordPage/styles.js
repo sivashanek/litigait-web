@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
             fontFamily: 'Avenir-Bold',
             textTransform: 'uppercase',
             marginRight: '2em'
+        },
+        action: {
+            marginBottom: '32px'
         }
     
   }));
