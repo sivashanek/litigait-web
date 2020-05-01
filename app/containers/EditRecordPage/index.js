@@ -22,10 +22,9 @@ export default function (name, path, columns, actions, selectors) {
     }
 
     function EditRecordPage({ location, record }) {
-        console.log('record', record);
         return (<div>
             <EditRecordForm
-                intialValues={record || {}}
+                initialValues={record || {}}
                 form={`editRecord.${record.id}`}
                 name={name}
                 path={path}
