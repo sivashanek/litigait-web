@@ -91,7 +91,7 @@ export default function reducer(constants, name) {
           draft.success = false;
           break;
         case DELETE_RECORD_SUCCESS:  
-          draft.records = draft.records.filter((r, i) => parseInt(i) !== parseInt(id));
+          draft.records = draft.records.filter((r, i) => r.id !== id);
           draft.loading = false;
           draft.error = false;
           draft.updateError = false;

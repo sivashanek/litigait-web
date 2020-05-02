@@ -22,7 +22,7 @@ export default function (name, path, columns, actions, selectors) {
 
 
     const { selectRecord } = selectors;
-    function ViewRecordPage({ record }) {
+    function ViewRecordPage({ record, dispatch }) {
         const classes = Styles();
 
         return (
@@ -35,7 +35,8 @@ export default function (name, path, columns, actions, selectors) {
                             <Button
                                 type="button"
                                 variant="contained"
-                                className={classes.Button} >
+                                className={classes.Button}
+                                onClick={()=>dispatch(actions.deleteRecord(record.id))} >
                                 Delete
                             </Button>
                         </Grid>

@@ -28,7 +28,6 @@ function createRecordForm(props) {
                         </Grid>   
                 })}
             </Grid>
-            {/* <DateField/> */}
             <Grid>
                 <Button
                     type="submit"

@@ -139,9 +139,6 @@ function App(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  console.log("props app page== ",props);
-
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };

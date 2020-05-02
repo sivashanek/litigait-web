@@ -19,7 +19,6 @@ const MaterialUIPickers = () => {
   const handleDateChange = date => {
     setSelectedDate(date);
   };
-  console.log("material ui = ")
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { List, Map } from 'immutable';
-
+import mapRecords from './utils';
 
 export default function selectors(name) {
   const selectDomain = () => (state) => state[name] || false;
@@ -12,7 +12,7 @@ export default function selectors(name) {
 
   const selectRecords = () => createSelector(
     selectDomain(),
-    (domain) => domain && domain.records || [],
+    (domain) => domain && domain.records && mapRecords(domain.records, name) || [],
   );
 
   const selectRecord = (id) => createSelector(

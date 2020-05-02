@@ -20,12 +20,12 @@ function RegisterForm({ handleSubmit, errorMessage, clearError }) {
 
     const userOptions = [
         {
-          label: 'Super Admin',
-          value: 'superAdmin',
+          label: 'Lawyer',
+          value: 'lawyer',
         },
         {
-          label: 'User',
-          value: 'user',
+          label: 'Paralegal',
+          value: 'paralegal',
         },
       ];
 
@@ -33,7 +33,10 @@ function RegisterForm({ handleSubmit, errorMessage, clearError }) {
         <form onSubmit={handleSubmit} className={classes.form} noValidate >
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Field name="name" label="Name" component={InputField} type="text" required autoFocus />
+                    <Field name="practice_name" label="Practice" component={InputField} type="text" required autoFocus />
+                </Grid>
+                <Grid item xs={12}>
+                    <Field name="name" label="Name" component={InputField} type="text" required />
                 </Grid>
                 <Grid item xs={12}>
                     <Field name="email" label="Email" component={InputField} type="text" required />

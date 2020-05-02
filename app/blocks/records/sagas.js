@@ -1,4 +1,5 @@
 import { delay } from 'redux-saga';
+import { push } from 'react-router-redux';
 import { call, take, put, race, select, all } from 'redux-saga/effects';
 import { startSubmit, stopSubmit } from 'redux-form/immutable';
 const VALID_CACHE_DIFF = -30;
@@ -122,6 +123,8 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
           yield put(createRecordSuccess(result));
                
           yield put(stopSubmit(form));
+          
+          yield put(push(process.env.PUBLIC_PATH || `/${entityUrl}`));
         } catch (error) {
           yield put(createRecordError(error));
           yield put(stopSubmit(form, { _error: error }));
@@ -142,7 +145,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         try {
           yield call(updateRecord, record);
           yield put(updateRecordSuccess(record));
-
+          yield put(push(process.env.PUBLIC_PATH || `/${entityUrl}`));
         } catch (error) {
           yield put(updateRecordError(error));
           yield put(stopSubmit(form, { _error: error }));
@@ -164,6 +167,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
           yield call(deleteRecord, id);
           yield put(deleteRecordSuccess(id));
           yield put(stopSubmit(form));
+          yield put(push(process.env.PUBLIC_PATH || `/${entityUrl}`));
         } catch (error) {
           yield put(deleteRecordError(error));
           yield put(stopSubmit(form, { _error: error }));
