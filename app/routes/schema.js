@@ -29,7 +29,7 @@ export default function() {
                 },
                 {
                     id: 3,
-                    value: 'registeredDate',
+                    value: 'createdAt',
                     label: 'REGISTERED DATE',
                     editRecord: false,
                     viewRecord: true,
@@ -70,7 +70,7 @@ export default function() {
                 },
                 {
                     id: 7,
-                    value: 'termsAccepted',
+                    value: 'hipaa_acceptance_status',
                     label: 'TERMS ACCEPTED',
                     editRecord: true,
                     viewRecord: true,

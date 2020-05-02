@@ -50,6 +50,15 @@ class TableWrapper extends React.Component { // eslint-disable-line react/prefer
                         },
                     ));
                     break;
+                    case 'checkbox':
+                    rows = rows.map((row) => Object.assign(
+                        row,
+                        {
+                            [column.value]:
+                            (row[column.value]==false || row[column.value]==null) ?'No':'yes',
+                        },
+                    ));
+                    break;
                 default:
                     break;
             }
