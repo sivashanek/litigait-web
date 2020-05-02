@@ -8,7 +8,7 @@ import moment from 'moment'
 export function mapClients(records) {
     if (records && records.length > 0) {
         return records.map((record) => {
-            record.createdAt = moment(record.createdAt).format('DD/MM/YYYY');
+            record.createdAt = record.createdAt && moment(record.createdAt).format('DD/MM/YYYY') || false;
             record.hipaa_acceptance_status  = record.hipaa_acceptance_status && record.fee_acceptance_status ? 'All' : false
             return record;
         });
@@ -21,7 +21,7 @@ export function mapCases(records) {
 
     if (records && records.length > 0) {
         return records.map((record) => {
-            record.startDate = moment(record.startDate).format('DD/MM/YYYY');
+            record.startDate = record.startDate && moment(record.startDate).format('DD/MM/YYYY') || false;
             return record;
         });
     }
@@ -33,7 +33,7 @@ export function mapOrders(records) {
 
     if (records && records.length > 0) {
         return records.map((record) => {
-            record.orderDate = moment(record.orderDate).format('DD/MM/YYYY');
+            record.orderDate = record.orderDate && moment(record.orderDate).format('DD/MM/YYYY') || false;
             return record;
         });
     }
