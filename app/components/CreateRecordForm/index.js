@@ -11,6 +11,7 @@ import { ImplementationFor } from './utils';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Styles from './styles';
+import DateField from '../../components/DateField'
 
 function createRecordForm(props) {
 
@@ -27,6 +28,7 @@ function createRecordForm(props) {
                         </Grid>   
                 })}
             </Grid>
+            {/* <DateField/> */}
             <Grid>
                 <Button
                     type="submit"

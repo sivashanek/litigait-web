@@ -21,9 +21,9 @@ import { logIn, signUp, sessionResetError} from 'blocks/session/actions';
 import Copyright from 'components/Copyright';
 import useStyles from './styles';
 
-import LoginForm from 'Components/LoginForm';
-import RegisterForm from 'Components/RegisterForm';
-import ForgotPasswordForm from 'Components/ForgotPasswordForm';
+import LoginForm from 'components/LoginForm';
+import RegisterForm from 'components/RegisterForm';
+import ForgotPasswordForm from 'components/ForgotPasswordForm';
 
 
 const ImplementationFor = {

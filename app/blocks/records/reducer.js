@@ -76,7 +76,7 @@ export default function reducer(constants, name) {
           draft.success = false;
           break;
         case UPDATE_RECORD_SUCCESS:
-          draft.records = draft.records.map((r ,i) => parseInt(record.id) === parseInt(i) ? Object.assign({}, record) : Object.assign({}, r));
+          draft.records = draft.records.map((r ,i) => record.id === id ? Object.assign({}, record) : Object.assign({}, r));
           draft.loading = false;
           draft.error = false;
           draft.updateError = false;

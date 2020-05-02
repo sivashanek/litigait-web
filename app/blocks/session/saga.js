@@ -34,11 +34,11 @@ export function* verifyInitialSessionSaga() {
   if (secret) {
     try {
       setAuthToken(secret);
-      //const user = yield call(verifySession, secret);
-      const user = dummyData;
+      const user = yield call(verifySession, secret);
+      // const user = dummyData;
       store2.set('secret', secret);
       yield put(verifySessionSuccess(user));
-      //yield put(push(process.env.PUBLIC_PATH || '/clients'));
+      yield put(push(process.env.PUBLIC_PATH || '/clients'));
     } catch (error) {
       store2.remove('secret');
       yield put(verifySessionError(DEFAULT_SESSION_TOKEN_ERROR));
@@ -76,14 +76,15 @@ export function* loginSaga() {
     yield put(startSubmit(form));
     
     try {
-      //const result = yield call(logIn, identifier, secret);
-      const result = dummyData;
+      const result = yield call(logIn, identifier, secret);
+      // const result = dummyData;
       if(remember){
         store2.set('secret', result.authToken);
       }
-      yield put(logInSuccess(result));
+      // yield put(logInSuccess(result));
       setAuthToken(result.authToken);
-      yield put(push(process.env.PUBLIC_PATH || '/clients'));
+      yield put(verifySessionAction(result.authToken));
+      // yield put(push(process.env.PUBLIC_PATH || '/clients'));
     } catch (error) {
       store2.remove('secret');
       yield put(logInError(error));

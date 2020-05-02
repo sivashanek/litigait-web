@@ -139,6 +139,8 @@ function App(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  console.log("props app page== ",props);
+
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -191,7 +193,7 @@ function App(props) {
                   src={require('images/icons/settins.svg')}
                   style={{ width: '23px' }} 
                 />{' '}
-                rifluxyss@gmail.com
+                {props.user && props.user.email}
               </Typography>
 
               <Typography noWrap className={classes.help}>
