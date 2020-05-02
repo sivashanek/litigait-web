@@ -35,6 +35,7 @@ export default function (name, path, columns, actions, selectors) {
         }, []);
 
         const activeChildren = path !== location.pathname;
+        console.log("active children path=",path+","+location.pathname);
         
         return (<Grid container>
             <Grid item xs={12}>
@@ -42,6 +43,7 @@ export default function (name, path, columns, actions, selectors) {
                 <Typography component="h1" variant="h5">
                     {name}
                 </Typography>
+                {(path!=null && path=='/clients')?
                 <Link to={`${path}/create`}>
                     <Button
                         type="button"
@@ -50,9 +52,10 @@ export default function (name, path, columns, actions, selectors) {
                         className={classes.create} >
                         New {name}
                     </Button>
-                </Link>
+                </Link>:null}
                 </Grid>
             </Grid>
+            {(path!=null && path=='/clients')?
             <Grid item xs={12} md={activeChildren ? 6 : 12} className={classes.table}>
                 <TableWrapper
                     records={records}
@@ -63,7 +66,7 @@ export default function (name, path, columns, actions, selectors) {
                     history={history}
                     locationState={location.state}
                 />
-            </Grid>
+            </Grid>:null}
             {activeChildren ?
                 <Grid item xs={12} md={6}>
                     <div className="children">

@@ -91,7 +91,7 @@ export default function() {
                 {
                     id: 9,
                     value: 'caseCount',
-                    label: 'CASE COUNTED',
+                    label: 'CASE COUNT',
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,

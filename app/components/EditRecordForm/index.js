@@ -33,7 +33,7 @@ function editRecordForm(props) {
                     variant="contained"
                     color="primary"
                     className={classes.submitBtn} >
-                    Create
+                    Update
                 </Button>
                 <Link to={path}>
                     <Button

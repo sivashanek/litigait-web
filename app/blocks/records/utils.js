@@ -9,7 +9,7 @@ export function mapClients(records) {
     if (records && records.length > 0) {
         return records.map((record) => {
             record.createdAt = record.createdAt && moment(record.createdAt).format('DD/MM/YYYY') || false;
-            record.hipaa_acceptance_status  = record.hipaa_acceptance_status && record.fee_acceptance_status ? 'All' : false
+            record.hipaa_acceptance_status  = record.hipaa_acceptance_status && record.fee_acceptance_status ? 'All' : 'Pending'
             return record;
         });
     }
