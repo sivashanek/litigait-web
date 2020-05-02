@@ -91,13 +91,10 @@ export function logOutError(error) {
   };
 }
 
-export function signUp(name, email, password, role, form) {
+export function signUp(record, form) {
   return {
     type: SIGN_UP,
-    name,
-    email,
-    password,
-    role,
+    record,
     form,
   };
 }

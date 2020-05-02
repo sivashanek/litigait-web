@@ -33,7 +33,7 @@ function RegisterForm({ handleSubmit, errorMessage, clearError }) {
         <form onSubmit={handleSubmit} className={classes.form} noValidate >
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Field name="practice_name" label="Practice" component={InputField} type="text" required autoFocus />
+                    <Field name="practice_name" label="Practice Name" component={InputField} type="text" required autoFocus />
                 </Grid>
                 <Grid item xs={12}>
                     <Field name="name" label="Name" component={InputField} type="text" required />

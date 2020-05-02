@@ -116,11 +116,11 @@ export function* logOutSaga() {
 export function* signUpSaga() {
   while (true) {
     // eslint-disable-line no-constant-condition
-    const { name, email, password, role, form } = yield take(SIGN_UP);
+    const { record, form } = yield take(SIGN_UP);
     yield put(startSubmit(form));
     
     try {
-      const result = yield call(signUp, name, email, password, role);
+      const result = yield call(signUp, record);
       // const result = dummyData;
       setAuthToken(result.authToken);
       yield put(verifySessionAction(result.authToken));

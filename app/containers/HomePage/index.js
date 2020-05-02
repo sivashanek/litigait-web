@@ -46,14 +46,14 @@ export function HomePage(props) {
   }
 
 
-  const form = location && location.state && location.state.form || 'login';
-  const Component = form && ImplementationFor[form]
+  const formState = location && location.state && location.state.form || 'login';
+  const Component = formState && ImplementationFor[formState]
 
-  const handleSubmit = (data) => {
-    if (form === 'login') {
+  const handleSubmit = (data, dispatch, { form }) => {
+    if (formState === 'login') {
       dispatch(logIn(data.email, data.password, data.remember))
-    } else if (form === 'register') {
-      dispatch(signUp(data.name, data.email, data.password, data.role))
+    } else if (formState === 'register') {
+      dispatch(signUp(data, form))
     }
   }
   const clearError = () => {

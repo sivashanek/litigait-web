@@ -21,9 +21,9 @@ export function logOut() {
     .catch(error => Promise.reject(error));
 }
 
-export function signUp(name, email, password, role) {
+export function signUp(record) {
   return api
-    .post(`/users/signup`, { name, email, password, role })
+    .post(`/users/signup`, record)
     .then(response => response.data)
     .catch(error => Promise.reject(error));
 }
