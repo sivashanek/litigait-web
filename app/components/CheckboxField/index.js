@@ -13,9 +13,12 @@ import Styles from './styles';
  export default function ({ input, label, required, meta: { touched, error } }) {
 
     const classes = Styles();
+    console.log("label = ",label);
+    const setStyles = label=='Remember Me'?classes.formControlLabel:null;
+
     
     return (
-        <FormControlLabel className={classes.formControlLabel}
+        <FormControlLabel className={setStyles} 
         control={<Checkbox  style={{color:"grey"}} defaultChecked={input.value || false} onChange={(e)=>input.onChange(e.target.checked)} />}
         label={label} />
     )

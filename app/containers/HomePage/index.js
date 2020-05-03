@@ -42,8 +42,17 @@ export function HomePage(props) {
   if (error && error.login && error.login.response
     && error.login.response.data && error.login.response.data.error) {
     const data = error.login.response.data;
-    err = data['error'][Object.keys(data.error)[0]][0];
+    console.log("data", data);
+
+    if( typeof data.error === 'string' ) {
+      err = data['error'];
+    }else{
+      err = data['error'][Object.keys(data.error)[0]][0];
+    }
+
   }
+
+
 
 
   const formState = location && location.state && location.state.form || 'login';

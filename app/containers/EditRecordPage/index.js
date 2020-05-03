@@ -34,7 +34,7 @@ export default function (name, path, columns, actions, selectors) {
             setLoading(true);
             setTimeout(()=>{
                 setLoading(false);
-            }, 500);
+            }, 200);
         }, []);
 
         return (<div>
