@@ -11,10 +11,11 @@ import moment from 'moment'
 export function mapClients(records) {
     if (records && records.length > 0) {
         return records.map((record) => {
-            record.createdAt = record.createdAt && moment(record.createdAt).format('MM/DD/YYYY') || false;
-            record.dob = record.dob && moment(record.dob).format('MM/DD/YYYY') || false;
-            record.hipaa_acceptance_status  = record.hipaa_acceptance_status && record.fee_acceptance_status ? 'All' : 'Pending'
-            return record;
+            let Record = Object.assign({}, record);
+            Record.createdAt = record.createdAt && moment(record.createdAt).format('MM/DD/YYYY') || false;
+            Record.dob = record.dob && moment(record.dob).format('MM/DD/YYYY') || false;
+            Record.hipaa_acceptance_status  = record.hipaa_acceptance_status && record.fee_acceptance_status ? 'All' : 'Pending'
+            return Record;
         });
     }
     return records;

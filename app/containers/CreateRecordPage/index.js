@@ -9,7 +9,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import CreateRecordForm from 'components/CreateRecordForm';
-import moment from 'moment';
+import set from './utils';
 
 export default function (name, path, columns, actions, selectors) {
 
@@ -29,6 +29,7 @@ export default function (name, path, columns, actions, selectors) {
 
         return (<div>
             <CreateRecordForm
+                initialValues={set(columns)}
                 name={name}
                 path={path}
                 fields={columns.filter(_ => _.editRecord)}

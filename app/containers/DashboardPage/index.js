@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 
 function DashboardPage() {
     return (<div>
-        <h1>Welcome to Dashboard Page</h1>
+        <h1>Dashboard</h1>
     </div>)
 }
 

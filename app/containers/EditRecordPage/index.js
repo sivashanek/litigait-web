@@ -12,6 +12,7 @@ import EditRecordForm from 'components/EditRecordForm';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
+import get from './utils';
 
 export default function (name, path, columns, actions, selectors) {
 
@@ -21,7 +22,6 @@ export default function (name, path, columns, actions, selectors) {
     }
 
     function EditRecordPage({ location, record }) {
-        console.log('record', record);
 
         const [loading, setLoading] = useState(true);
 
@@ -34,7 +34,7 @@ export default function (name, path, columns, actions, selectors) {
 
         return (<div>
             {!loading ? <EditRecordForm
-                initialValues={record || {}}
+                initialValues={record && get(name, record) || {}}
                 form={`editRecord.${record.id}`}
                 name={name}
                 path={path}

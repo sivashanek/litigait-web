@@ -87,6 +87,7 @@ export default function() {
                     viewRecord: false,
                     viewMode: false,
                     visible: false,
+                    defaultValue: true,
                     type: 'checkbox'
                 },
                 {

@@ -11,56 +11,43 @@ import { ImplementationFor } from './utils';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Styles from './styles';
-import {MaterialUIPickers} from '../../components/DateField'
-import DatePicker from 'react-date-picker';
 
 function createRecordForm(props) {
 
     const classes = Styles();
     const { handleSubmit, pristine, submitting, fields, path, error, metaData, locationState } = props;
 
-    // const[date, setDate] = getCurrentDate;
-
-    // const getCurrentDate = () => {
-    //     return "test";
-    //  }
-
-    // const onChange = date => setDate({ date });
-
     return (
-        <div>  
-           <div>
-           {/* <DateField/> */}
-           </div>
-        <form onSubmit={handleSubmit} className={classes.form} noValidate >
-            <Grid container spacing={3}>
-                {(fields || []).map((field, index) => {
-                    const InputComponent = ImplementationFor[field.type];
-                    return <Grid key={index} item xs={12}>
+        <div>
+            <form onSubmit={handleSubmit} className={classes.form} noValidate >
+                <Grid container spacing={3}>
+                    {(fields || []).map((field, index) => {
+                        const InputComponent = ImplementationFor[field.type];
+                        return <Grid key={index} item xs={12}>
                             <Field name={field.value} label={field.label} component={InputComponent} required={field.required} {...field} />
-                        </Grid>   
-                })}
-            </Grid>
-          
-            <Grid>
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    className={classes.submitBtn} >
-                    Create
-                </Button>
-                <Link to={path}>
+                        </Grid>
+                    })}
+                </Grid>
+
+                <Grid>
                     <Button
-                        type="button"
+                        type="submit"
                         variant="contained"
                         color="primary"
-                        className={classes.cancelBtn} >
-                        Cancel
+                        className={classes.submitBtn} >
+                        Create
+                </Button>
+                    <Link to={path}>
+                        <Button
+                            type="button"
+                            variant="contained"
+                            color="primary"
+                            className={classes.cancelBtn} >
+                            Cancel
                     </Button>
-                </Link>
-            </Grid>
-        </form>
+                    </Link>
+                </Grid>
+            </form>
         </div>
     )
 

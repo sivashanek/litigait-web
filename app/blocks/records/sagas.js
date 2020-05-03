@@ -70,7 +70,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         } else {
           try {
             /*if(entityUrl === 'clients'){
-            yield put(loadRecordsSuccess([{id:'1', name: 'test', email: 'a@g.com', phone: '783737', address: 'test', hipaa_acceptance_status: true, createdAt: moment()},{id:'2', name: 'test1', email: 'a1@g.com', phone: '22222', address: 'test1', hipaa_acceptance_status: true, fee_acceptance_status: true,createdAt: moment().subtract(1, 'month')}]));
+            yield put(loadRecordsSuccess([{id:'1', name: 'test', email: 'a@g.com', phone: '783737', address: 'test', fee_acceptance_status: true,createdAt: moment()},{id:'2', name: 'test1', email: 'a1@g.com', phone: '22222', address: 'test1', hipaa_acceptance_status: true, fee_acceptance_status: true,createdAt: moment().subtract(1, 'month')}]));
             } else if(entityUrl === 'cases'){
               yield put(loadRecordsSuccess([
                 {clientName:'test', id:'1', startDate: moment(), caseTitle: 'law', status: 'New'},
@@ -158,7 +158,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         yield put(startSubmit(form));
 
         try {
-          yield call(updateRecord, record);
+          //yield call(updateRecord, record);
           yield put(updateRecordSuccess(record));
           yield put(push(process.env.PUBLIC_PATH || `/${entityUrl}`));
         } catch (error) {
