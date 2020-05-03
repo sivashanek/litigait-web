@@ -134,7 +134,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         yield put(startSubmit(form));
 
         try {
-          //const result = yield call(createRecord, record);
+          const result = yield call(createRecord, record);
           yield put(createRecordSuccess(record));
                
           yield put(stopSubmit(form));
@@ -158,7 +158,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         yield put(startSubmit(form));
 
         try {
-          //yield call(updateRecord, record);
+          yield call(updateRecord, record);
           yield put(updateRecordSuccess(record));
           yield put(push(process.env.PUBLIC_PATH || `/${entityUrl}`));
         } catch (error) {
@@ -179,7 +179,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
       if (del) {
         yield put(startSubmit(form));
         try {
-          //yield call(deleteRecord, id);
+          yield call(deleteRecord, id);
           yield put(deleteRecordSuccess(id));
           yield put(stopSubmit(form));
           yield put(push(process.env.PUBLIC_PATH || `/${entityUrl}`));

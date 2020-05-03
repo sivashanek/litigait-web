@@ -48,7 +48,7 @@ export default function (name, path, columns, actions, selectors) {
                                     <Grid item xs={12} key={column.id}>
                                         <div>
                                             <div className={classes.label}>{column.label}:</div>
-                                            <p className={classes.value}>{record[column.value] || '-'}</p>
+                                            <p className={classes.value}>{record[column.value]==true?'Yes':record[column.value] || '-'}</p>
                                             <hr className={classes.hr} />
                                         </div>
                                     </Grid>

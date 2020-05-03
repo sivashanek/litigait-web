@@ -21,6 +21,7 @@ export default function (name, path, columns, actions, selectors) {
     function handleEdit(record, dispatch, { form }) {
         if(name === 'clients.edit'){
             record.createdAt = moment(record.createdAt).format('YYYY-MM-DD');
+            record.dob = moment(record.dob).format('YYYY-MM-DD');
         }
         dispatch(actions.updateRecord(record, form))
     }
