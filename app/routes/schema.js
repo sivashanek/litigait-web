@@ -10,9 +10,9 @@ export default function() {
                 {
                     id: 1,
                     value: 'name',
-                    label: 'NAME',
-                    editRecord: true,
-                    viewRecord: true,
+                    label: 'NAME⇅',
+                    editRecord: false,
+                    viewRecord: false,
                     viewMode: true,
                     visible: true,
                     sort: true,
@@ -20,6 +20,16 @@ export default function() {
                 },
                 {
                     id: 2,
+                    value: 'name',
+                    label: 'NAME',
+                    editRecord: true,
+                    viewRecord: true,
+                    viewMode: false,
+                    visible: false,
+                    type: 'input'
+                },
+                {
+                    id: 3,
                     value: 'email',
                     label: 'EMAIL',
                     editRecord: true,
@@ -29,18 +39,28 @@ export default function() {
                     type: 'input'
                 },
                 {
-                    id: 3,
+                    id: 4,
                     value: 'createdAt',
-                    label: 'REGISTERED DATE',
+                    label: 'REGISTERED DATE⇅',
                     editRecord: false,
-                    viewRecord: true,
+                    viewRecord: false,
                     viewMode: false,
                     visible: true,
                     sort: true,
                     type: 'date'
                 },
                 {
-                    id: 4,
+                    id: 5,
+                    value: 'createdAt',
+                    label: 'REGISTERED DATE',
+                    editRecord: false,
+                    viewRecord: true,
+                    viewMode: false,
+                    visible: false,
+                    type: 'date'
+                },
+                {
+                    id: 6,
                     value: 'id',
                     label: 'ID',
                     editRecord: false,
@@ -50,7 +70,7 @@ export default function() {
                     type: 'input'
                 },
                 {
-                    id: 5,
+                    id: 7,
                     value: 'phone',
                     label: 'PHONE',
                     editRecord: true,
@@ -61,7 +81,7 @@ export default function() {
                     type: 'input'
                 },
                 {
-                    id: 6,
+                    id: 8,
                     value: 'dob',
                     label: 'BIRTHDATE',
                     editRecord: true,
@@ -71,7 +91,7 @@ export default function() {
                     type: 'input'
                 },
                 {
-                    id: 7,
+                    id: 9,
                     value: 'address',
                     label: 'ADDRESS',
                     editRecord: true,
@@ -81,7 +101,7 @@ export default function() {
                     type: 'input'
                 },
                 {
-                    id: 8,
+                    id: 10,
                     value: 'fee_acceptance_status',
                     label: 'FEE ACCEPTANCE',
                     editRecord: true,
@@ -91,7 +111,7 @@ export default function() {
                     type: 'checkbox'
                 },
                 {
-                    id: 9,
+                    id: 11,
                     value: 'hipaa_acceptance_status',
                     label: 'HIPPA ACCEPTANCE',
                     editRecord: true,
@@ -101,7 +121,7 @@ export default function() {
                     type: 'checkbox'
                 },
                 {
-                    id: 10,
+                    id: 12,
                     value: 'terms_accepted',
                     label: 'TERMS ACCEPTED',
                     editRecord: false,
@@ -112,7 +132,7 @@ export default function() {
                 },
                 
                 {
-                    id: 11,
+                    id: 13,
                     value: 'caseCount',
                     label: 'CASE COUNT',
                     editRecord: false,
