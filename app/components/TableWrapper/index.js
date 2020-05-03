@@ -72,7 +72,7 @@ class TableWrapper extends React.Component { // eslint-disable-line react/prefer
                         config={{ itemsPerPageOptions: [25, 50, 100] }}
                         columns={tableColumns.map((column) => Object.assign(
                             {},
-                            { key: column.value, label: column.label }
+                            { key: column.value, label: column.label, sort: column.sort }
                         ))}
                         rows={rows}
                     />

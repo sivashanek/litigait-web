@@ -35,6 +35,7 @@ export default function() {
                     viewRecord: true,
                     viewMode: false,
                     visible: true,
+                    sort: true,
                     type: 'date'
                 },
                 {

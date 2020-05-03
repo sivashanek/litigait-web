@@ -1,7 +1,15 @@
+
+/*
+ *
+ *  sagas
+ *
+ */
+
 import { delay } from 'redux-saga';
 import { push } from 'react-router-redux';
 import { call, take, put, race, select, all } from 'redux-saga/effects';
 import { startSubmit, stopSubmit } from 'redux-form/immutable';
+import moment from 'moment';
 const VALID_CACHE_DIFF = -30;
 
 export default function sagas(constants, actions, remotes, selectors, entityUrl) {
@@ -61,7 +69,14 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
           yield put(loadRecordsCacheHit());
         } else {
           try {
-            // yield put(loadRecordsSuccess([{name: 'test', email: 'a@g.com'}]));
+            /*if(entityUrl === 'clients'){
+            yield put(loadRecordsSuccess([{id:'1', name: 'test', email: 'a@g.com', phone: '783737', address: 'test', hipaa_acceptance_status: true, createdAt: moment()},{id:'2', name: 'test1', email: 'a1@g.com', phone: '22222', address: 'test1', hipaa_acceptance_status: true, fee_acceptance_status: true,createdAt: moment().subtract(1, 'month')}]));
+            } else if(entityUrl === 'cases'){
+              yield put(loadRecordsSuccess([
+                {clientName:'test', id:'1', startDate: moment(), caseTitle: 'law', status: 'New'},
+                {clientName:'test1', id:'2', startDate: moment().subtract(1, 'month'), caseTitle: 'law1', status: 'Active'}
+              ]))
+            }*/
             const records = yield call(loadRecords);
 
             if (records) {

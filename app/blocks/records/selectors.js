@@ -1,3 +1,9 @@
+/*
+ *
+ *  selectors
+ *
+ */
+
 import { createSelector } from 'reselect';
 import { List, Map } from 'immutable';
 import mapRecords from './utils';

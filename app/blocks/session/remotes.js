@@ -1,3 +1,9 @@
+/*
+ *
+ *  session remotes
+ *
+ */
+
 import api from 'utils/api';
 
 export function verifySession() {

@@ -1,3 +1,9 @@
+/*
+ *
+ *  remotes
+ *
+ */
+
 import api from 'utils/api.js'
 
 export default function (name, remotesBlock) {

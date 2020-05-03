@@ -1,3 +1,9 @@
+/*
+ *
+ *  session selectors
+ *
+ */
+
 import { createSelector } from 'reselect';
 import { Map } from 'immutable';
 
