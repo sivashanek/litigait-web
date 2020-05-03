@@ -28,9 +28,9 @@ export default function (name, path, columns, actions, selectors) {
         return (
             <Grid container>
                 <Grid item xs={12}>
-                    <Grid container justify="space-between" className={classes.action}>
+                    <Grid container style={{justifyContent:'space-between',marginBottom:'12px'}}>
                         <Link to={path} className={classes.link}>Close</Link>
-                        <Grid>
+                        <Grid style={{display:'flex',alignItems:'center'}}>
                             <Link to={`${path}/${record.id}/edit`} className={classes.link}>Edit</Link>
                             <Button
                                 type="button"

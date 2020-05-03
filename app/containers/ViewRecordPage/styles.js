@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
             boxShadow: 'none',
             color: '#47AC39',
             fontSize: '18px', 
-            paddingTop: '0px',
+            marginLeft: '10px',
             "&:hover": {
                 backgroundColor: '#fff !important',
                 boxShadow: 'none',    
