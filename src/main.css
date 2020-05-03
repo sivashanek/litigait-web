@@ -32,7 +32,7 @@
   }
   
   .spicy-datatable > tbody > tr:hover {
-    background: whitesmoke;
+    background: #ececec;
   }
   
   .spicy-datatable > thead > tr > th {
@@ -40,7 +40,7 @@
   }
   
   .spicy-datatable > tbody > .spicy-datatable--selected-row {
-    background: #ABABAB;
+    background: #ececec;
   }
   
   /*

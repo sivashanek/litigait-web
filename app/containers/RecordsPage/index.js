@@ -59,7 +59,7 @@ export default function (name, path, columns, actions, selectors, filterColumns,
             {filterColumns && filterColumns[name] && show ? <Grid item xs={12}>
                 <SVG src={require('images/icons/dropdown.svg')} className={classes.dropdown} />
                 <select className={classes.filter} defaultValue={""} onChange={(e) => setFilter(e.target.value)}>
-                    {filterColumns[name].options.map(a => <option disabled={a.disabled} value={a.value}>{a.label}</option>)}
+                    {filterColumns[name].options.map((a, i) => <option key={i} disabled={a.disabled} value={a.value}>{a.label}</option>)}
                 </select>
             </Grid> : null}
             {show ? <Grid item xs={12} md={activeChildren ? 6 : 12} className={classes.table}>

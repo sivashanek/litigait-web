@@ -13,8 +13,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router';
-
 
 import {
   selectLoggedIn,
@@ -27,110 +25,21 @@ import {
 import '../../../src/main.css';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import SVG from 'react-inlinesvg';
-import Icons from 'components/Icons';
 import GlobalStyle from '../../global-styles';
-const drawerWidth = 240;
 import { logOut } from '../../blocks/session/actions';
+import { StyledListItem, useStyles} from './styles';
 
-const StyledListItem = withStyles({
-  root: {
-    "&$selected": {
-      backgroundColor: "black"
-    },
-    "&:hover": {
-      //you want this to be the same as the backgroundColor above
-      backgroundColor: '#2C2C2F',
-    },
-    "&.MuiListItem-root.Mui-selected": {
-      backgroundColor: "black"
-    },
-  },
-  selected: {}
-})(ListItem);
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-  },
-  drawer: {
-    [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-    background: '#393a3d',
-
-  },
-  appBar: {
-    [theme.breakpoints.up('sm')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-    boxShadow: '0px 1px 6px -1px lightgrey',
-    background: '#fff',
-    zIndex: '9999',
-    position: 'fixed',
-    overflow: 'hidden'
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-    color: '#2DA01D',
-  },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
-  drawerPaper: {
-    width: drawerWidth,
-    background: '#393A3D',
-    color: '#F1F1F1',
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
-  login: {
-    flexGrow: 1,
-  },
-  icons: {
-    color: '#F1F1F1',
-  },
-  title: {
-    color: '#2DA01D',
-    fontWeight: 'bold',
-  },
-  link: {
-    textDecoration: 'none',
-    color: '#F1F1F1',
-  },
-  settings: {
-    position: 'relative',
-    left: '55%',
-    color: '#A6A6A9',
-    cursor: 'pointer',
-  },
-  help: {
-    position: 'relative',
-    left: '56%',
-    color: '#A6A6A9',
-    cursor: 'pointer',
-  },
-}));
 
 function App(props) {
   const { loggedIn, container, pages, dispatch } = props;
