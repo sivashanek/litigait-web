@@ -38,8 +38,8 @@ import { useTheme } from '@material-ui/core/styles';
 import SVG from 'react-inlinesvg';
 import GlobalStyle from '../../global-styles';
 import { logOut } from '../../blocks/session/actions';
-import { StyledListItem, useStyles} from './styles';
-
+import { StyledListItem, useStyles } from './styles';
+import Grid from '@material-ui/core/Grid';
 
 function App(props) {
   const { loggedIn, container, pages, dispatch } = props;
@@ -91,24 +91,21 @@ function App(props) {
                 className={classes.menuButton}>
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h5" noWrap className={classes.title}>
-                D & J Law Firm
-              </Typography>
-              <Typography noWrap className={classes.settings}   onClick={handleLogout}>
-                <SVG
-                  src={require('images/icons/settins.svg')}
-                  style={{ width: '23px' }} 
-                />{' '}
-                {props.user && props.user.email}
-              </Typography>
-
-              <Typography noWrap className={classes.help}>
-                <SVG
-                  src={require('images/icons/help.svg')}
-                  style={{ width: '23px' }}
-                />{' '}
-                Help
-              </Typography>
+              <Grid container justify="space-between">
+                <Grid>
+                <Typography variant="h5" noWrap className={classes.title}>
+                  D & J Law Firm
+                </Typography>
+                </Grid>
+                <Grid className={classes.settings}>
+                  <Typography noWrap onClick={handleLogout}>
+                    <SVG src={require('images/icons/settins.svg')} style={{ width: '23px' }} /> {props.user && props.user.email}
+                  </Typography>
+                  <Typography noWrap style={{marginLeft: '12px'}}>
+                    <SVG src={require('images/icons/help.svg')} style={{ width: '23px' }} /> Help
+                  </Typography>
+                </Grid>
+              </Grid>
             </Toolbar>
           </AppBar>
           <nav className={classes.drawer} aria-label="mailbox folders">

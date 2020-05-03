@@ -71,6 +71,7 @@ export const useStyles = makeStyles(theme => ({
     title: {
       color: '#2DA01D',
       fontWeight: 'bold',
+      marginTop: '8px'
     },
     link: {
       textDecoration: 'none',
@@ -78,15 +79,11 @@ export const useStyles = makeStyles(theme => ({
     },
     settings: {
       position: 'relative',
-      left: '55%',
       color: '#A6A6A9',
       cursor: 'pointer',
-    },
-    help: {
-      position: 'relative',
-      left: '56%',
-      color: '#A6A6A9',
-      cursor: 'pointer',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
     },
   }));
 

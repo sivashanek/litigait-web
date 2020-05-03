@@ -34,8 +34,14 @@ const useStyles = makeStyles((theme) => ({
         },
         action: {
             marginBottom: '32px'
+        },
+        hr: {
+            borderTop: '1px solid lightgray',
+            borderBottom: 'none'
+        },
+        value: {
+            marginTop: '0px'
         }
-    
   }));
   
   export default useStyles;

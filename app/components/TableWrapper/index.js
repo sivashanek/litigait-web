@@ -44,21 +44,12 @@ class TableWrapper extends React.Component { // eslint-disable-line react/prefer
                         {
                             [column.value]:
                             <img
-                                src={`${row[column.value] || 'https://s3.amazonaws.com/ds-static.spfr.co/img/placeholder.jpg'}`}
+                                src={`${row[column.value] || ''}`}
                                 role="presentation" style={{ height: 64, padding: 4 }}
                             />,
                         },
                     ));
                     break;
-                // case 'checkbox':
-                //     rows = rows.map((row) => Object.assign(
-                //         row,
-                //         {
-                //             [column.value]:
-                //             (row[column.value]==false || row[column.value]==null) ?'No':'yes',
-                //         },
-                //     ));
-                //     break;
                 default:
                     break;
             }
@@ -66,7 +57,7 @@ class TableWrapper extends React.Component { // eslint-disable-line react/prefer
 
         return (
             <Grid container>
-                <Grid item sm={12}>
+                <Grid item xs={12}>
                     <SpicyDatatable
                         tableKey={path}
                         config={{ itemsPerPageOptions: [25, 50, 100] }}
