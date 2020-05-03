@@ -229,10 +229,78 @@ export default function() {
         }
     }
 
+    function filterColumns() {
+        return {
+            clients: {
+                value: 'hipaa_acceptance_status',
+                options: [
+                    {
+                        value: '',
+                        label: 'Terms Accepted',
+                        disabled: true
+                    },
+                    {
+                        value: 'All',
+                        label: 'All'
+                    },
+                    {
+                        value: 'Pending',
+                        label: 'Pending Terms Acceptance'
+                    }
+                ]
+            },
+            cases: {
+                value: 'status',
+                options: [
+                    {
+                        value: '',
+                        label: 'Status',
+                        disabled: true
+                    },
+                    {
+                        value: 'New',
+                        label: 'New'
+                    },
+                    {
+                        value: 'Active',
+                        label: 'Active'
+                    },
+                    {
+                        value: 'Closed',
+                        label: 'Closed'
+                    }
+                ]
+            },
+            orders: {
+                value: 'status',
+                options: [
+                    {
+                        value: '',
+                        label: 'Status',
+                        disabled: true
+                    },
+                    {
+                        value: 'New',
+                        label: 'New'
+                    },
+                    {
+                        value: 'Active',
+                        label: 'Active'
+                    },
+                    {
+                        value: 'Closed',
+                        label: 'Closed'
+                    }
+                ]
+            }
+        }
+    }
+
 
     return {
         clients,
         cases,
-        orders
+        orders,
+        filterColumns
     }
 }

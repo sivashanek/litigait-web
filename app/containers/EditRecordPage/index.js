@@ -6,13 +6,12 @@
  */
 
 
-import React, { useState, memo } from 'react';
+import React, { useState, useEffect,  memo } from 'react';
 import { connect } from 'react-redux';
 import EditRecordForm from 'components/EditRecordForm';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
-
 
 export default function (name, path, columns, actions, selectors) {
 
@@ -22,8 +21,19 @@ export default function (name, path, columns, actions, selectors) {
     }
 
     function EditRecordPage({ location, record }) {
+        console.log('record', record);
+
+        const [loading, setLoading] = useState(true);
+
+        useEffect(() => {
+            setLoading(true);
+            setTimeout(()=>{
+                setLoading(false);
+            }, 500);
+        }, []);
+
         return (<div>
-            {Object.keys(record).length > 0 ? <EditRecordForm
+            {!loading ? <EditRecordForm
                 initialValues={record || {}}
                 form={`editRecord.${record.id}`}
                 name={name}
@@ -31,7 +41,7 @@ export default function (name, path, columns, actions, selectors) {
                 fields={columns.filter(_=>_.editRecord)}
                 onSubmit={handleEdit.bind(this)}
                 locationState={location.state}
-            /> : null}
+            /> : 'Loading...'}
         </div>)
 
     }
@@ -41,7 +51,7 @@ export default function (name, path, columns, actions, selectors) {
     };
 
     const mapStateToProps = createStructuredSelector({
-        record: (state, props) => selectRecord(props.match.params.id)(state)
+        record: (state, props) => selectRecord(props.match.params.id)(state),
     });
 
     const withConnect = connect(

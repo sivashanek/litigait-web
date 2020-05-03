@@ -4,6 +4,7 @@ import schema from './schema';
 const clientsColumns = schema().clients().columns;
 const casesColumns = schema().cases().columns;
 const ordersColumns = schema().orders().columns;
+const filterColumns = schema().filterColumns();
 
 
 export default function (simpleLazyLoadedRoute){
@@ -27,7 +28,7 @@ export default function (simpleLazyLoadedRoute){
                 icon: 'Group'
             },
             container: function RecordsPage(clients){
-                return this('clients', `${process.env.PUBLIC_PATH || ''}/clients`, clientsColumns, clients.actions, clients.selectors)
+                return this('clients', `${process.env.PUBLIC_PATH || ''}/clients`, clientsColumns, clients.actions, clients.selectors, filterColumns, true)
             },
             childRoutes: [
                 simpleLazyLoadedRoute({
@@ -66,7 +67,7 @@ export default function (simpleLazyLoadedRoute){
                 icon: 'Business'
             },
             container: function RecordsPage(cases){
-                return this('cases', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors)
+                return this('cases', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors, filterColumns)
             },
             childRoutes: [
                 simpleLazyLoadedRoute({
@@ -100,7 +101,7 @@ export default function (simpleLazyLoadedRoute){
             name: 'orders',
             require: ['RecordsPage', 'orders'],
             container: function RecordsPage(orders){
-                return this('orders', `${process.env.PUBLIC_PATH || ''}/orders`, ordersColumns, orders.actions, orders.selectors)
+                return this('orders', `${process.env.PUBLIC_PATH || ''}/orders`, ordersColumns, orders.actions, orders.selectors, filterColumns)
             },
             data: {
                 path: '/orders',

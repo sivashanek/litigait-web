@@ -19,78 +19,13 @@ import Button from '@material-ui/core/Button';
 import Styles from './styles';
 import SVG from 'react-inlinesvg';
 
-export default function (name, path, columns, actions, selectors) {
+export default function (name, path, columns, actions, selectors, filterColumns, show) {
 
     const {
         selectLoading,
         selectRecords,
         selectError
     } = selectors;
-
-    const filterColumns = {
-        clients: {
-            value: 'hipaa_acceptance_status',
-            options: [
-                {
-                    value: '',
-                    label: 'Terms Accepted',
-                    disabled: true
-                },
-                {
-                    value: 'All',
-                    label: 'All'
-                },
-                {
-                    value: 'Pending',
-                    label: 'Pending Terms Acceptance'
-                }
-            ]
-        },
-        cases: {
-            value: 'status',
-            options: [
-                {
-                    value: '',
-                    label: 'Status',
-                    disabled: true
-                },
-                {
-                    value: 'New',
-                    label: 'New'
-                },
-                {
-                    value: 'Active',
-                    label: 'Active'
-                },
-                {
-                    value: 'Closed',
-                    label: 'Closed'
-                }
-            ]
-        },
-        orders: {
-            value: 'status',
-            options: [
-                {
-                    value: '',
-                    label: 'Status',
-                    disabled: true
-                },
-                {
-                    value: 'New',
-                    label: 'New'
-                },
-                {
-                    value: 'Active',
-                    label: 'Active'
-                },
-                {
-                    value: 'Closed',
-                    label: 'Closed'
-                }
-            ]
-        }
-    }
 
     function RecordsPage(props) {
         const classes = Styles();
@@ -110,7 +45,7 @@ export default function (name, path, columns, actions, selectors) {
                     <Typography component="h1" variant="h5">
                         {name}
                     </Typography>
-                    <Link to={`${path}/create`}>
+                    {show ? <Link to={`${path}/create`}>
                         <Button
                             type="button"
                             variant="contained"
@@ -118,18 +53,18 @@ export default function (name, path, columns, actions, selectors) {
                             className={classes.create} >
                             New {name}
                         </Button>
-                    </Link>
+                    </Link> : null}
                 </Grid>
             </Grid>
-            {filterColumns[name] ? <Grid item xs={12}>
+            {filterColumns && filterColumns[name] && show ? <Grid item xs={12}>
                 <SVG src={require('images/icons/dropdown.svg')} className={classes.dropdown} />
                 <select className={classes.filter} defaultValue={""} onChange={(e) => setFilter(e.target.value)}>
                     {filterColumns[name].options.map(a => <option disabled={a.disabled} value={a.value}>{a.label}</option>)}
                 </select>
             </Grid> : null}
-            <Grid item xs={12} md={activeChildren ? 6 : 12} className={classes.table}>
+            {show ? <Grid item xs={12} md={activeChildren ? 6 : 12} className={classes.table}>
                 <TableWrapper
-                    records={filter && records.filter(a => a[filterColumns[name].value] === filter) || records}
+                    records={filter && filterColumns && records.filter(a => a[filterColumns[name].value] === filter) || records}
                     columns={columns}
                     children={activeChildren}
                     path={path}
@@ -137,7 +72,7 @@ export default function (name, path, columns, actions, selectors) {
                     history={history}
                     locationState={location.state}
                 />
-            </Grid>
+            </Grid> : null}
             {activeChildren ?
                 <Grid item xs={12} md={6}>
                     <div className="children">

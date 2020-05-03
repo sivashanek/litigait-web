@@ -20,6 +20,7 @@ export default function ({ input, label, required, options, meta: { touched, err
         <FormControl className={classes.formControl}>
             <InputLabel id={`${name}-id`}>{label}</InputLabel>
             <Select
+                name={name}
                 fullWidth
                 required={required}
                 labelId={`${name}-id`}

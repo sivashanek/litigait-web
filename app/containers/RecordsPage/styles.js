@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
         position: 'relative',
         left: '208px',
         display: 'table',
-        top: '47px'
+        top: '31px',
+        height: '15px'
     }
 }));
 
