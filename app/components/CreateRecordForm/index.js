@@ -11,14 +11,27 @@ import { ImplementationFor } from './utils';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Styles from './styles';
-import DateField from '../../components/DateField'
+import {MaterialUIPickers} from '../../components/DateField'
+import DatePicker from 'react-date-picker';
 
 function createRecordForm(props) {
 
     const classes = Styles();
     const { handleSubmit, pristine, submitting, fields, path, error, metaData, locationState } = props;
 
+    // const[date, setDate] = getCurrentDate;
+
+    // const getCurrentDate = () => {
+    //     return "test";
+    //  }
+
+    // const onChange = date => setDate({ date });
+
     return (
+        <div>  
+           <div>
+           {/* <DateField/> */}
+           </div>
         <form onSubmit={handleSubmit} className={classes.form} noValidate >
             <Grid container spacing={3}>
                 {(fields || []).map((field, index) => {
@@ -28,6 +41,7 @@ function createRecordForm(props) {
                         </Grid>   
                 })}
             </Grid>
+          
             <Grid>
                 <Button
                     type="submit"
@@ -47,6 +61,7 @@ function createRecordForm(props) {
                 </Link>
             </Grid>
         </form>
+        </div>
     )
 
 }

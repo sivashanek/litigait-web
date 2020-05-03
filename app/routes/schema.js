@@ -41,7 +41,7 @@ export default function() {
                     id: 4,
                     value: 'id',
                     label: 'ID',
-                    editRecord: true,
+                    editRecord: false,
                     viewRecord: true,
                     viewMode: false,
                     visible: false,
@@ -60,6 +60,16 @@ export default function() {
                 },
                 {
                     id: 6,
+                    value: 'dob',
+                    label: 'BIRTHDATE',
+                    editRecord: true,
+                    viewRecord: true,
+                    viewMode: false,
+                    visible: false,
+                    type: 'input'
+                },
+                {
+                    id: 7,
                     value: 'address',
                     label: 'ADDRESS',
                     editRecord: true,
@@ -69,7 +79,7 @@ export default function() {
                     type: 'input'
                 },
                 {
-                    id: 7,
+                    id: 8,
                     value: 'fee_acceptance_status',
                     label: 'FEE ACCEPTANCE',
                     editRecord: false,
@@ -79,7 +89,7 @@ export default function() {
                     type: 'checkbox'
                 },
                 {
-                    id: 8,
+                    id: 9,
                     value: 'hipaa_acceptance_status',
                     label: 'TERMS ACCEPTED',
                     editRecord: true,
@@ -89,10 +99,10 @@ export default function() {
                     type: 'checkbox'
                 },
                 {
-                    id: 9,
+                    id: 10,
                     value: 'caseCount',
                     label: 'CASE COUNT',
-                    editRecord: true,
+                    editRecord: false,
                     viewRecord: true,
                     viewMode: false,
                     visible: false,
