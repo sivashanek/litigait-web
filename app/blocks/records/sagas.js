@@ -158,7 +158,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         yield put(startSubmit(form));
 
         try {
-          //yield call(updateRecord, record);
+          yield call(updateRecord, record);
           yield put(updateRecordSuccess(record));
           yield put(push(process.env.PUBLIC_PATH || `/${entityUrl}`));
         } catch (error) {

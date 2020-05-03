@@ -15,6 +15,7 @@ export default function() {
                     viewRecord: true,
                     viewMode: true,
                     visible: true,
+                    sort: true,
                     type: 'input'
                 },
                 {
@@ -83,25 +84,35 @@ export default function() {
                     id: 8,
                     value: 'fee_acceptance_status',
                     label: 'FEE ACCEPTANCE',
-                    editRecord: false,
-                    viewRecord: false,
+                    editRecord: true,
+                    viewRecord: true,
                     viewMode: false,
                     visible: false,
-                    defaultValue: true,
                     type: 'checkbox'
                 },
                 {
                     id: 9,
                     value: 'hipaa_acceptance_status',
-                    label: 'TERMS ACCEPTED',
+                    label: 'HIPPA ACCEPTANCE',
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
-                    visible: true,
+                    visible: false,
                     type: 'checkbox'
                 },
                 {
                     id: 10,
+                    value: 'terms_accepted',
+                    label: 'TERMS ACCEPTED',
+                    editRecord: false,
+                    viewRecord: false,
+                    viewMode: false,
+                    visible: true,
+                    type: 'checkbox'
+                },
+                
+                {
+                    id: 11,
                     value: 'caseCount',
                     label: 'CASE COUNT',
                     editRecord: false,
@@ -233,12 +244,11 @@ export default function() {
     function filterColumns() {
         return {
             clients: {
-                value: 'hipaa_acceptance_status',
+                value: 'terms_accepted',
                 options: [
                     {
                         value: '',
-                        label: 'Terms Accepted',
-                        disabled: true
+                        label: 'Terms Accepted'
                     },
                     {
                         value: 'All',

@@ -14,7 +14,7 @@ export function mapClients(records) {
             let Record = Object.assign({}, record);
             Record.createdAt = record.createdAt && moment(record.createdAt).format('MM/DD/YYYY') || false;
             Record.dob = record.dob && moment(record.dob).format('MM/DD/YYYY') || false;
-            Record.hipaa_acceptance_status  = record.hipaa_acceptance_status && record.fee_acceptance_status ? 'All' : 'Pending'
+            Record.terms_accepted  = record.hipaa_acceptance_status && record.fee_acceptance_status ? 'All' : 'Pending'
             return Record;
         });
     }
