@@ -13,11 +13,15 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import get from './utils';
+import moment from 'moment';
 
 export default function (name, path, columns, actions, selectors) {
 
     const { selectRecord } = selectors;    
     function handleEdit(record, dispatch, { form }) {
+        if(name === 'clients.edit'){
+            record.createdAt = moment(record.createdAt).format('YYYY-MM-DD');
+        }
         dispatch(actions.updateRecord(record, form))
     }
 
