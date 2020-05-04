@@ -18,7 +18,7 @@ export default function ({ input, label, autoFocus, required, meta: { touched, e
             required={required}
             fullWidth
             name={name}
-            label={label}
+            label={<span className={classes.textSize} >{label}</span>}
             onChange={(e) => onChange(e.target.value)}
             value={value || ''}
             autoFocus={autoFocus} />

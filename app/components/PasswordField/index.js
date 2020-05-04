@@ -29,7 +29,7 @@ export default function ({ input, label, required, meta: { touched, error } }) {
 
     return (
         <FormControl className={classes.fieldColor}>
-            <InputLabel required>{label}</InputLabel>
+            <InputLabel required>{<span className={classes.textSize} >{label}</span>}</InputLabel>
             <Input
                 required={required}
                 type={showPassword ? 'text' : 'password'}

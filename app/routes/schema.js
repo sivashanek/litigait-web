@@ -64,7 +64,7 @@ export default function() {
                     value: 'id',
                     label: 'ID',
                     editRecord: false,
-                    viewRecord: true,
+                    viewRecord: false,
                     viewMode: false,
                     visible: false,
                     type: 'input'

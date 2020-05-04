@@ -42,12 +42,14 @@ function LoginForm({ handleSubmit, errorMessage, clearError }) {
             <Error errorMessage={errorMessage}/>
             <Grid className={classes.div}>
                 <Grid item xs>
-                    <Link to={{
-                        pathname: '/',
-                        state: {
-                            form: 'forgot'
-                        }
-                    }} className={classes.linkColor}>
+                    <Link 
+                    // to={{
+                    //     pathname: '/',
+                    //     state: {
+                    //         form: 'forgot'
+                    //     }
+                    // }} 
+                    className={classes.linkColor}>
                         Forgot your Password?
                     </Link>
                 </Grid>

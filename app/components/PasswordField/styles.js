@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
         borderColor: '#2ca01c',
       },
     },
+    textSize:{
+      fontSize: '14px',
+    },
   
   }));
   

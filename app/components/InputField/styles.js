@@ -17,7 +17,18 @@ const useStyles = makeStyles((theme) => ({
       '&.Mui-focused fieldset': {
         borderColor: '#2ca01c',
       },
+      // '.MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated':{
+      //   fontSize:'10px',
+      // }
     },
+
+    textSize:{
+      fontSize: '14px',
+    }
+
+    
+
+    
   
   }));
   

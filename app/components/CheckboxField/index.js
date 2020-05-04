@@ -15,11 +15,12 @@ import Styles from './styles';
     const classes = Styles();
     console.log("label = ",label);
     const setStyles = label=='Remember Me'?classes.formControlLabel:null;
+    const setFontSize = label!='Remember Me'?classes.textSize:null;
 
     
     return (
         <FormControlLabel className={setStyles} 
         control={<Checkbox  style={{color:"grey"}} defaultChecked={input.value || false} onChange={(e)=>input.onChange(e.target.checked)} />}
-        label={label} />
+        label={<span className={setFontSize} >{label}</span>} />
     )
  }
