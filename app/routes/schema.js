@@ -178,7 +178,7 @@ export default function() {
                     viewMode: false,
                     visible: true,
                     sort: true,
-                    type: 'input'  
+                    type: 'date'  
                 },
                 {
                     id: 4,
