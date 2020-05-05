@@ -16,7 +16,9 @@ class TableWrapper extends React.Component { // eslint-disable-line react/prefer
         children: PropTypes.bool,
         path: PropTypes.string,
         locationState: PropTypes.object,
+        disableClickList: PropTypes.bool
     };
+
 
     constructor(props) {
         super(props);
@@ -24,14 +26,14 @@ class TableWrapper extends React.Component { // eslint-disable-line react/prefer
     }
 
     render() {
-        const { records, columns, children, path, locationState = {} } = this.props;
+        const { records, columns, children, path, locationState = {}, disableClickList } = this.props;
         const activePath = location.pathname;
         const tableColumns = children ? columns.filter((column) => column.visible && column.viewMode) : columns.filter((column) => column.visible);
 
         let rows = records.map((record) => Object.assign(
             {},
             record, {
-            onClickHandler: this.handleClick.bind(this, record.id, locationState),
+            onClickHandler: this.handleClick.bind(this, record.id, locationState, disableClickList),
             isActive: activePath === `${path}/${record.id}` || activePath === `${path}/${record.id}/edit`,
         }),
         );
@@ -73,6 +75,7 @@ class TableWrapper extends React.Component { // eslint-disable-line react/prefer
     }
 
     handleClick(id) {
+        if(this.props.disableClickList) return;
         const { path, history } = this.props;
         if(id)
             history.push(`${path}/${id}`);

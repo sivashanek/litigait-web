@@ -88,7 +88,7 @@ export default function() {
                     viewRecord: true,
                     viewMode: false,
                     visible: false,
-                    type: 'input'
+                    type: 'date'
                 },
                 {
                     id: 9,
@@ -156,35 +156,37 @@ export default function() {
                     viewRecord: true,
                     viewMode: true,
                     visible: true,
+                    sort: true,
                     type: 'input'  
                 },
                 {
                     id: 2,
                     value: 'id',
                     label: 'ID',
-                    editRecord: true,
-                    viewRecord: true,
+                    editRecord: false,
+                    viewRecord: false,
                     viewMode: false,
-                    visible: true,
+                    visible: false,
                     type: 'input'  
                 },
                 {
                     id: 3,
-                    value: 'startDate',
+                    value: 'start_date',
                     label: 'START DATE',
-                    editRecord: false,
-                    viewRecord: true,
-                    viewMode: false,
-                    visible: true,
-                    type: 'date'  
-                },
-                {
-                    id: 4,
-                    value: 'caseTitle',
-                    label: 'CASE TITLE',
                     editRecord: true,
                     viewRecord: true,
                     viewMode: false,
+                    visible: true,
+                    sort: true,
+                    type: 'input'  
+                },
+                {
+                    id: 4,
+                    value: 'case_title',
+                    label: 'CASE TITLE',
+                    editRecord: true,
+                    viewRecord: true,
+                    viewMode: true,
                     visible: true,
                     type: 'input'  
                 },
@@ -192,7 +194,7 @@ export default function() {
                     id: 5,
                     value: 'status',
                     label: 'STATUS',
-                    editRecord: true,
+                    editRecord: false,
                     viewRecord: true,
                     viewMode: false,
                     visible: true,
@@ -275,8 +277,12 @@ export default function() {
                         label: 'All'
                     },
                     {
-                        value: 'Pending',
-                        label: 'Pending Terms Acceptance'
+                        value: 'Pending Hipaa',
+                        label: 'Pending Hipaa'
+                    },
+                    {
+                        value: 'Pending Fee',
+                        label: 'Pending Fee'
                     }
                 ]
             },
@@ -289,15 +295,15 @@ export default function() {
                         disabled: true
                     },
                     {
-                        value: 'New',
+                        value: 'new',
                         label: 'New'
                     },
                     {
-                        value: 'Active',
+                        value: 'active',
                         label: 'Active'
                     },
                     {
-                        value: 'Closed',
+                        value: 'closed',
                         label: 'Closed'
                     }
                 ]

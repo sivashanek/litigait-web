@@ -19,7 +19,7 @@ import Button from '@material-ui/core/Button';
 import Styles from './styles';
 import SVG from 'react-inlinesvg';
 
-export default function (name, path, columns, actions, selectors, filterColumns, show) {
+export default function (name, path, columns, actions, selectors, filterColumns, show, disableClickList) {
 
     const {
         selectLoading,
@@ -71,6 +71,7 @@ export default function (name, path, columns, actions, selectors, filterColumns,
                     name={name}
                     history={history}
                     locationState={location.state}
+                    disableClickList={disableClickList}
                 />
             </Grid> : null}
             {activeChildren ?

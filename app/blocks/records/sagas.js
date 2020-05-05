@@ -135,7 +135,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
 
         try {
           const result = yield call(createRecord, record);
-          yield put(createRecordSuccess(record));
+          yield put(createRecordSuccess(result));
                
           yield put(stopSubmit(form));
           

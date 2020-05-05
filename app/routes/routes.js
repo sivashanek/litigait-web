@@ -28,7 +28,7 @@ export default function (simpleLazyLoadedRoute){
                 icon: 'Group'
             },
             container: function RecordsPage(clients){
-                return this('clients', `${process.env.PUBLIC_PATH || ''}/clients`, clientsColumns, clients.actions, clients.selectors, filterColumns, true)
+                return this('clients', `${process.env.PUBLIC_PATH || ''}/clients`, clientsColumns, clients.actions, clients.selectors, filterColumns, true, false)
             },
             childRoutes: [
                 simpleLazyLoadedRoute({
@@ -67,7 +67,7 @@ export default function (simpleLazyLoadedRoute){
                 icon: 'Business'
             },
             container: function RecordsPage(cases){
-                return this('cases', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors, filterColumns)
+                return this('cases', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors, filterColumns, true, true)
             },
             childRoutes: [
                 simpleLazyLoadedRoute({

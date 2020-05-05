@@ -1,10 +1,13 @@
-import InputField from 'Components/InputField';
-import CheckboxField from 'Components/CheckboxField';
-import SelectField from 'Components/SelectField';
+import InputField from 'components/InputField';
+import CheckboxField from 'components/CheckboxField';
+import SelectField from 'components/SelectField';
+import DatePicker from 'components/DatePicker';
+
 
 export const ImplementationFor = {
     input: InputField,
     checkbox: CheckboxField,
-    select: SelectField
+    select: SelectField,
+    date: DatePicker
 };
 

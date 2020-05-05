@@ -14,19 +14,36 @@ export function mapClients(records) {
             let Record = Object.assign({}, record);
             Record.createdAt = record.createdAt && moment(record.createdAt).format('MM/DD/YYYY') || false;
             Record.dob = record.dob && moment(record.dob).format('MM/DD/YYYY') || false;
-            Record.terms_accepted  = record.hipaa_acceptance_status && record.fee_acceptance_status ? 'All' : 'Pending'
+            // Record.terms_accepted  = record.hipaa_acceptance_status && record.fee_acceptance_status ? 'All' : 'Pending'
+            Record.terms_accepted  = getTermsAccepted(record.hipaa_acceptance_status, record.fee_acceptance_status);
+
             return Record;
         });
     }
     return records;
 }
 
+function getTermsAccepted(hipaa_acceptance_status, fee_acceptance_status){
+    if(hipaa_acceptance_status && fee_acceptance_status){
+        return "All";
+    }
+    if(!hipaa_acceptance_status && !fee_acceptance_status){
+        return "Pending";
+    }
+    if(!hipaa_acceptance_status){
+        return "Pending Hipaa";
+    }
+    if(!fee_acceptance_status){
+        return "Pending Fee";
+    }
+    return '';
+}
 
 export function mapCases(records) {
 
     if (records && records.length > 0) {
         return records.map((record) => {
-            record.startDate = record.startDate && moment(record.startDate).format('MM/DD/YYYY') || false;
+            record.start_date = record.start_date && moment(record.start_date).format('MM/DD/YYYY') || false;
             return record;
         });
     }
