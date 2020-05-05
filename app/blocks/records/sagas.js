@@ -77,7 +77,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
                 {clientName:'test1', id:'2', startDate: moment().subtract(1, 'month'), caseTitle: 'law1', status: 'Active'}
               ]))
             }
-            const records = yield call(loadRecords);
+            //const records = yield call(loadRecords);
 
             if (records) {
               yield put(loadRecordsSuccess(records));
