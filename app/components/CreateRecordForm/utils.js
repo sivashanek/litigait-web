@@ -6,6 +6,7 @@ import DatePicker from 'components/DatePicker';
 
 export const ImplementationFor = {
     input: InputField,
+    number: InputField,
     checkbox: CheckboxField,
     select: SelectField,
     date: DatePicker

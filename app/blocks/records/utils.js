@@ -44,11 +44,19 @@ export function mapCases(records) {
     if (records && records.length > 0) {
         return records.map((record) => {
             record.start_date = record.start_date && moment(record.start_date).format('MM/DD/YYYY') || false;
+            record.status = changeStatus(record.status);
             return record;
         });
     }
     return records;
 
+}
+
+export function changeStatus(status){
+    if(status=='new') return 'New';
+    if(status=='active') return 'Active';
+    if(status=='close') return 'Closed';
+    return;
 }
 
 export function mapOrders(records) {

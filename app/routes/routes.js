@@ -67,7 +67,7 @@ export default function (simpleLazyLoadedRoute){
                 icon: 'Business'
             },
             container: function RecordsPage(cases){
-                return this('cases', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors, filterColumns, true, true)
+                return this('cases', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors, filterColumns, true)
             },
             childRoutes: [
                 simpleLazyLoadedRoute({
@@ -87,11 +87,11 @@ export default function (simpleLazyLoadedRoute){
                     }
                 }),
                 simpleLazyLoadedRoute({
-                    path: `:id`,
+                    path: `:id/form`,
                     name: 'cases.view',
-                    require: ['ViewRecordPage', 'cases'],
-                    container: function ViewRecordPage(cases){
-                        return this('cases.view', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors)
+                    require: ['ViewCasesPage', 'cases'],
+                    container: function ViewCasesPage(cases){
+                        return this('cases', `${process.env.PUBLIC_PATH || ''}/cases`, casesColumns, cases.actions, cases.selectors)
                     }
                 })
             ]

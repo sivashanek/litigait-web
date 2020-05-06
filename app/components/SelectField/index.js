@@ -18,8 +18,8 @@ export default function ({ input, label, required, options, meta: { touched, err
     const { name, value } = input;
     return (
         <FormControl className={classes.formControl}>
-            <InputLabel id={`${name}-id`}>{label}</InputLabel>
-            <Select
+            <InputLabel className={classes.labelSize} id={`${name}-id`}>{label}</InputLabel>
+            <Select 
                 name={name}
                 fullWidth
                 required={required}

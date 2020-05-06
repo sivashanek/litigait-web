@@ -78,7 +78,7 @@ export default function() {
                     viewMode: false,
                     number: true,
                     visible: true,
-                    type: 'input'
+                    type: 'number'
                 },
                 {
                     id: 8,
@@ -139,7 +139,7 @@ export default function() {
                     viewRecord: true,
                     viewMode: false,
                     visible: false,
-                    type: 'input'
+                    type: 'number'
                 }
             ]
         }
@@ -150,7 +150,7 @@ export default function() {
             columns: [
                 {
                     id: 1,
-                    value: 'clientName',
+                    value: 'client_name',
                     label: 'CLIENT NAME',
                     editRecord: true,
                     viewRecord: true,
@@ -192,15 +192,36 @@ export default function() {
                 },
                 {
                     id: 5,
+                    value: 'case_number',
+                    label: 'CASE NUMBER',
+                    editRecord: true,
+                    viewRecord: true,
+                    viewMode: false,
+                    visible: false,
+                    type: 'number'  
+                },
+                {
+                    id: 6,
                     value: 'status',
                     label: 'STATUS',
-                    editRecord: false,
+                    editRecord: true,
                     viewRecord: true,
                     viewMode: false,
                     visible: true,
                     options: ['New', 'Active', 'Closed'],
                     type: 'select'  
-                }
+                },
+                {
+                    id: 7,
+                    value: 'client_id',
+                    label: 'CLIENT ID',
+                    editRecord: true,
+                    viewRecord: true,
+                    viewMode: true,
+                    visible: false,
+                    type: 'input'  
+                },
+                
             ]
         }
     }
@@ -277,13 +298,17 @@ export default function() {
                         label: 'All'
                     },
                     {
+                        value: 'Pending',
+                        label: 'Pending'
+                    },
+                    {
                         value: 'Pending Hipaa',
                         label: 'Pending Hipaa'
                     },
                     {
                         value: 'Pending Fee',
                         label: 'Pending Fee'
-                    }
+                    },
                 ]
             },
             cases: {
@@ -292,18 +317,18 @@ export default function() {
                     {
                         value: '',
                         label: 'Status',
-                        disabled: true
+                        // disabled: true
                     },
                     {
-                        value: 'new',
+                        value: 'New',
                         label: 'New'
                     },
                     {
-                        value: 'active',
+                        value: 'Active',
                         label: 'Active'
                     },
                     {
-                        value: 'closed',
+                        value: 'Closed',
                         label: 'Closed'
                     }
                 ]

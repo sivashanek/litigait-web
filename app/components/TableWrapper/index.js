@@ -78,7 +78,7 @@ class TableWrapper extends React.Component { // eslint-disable-line react/prefer
         if(this.props.disableClickList) return;
         const { path, history } = this.props;
         if(id)
-            history.push(`${path}/${id}`);
+            history.push(path.indexOf('cases') > -1 ? `${path}/${id}/form` : `${path}/${id}`);
     }
 
 
