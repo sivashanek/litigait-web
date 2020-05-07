@@ -70,8 +70,8 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
           yield put(loadRecordsCacheHit());
         } else {
           try {
-            let records;
-            /*if (entityUrl === 'clients') {
+            /*let records;
+            if (entityUrl === 'clients') {
               records = [{ id: '1', name: 'test', email: 'a@g.com', phone: '783737', address: 'test', fee_acceptance_status: true, createdAt: moment() }, { id: '2', name: 'test1', email: 'a1@g.com', phone: '22222', address: 'test1', hipaa_acceptance_status: true, fee_acceptance_status: true, createdAt: moment().subtract(1, 'month') }];
             } else if (entityUrl === 'cases') {
               records = [
