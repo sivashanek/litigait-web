@@ -29,8 +29,8 @@ export default function reducer(constants, name) {
     LOAD_RECORDS_VALID_CACHE,
   } = constants;
 
-  return function recordsReducer(state = initialState, { type, id, record, records, error }) {
-    
+  return function recordsReducer(state = initialState, { type, id, record, records, recordsMetaData, error }) {
+
     return produce(state, draft => {
       switch (type) {
         case LOAD_RECORDS_VALID_CACHE:
@@ -49,6 +49,7 @@ export default function reducer(constants, name) {
         case LOAD_RECORDS_SUCCESS:
           draft.records = records;
           draft.lastUpdate = Math.floor(Date.now() / 1000);
+          draft.recordsMetaData = recordsMetaData;
           draft.loading = false;
           draft.error = false;
           draft.updateError = false;
@@ -84,13 +85,13 @@ export default function reducer(constants, name) {
           break;
         case CREATE_RECORD_ERROR:
         case UPDATE_RECORD_ERROR:
-        case DELETE_RECORD_ERROR:  
+        case DELETE_RECORD_ERROR:
           draft.loading = false;
           draft.error = false;
           draft.updateError = error;
           draft.success = false;
           break;
-        case DELETE_RECORD_SUCCESS:  
+        case DELETE_RECORD_SUCCESS:
           draft.records = draft.records.filter((r, i) => r.id !== id);
           draft.loading = false;
           draft.error = false;

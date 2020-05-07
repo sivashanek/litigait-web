@@ -55,7 +55,6 @@ export default function ({ input, label, autoFocus, required, meta: { touched, e
 //   render() {
 //     const { classes } = this.props;
 //     const { selectedDate } = this.state;
-//     console.log("selectedDate = ",selectedDate);
 
 //     return (
 //       <MuiPickersUtilsProvider utils={DateFnsUtils}>

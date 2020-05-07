@@ -13,7 +13,6 @@ import Styles from './styles';
  export default function ({ input, label, required, meta: { touched, error } }) {
 
     const classes = Styles();
-    console.log("label = ",label);
     const setStyles = label=='Remember Me'?classes.formControlLabel:null;
     const setFontSize = label!='Remember Me'?classes.textSize:null;
 

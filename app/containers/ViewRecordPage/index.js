@@ -33,7 +33,6 @@ export default function (name, path, columns, actions, selectors) {
         };
 
         const handleClose = () => {
-            console.log("close ");
             setOpen(false);
         };
 

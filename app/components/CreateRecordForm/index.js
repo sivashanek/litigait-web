@@ -14,17 +14,14 @@ import Styles from './styles';
 import Error from '../Error';
 
 function createRecordForm(props) {
-
     const classes = Styles();
     const { handleSubmit, pristine, submitting, fields, path, error, metaData, locationState } = props;
 
-    console.log("error", props);
     let err = null;
 
     if (error && error.response
       && error.response.data && error.response.data.error) {
       const data = error.response.data;
-      console.log("data", data);
   
       if( typeof data.error === 'string' ) {
         err = data['error'];
@@ -42,7 +39,7 @@ function createRecordForm(props) {
                     {(fields || []).map((field, index) => {
                         const InputComponent = ImplementationFor[field.type];
                         return <Grid key={index} item xs={12}>
-                            <Field name={field.value} label={field.label} type={field.type} component={InputComponent} required={field.required} {...field} />
+                            <Field name={field.value} label={field.label} type={field.type} metaData={metaData} component={InputComponent} required={field.required} {...field} />
                         </Grid>
                     })}
                 </Grid>

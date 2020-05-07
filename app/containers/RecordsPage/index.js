@@ -81,7 +81,6 @@ export default function (name, path, columns, actions, selectors, filterColumns,
             },
           ]
 
-        console.log("records page props = ",props);
         const activeChildren = path !== pathname;
 
         const fullView = pathname.indexOf('form') > -1 ? true : false;

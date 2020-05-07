@@ -157,7 +157,8 @@ export default function() {
                     viewMode: true,
                     visible: true,
                     sort: true,
-                    type: 'input'  
+                    options: 'clientsOptions',
+                    type: 'select'  
                 },
                 {
                     id: 2,

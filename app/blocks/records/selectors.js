@@ -7,13 +7,19 @@
 import { createSelector } from 'reselect';
 import { List, Map } from 'immutable';
 import mapRecords from './utils';
+import mapRecordsMetaData from './metaData';
 
 export default function selectors(name) {
   const selectDomain = () => (state) => state[name] || false;
-  
+
   const selectLoading = () => createSelector(
     selectDomain(),
     (domain) => domain && domain.loading || false,
+  );
+
+  const selectRecordsMetaData = () => createSelector(
+    selectDomain(),
+    (domain) => domain && domain.recordsMetaData && mapRecordsMetaData(domain.recordsMetaData, name) || {},
   );
 
   const selectRecords = () => createSelector(
@@ -49,6 +55,7 @@ export default function selectors(name) {
     selectDomain,
     selectLoading,
     selectRecords,
+    selectRecordsMetaData,
     selectRecord,
     selectError,
     selectUpdateError,

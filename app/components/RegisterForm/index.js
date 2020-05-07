@@ -7,9 +7,9 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import InputField from 'Components/InputField';
-import PasswordField from 'Components/PasswordField';
-import SelectField from 'Components/SelectField';
+import InputField from 'components/InputField';
+import PasswordField from 'components/PasswordField';
+import SelectField from 'components/SelectField';
 import Error from '../Error';
 
 import Styles from './styles';

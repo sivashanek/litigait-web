@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 
-import InputField from 'Components/InputField';
+import InputField from 'components/InputField';
 
 import Styles from './styles';
 

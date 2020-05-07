@@ -23,7 +23,7 @@ function editRecordForm(props) {
                 {(fields || []).map((field, index) => {
                     const InputComponent = ImplementationFor[field.type];
                     return <Grid key={index} item xs={12}>
-                            <Field name={field.value} label={field.label} type="text" component={InputComponent} required={field.required} {...field} />
+                            <Field name={field.value} label={field.label} type="text" metaData={metaData} component={InputComponent} required={field.required} {...field} />
                         </Grid>   
                 })}
             </Grid>

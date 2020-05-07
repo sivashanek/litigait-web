@@ -9,11 +9,12 @@ import { delay } from 'redux-saga';
 import { push } from 'react-router-redux';
 import { call, take, put, race, select, all } from 'redux-saga/effects';
 import { startSubmit, stopSubmit } from 'redux-form/immutable';
+import appRemotes from './remotes';
 import moment from 'moment';
 const VALID_CACHE_DIFF = -30;
 
 export default function sagas(constants, actions, remotes, selectors, entityUrl) {
-  
+
   const {
     LOAD_RECORD,
     LOAD_RECORDS,
@@ -35,7 +36,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
     updateRecordError,
     deleteRecordSuccess,
     deleteRecordError,
-    loadRecordsCacheHit 
+    loadRecordsCacheHit
   } = actions;
 
   const {
@@ -52,7 +53,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
   } = selectors;
 
 
-  
+
 
   function* loadRecordsSaga() {
     while (true) { // eslint-disable-line no-constant-condition
@@ -69,18 +70,27 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
           yield put(loadRecordsCacheHit());
         } else {
           try {
-            // if(entityUrl === 'clients'){
-            // yield put(loadRecordsSuccess([{id:'1', name: 'test', email: 'a@g.com', phone: '783737', address: 'test', fee_acceptance_status: true,createdAt: moment()},{id:'2', name: 'test1', email: 'a1@g.com', phone: '22222', address: 'test1', hipaa_acceptance_status: true, fee_acceptance_status: true,createdAt: moment().subtract(1, 'month')}]));
-            // } else if(entityUrl === 'cases'){
-            //   yield put(loadRecordsSuccess([
-            //     {clientName:'test', id:'1', startDate: moment(), caseTitle: 'law', status: 'New'},
-            //     {clientName:'test1', id:'2', startDate: moment().subtract(1, 'month'), caseTitle: 'law1', status: 'Active'}
-            //   ]))
-            // }
+            let records;
+            /*if (entityUrl === 'clients') {
+              records = [{ id: '1', name: 'test', email: 'a@g.com', phone: '783737', address: 'test', fee_acceptance_status: true, createdAt: moment() }, { id: '2', name: 'test1', email: 'a1@g.com', phone: '22222', address: 'test1', hipaa_acceptance_status: true, fee_acceptance_status: true, createdAt: moment().subtract(1, 'month') }];
+            } else if (entityUrl === 'cases') {
+              records = [
+                { client_name: 'test', id: '1', start_date: moment(), case_title: 'law', status: 'new' },
+                { client_name: 'test1', id: '2', start_date: moment().subtract(1, 'month'), case_title: 'law1', status: 'active' }
+              ];
+            }*/
             const records = yield call(loadRecords);
 
+            let recordsMetaData;
+            if (entityUrl === 'cases') {
+              const clientsRemotes = yield call(appRemotes, 'client');
+              const clients = yield call(clientsRemotes.loadRecords);
+              //const clients = [{ id: '1', name: 'test', email: 'a@g.com', phone: '783737', address: 'test', fee_acceptance_status: true, createdAt: moment() }, { id: '2', name: 'test1', email: 'a1@g.com', phone: '22222', address: 'test1', hipaa_acceptance_status: true, fee_acceptance_status: true, createdAt: moment().subtract(1, 'month') }];
+              recordsMetaData = { clients };
+            }
+
             if (records) {
-              yield put(loadRecordsSuccess(records));
+              yield put(loadRecordsSuccess(records, recordsMetaData));
             } else {
               yield put(loadRecordsError());
             }
@@ -103,7 +113,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         const { id } = request;
         try {
           const record = yield call(loadRecord, id);
-      
+
           if (record) {
             // Delays the dispatch of loadRecordSuccess untill the store is populated with an initial list of records.
             while (true) { // eslint-disable-line no-constant-condition
@@ -136,9 +146,9 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
         try {
           const result = yield call(createRecord, record);
           yield put(createRecordSuccess(result));
-               
+
           yield put(stopSubmit(form));
-          
+
           yield put(push(process.env.PUBLIC_PATH || `/${entityUrl}`));
         } catch (error) {
           yield put(createRecordError(error));
@@ -169,7 +179,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
     }
   }
 
-  
+
   function* deleteRecordSaga() {
     while (true) { // eslint-disable-line no-constant-condition
       const { del } = yield race({
@@ -191,7 +201,7 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
     }
   }
 
-  return function* rootSaga(){
+  return function* rootSaga() {
     yield all([
       loadRecordSaga(),
       loadRecordsSaga(),
@@ -200,5 +210,5 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
       deleteRecordSaga()
     ])
   }
- 
+
 }

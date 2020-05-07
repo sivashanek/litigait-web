@@ -9,9 +9,9 @@ import SVG from 'react-inlinesvg';
 import Typography from '@material-ui/core/Typography';
 import Error from '../Error';
 
-import InputField from 'Components/InputField';
-import PasswordField from 'Components/PasswordField';
-import CheckboxField from 'Components/CheckboxField';
+import InputField from 'components/InputField';
+import PasswordField from 'components/PasswordField';
+import CheckboxField from 'components/CheckboxField';
 
 import Styles from './styles';
 

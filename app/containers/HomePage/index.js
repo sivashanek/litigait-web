@@ -42,8 +42,7 @@ export function HomePage(props) {
   if (error && error.login && error.login.response
     && error.login.response.data && error.login.response.data.error) {
     const data = error.login.response.data;
-    console.log("data", data);
-
+  
     if( typeof data.error === 'string' ) {
       err = data['error'];
     }else{

@@ -17,7 +17,7 @@ import moment from 'moment';
 
 export default function (name, path, columns, actions, selectors) {
 
-    const { selectRecord } = selectors;    
+    const { selectRecord, selectRecordsMetaData } = selectors;    
     function handleEdit(record, dispatch, { form }) {
         if(name === 'clients.edit'){
             record.createdAt = moment(record.createdAt).format('YYYY-MM-DD');
@@ -26,7 +26,7 @@ export default function (name, path, columns, actions, selectors) {
         dispatch(actions.updateRecord(record, form))
     }
 
-    function EditRecordPage({ location, record }) {
+    function EditRecordPage({ location, record, metaData }) {
 
         const [loading, setLoading] = useState(true);
 
@@ -43,6 +43,7 @@ export default function (name, path, columns, actions, selectors) {
                 form={`editRecord.${record.id}`}
                 name={name}
                 path={path}
+                metaData={metaData}
                 fields={columns.filter(_=>_.editRecord)}
                 onSubmit={handleEdit.bind(this)}
                 locationState={location.state}
@@ -53,10 +54,12 @@ export default function (name, path, columns, actions, selectors) {
 
     EditRecordPage.propTypes = {
         record: PropTypes.object,
+        metaData: PropTypes.object
     };
 
     const mapStateToProps = createStructuredSelector({
         record: (state, props) => selectRecord(props.match.params.id)(state),
+        metaData: selectRecordsMetaData()
     });
 
     const withConnect = connect(

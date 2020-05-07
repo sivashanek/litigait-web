@@ -13,7 +13,6 @@ import Styles from './styles';
 export default function ({ input, label, autoFocus, type, required, meta: { touched, error } }) {
     const classes = Styles();
     const { id, name, value, onChange } = input;
-    console.log("type",type);
     return (
         <TextField className={classes.fieldColor}
             required={required}

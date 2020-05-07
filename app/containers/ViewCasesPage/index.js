@@ -38,7 +38,7 @@ export default function (name, path, columns, actions, selectors) {
                 </Grid>
                 <Grid item xs={12} className={classes.children}>
                     <Grid continer spacing={3}>
-                        <Grid item xs={12}><Link to={path} className={classes.link}>Back</Link></Grid>
+                        <Grid item xs={12}><Link to={`${path}/${record.id}/edit`} className={classes.link}>Back</Link></Grid>
                         <Grid item xs={12}>
                             <Grid container justify="space-between">
                                 <Typography component="h1" variant="h5">
