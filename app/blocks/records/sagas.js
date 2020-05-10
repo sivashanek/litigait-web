@@ -70,22 +70,12 @@ export default function sagas(constants, actions, remotes, selectors, entityUrl)
           yield put(loadRecordsCacheHit());
         } else {
           try {
-            /*let records;
-            if (entityUrl === 'clients') {
-              records = [{ id: '1', name: 'test', email: 'a@g.com', phone: '783737', address: 'test', fee_acceptance_status: true, createdAt: moment() }, { id: '2', name: 'test1', email: 'a1@g.com', phone: '22222', address: 'test1', hipaa_acceptance_status: true, fee_acceptance_status: true, createdAt: moment().subtract(1, 'month') }];
-            } else if (entityUrl === 'cases') {
-              records = [
-                { client_name: 'test', id: '1', start_date: moment(), case_title: 'law', status: 'new' },
-                { client_name: 'test1', id: '2', start_date: moment().subtract(1, 'month'), case_title: 'law1', status: 'active' }
-              ];
-            }*/
             const records = yield call(loadRecords);
 
             let recordsMetaData;
             if (entityUrl === 'cases') {
-              const clientsRemotes = yield call(appRemotes, 'client');
+              const clientsRemotes = yield call(appRemotes, 'clients');
               const clients = yield call(clientsRemotes.loadRecords);
-              //const clients = [{ id: '1', name: 'test', email: 'a@g.com', phone: '783737', address: 'test', fee_acceptance_status: true, createdAt: moment() }, { id: '2', name: 'test1', email: 'a1@g.com', phone: '22222', address: 'test1', hipaa_acceptance_status: true, fee_acceptance_status: true, createdAt: moment().subtract(1, 'month') }];
               recordsMetaData = { clients };
             }
 

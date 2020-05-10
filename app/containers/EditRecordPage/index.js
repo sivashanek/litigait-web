@@ -26,11 +26,12 @@ export default function (name, path, columns, actions, selectors) {
         dispatch(actions.updateRecord(record, form))
     }
 
-    function EditRecordPage({ location, record, metaData }) {
+    function EditRecordPage({ location, record, metaData, dispatch }) {
 
         const [loading, setLoading] = useState(true);
 
         useEffect(() => {
+            dispatch(actions.loadRecords());
             setLoading(true);
             setTimeout(()=>{
                 setLoading(false);
@@ -38,7 +39,7 @@ export default function (name, path, columns, actions, selectors) {
         }, []);
 
         return (<div>
-            {!loading ? <EditRecordForm
+            {!loading && record && Object.keys(record).length > 0 ? <EditRecordForm
                 initialValues={record && get(name, record) || {}}
                 form={`editRecord.${record.id}`}
                 name={name}

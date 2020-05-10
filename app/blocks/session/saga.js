@@ -26,29 +26,28 @@ import {
 
 import { logIn, logOut, verifySession, signUp} from './remotes';
 
-const dummyData = {
-  authToken:
-    'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJmYWIxNDRjLWU3NjctNGFhYi04ODdhLTk3NDFmNGY4ZDNmOCIsInJvbGUiOiJzdXBlckFkbWluIiwiaWF0IjoxNTg3NTIxMDUyLCJleHAiOjE1ODc2MDc0NTJ9.q5WBjgc79tL_QwFnIcOn7njESt1V-WFqx25K_-R2wI8',
-  user: {
-    name: 'Siva',
-    role: 'superAdmin',
-  },
-};
-
 export function* verifyInitialSessionSaga() {
   const secret = store2.get('secret');
   if (secret) {
     try {
       setAuthToken(secret);
-      const user = yield call(verifySession, secret);
-      // const user = dummyData;
       store2.set('secret', secret);
+      const user = yield call(verifySession, secret);
       yield put(verifySessionSuccess(user));
-      yield put(push(process.env.PUBLIC_PATH || '/clients'));
     } catch (error) {
       store2.remove('secret');
       yield put(verifySessionError(DEFAULT_SESSION_TOKEN_ERROR));
       yield put(push(process.env.PUBLIC_PATH || '/'));
+    }
+  } else {
+    try {
+      yield call(logOut);
+      yield put(logOutSuccess());
+      yield put(push(process.env.PUBLIC_PATH || '/'));
+    } catch (error) {
+      yield put(logOutError(error));
+    } finally {
+      store2.remove('secret');
     }
   }
 }
@@ -61,7 +60,6 @@ export function* verifySessionSaga() {
       try {
         const user = yield call(verifySession, secret);
         yield put(verifySessionSuccess(user));
-        yield put(push(process.env.PUBLIC_PATH || '/clients'));
       } catch (error) {
         store2.remove('secret');
         yield put(verifySessionError(DEFAULT_SESSION_TOKEN_ERROR));
@@ -83,14 +81,12 @@ export function* loginSaga() {
     
     try {
       const result = yield call(logIn, identifier, secret);
-      // const result = dummyData;
       if(remember){
         store2.set('secret', result.authToken);
       }
-      yield put(logInSuccess(result));
       setAuthToken(result.authToken);
-      yield put(verifySessionAction(result.authToken));
-      // yield put(push(process.env.PUBLIC_PATH || '/clients'));
+      yield put(logInSuccess(result.user, result.authToken));
+      yield put(push(process.env.PUBLIC_PATH || '/clients'));
     } catch (error) {
       store2.remove('secret');
       yield put(logInError(error));
@@ -109,11 +105,11 @@ export function* logOutSaga() {
       try {
         yield call(logOut);
         yield put(logOutSuccess());
+        yield put(push(process.env.PUBLIC_PATH || '/'));
       } catch (error) {
         yield put(logOutError(error));
       } finally {
         store2.remove('secret');
-        yield put(push(process.env.PUBLIC_PATH || '/'));
       }
     }
   }
@@ -127,9 +123,8 @@ export function* signUpSaga() {
     
     try {
       const result = yield call(signUp, record);
-      // const result = dummyData;
       setAuthToken(result.authToken);
-      yield put(verifySessionAction(result.authToken));
+      yield put(signUpSuccess(result.user, result.authToken));
       yield put(push(process.env.PUBLIC_PATH || '/clients'));
     } catch (error) {
       store2.remove('secret');

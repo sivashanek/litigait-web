@@ -6,7 +6,7 @@
  * 
  */
 
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -40,6 +40,10 @@ export default function (name, path, columns, actions, selectors) {
             setOpen(false);
             dispatch(actions.deleteRecord(record.id))
         };
+
+        useEffect(() => {
+            dispatch(actions.loadRecords());
+        }, []);
 
 
         return (

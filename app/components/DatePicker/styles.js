@@ -22,9 +22,6 @@ const useStyles = makeStyles((theme) => ({
         borderColor: '#2ca01c',
         fontSize: '10px',
       },
-      // '.MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated':{
-      //   fontSize:'10px',
-      // }
     },
 
     textSize:{

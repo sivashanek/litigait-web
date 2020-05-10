@@ -40,7 +40,7 @@ export const useStyles = makeStyles(theme => ({
       },
       boxShadow: '0px 1px 6px -1px lightgrey',
       background: '#fff',
-      zIndex: '9999',
+      zIndex: '999',
       position: 'fixed',
       overflow: 'hidden'
     },

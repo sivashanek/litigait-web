@@ -20,11 +20,6 @@ export default function (store) {
     
     injectSaga('session', {saga: sessionSagas});
 
-    store.subscribe(() => {
-        //console.log('store', store.getState());
-    });
-
-    
     const simpleLazyLoadedRoute = simpleLazyLoadedRouteProvider(injectReducer, injectSaga);
     const routesProvider = routes(simpleLazyLoadedRoute);
 
@@ -32,11 +27,11 @@ export default function (store) {
         <Switch>
             {routesProvider.map((route, i) => {
                 const { path, childRoutes = [] } = route;
-                return <Auth key={i} {...route} {...store} path={`${process.env.PUBLIC_PATH || ''}/${path}`} >
+                return <Auth key={i} {...route} path={`${process.env.PUBLIC_PATH || ''}/${path}`} >
                     <div>
                         <Switch>
                             {childRoutes.map((child, c) => {
-                                return <Auth key={c} {...child} {...store} path={`${process.env.PUBLIC_PATH || ''}/${path}/${child.path}`} />
+                                return <Auth key={c} {...child} path={`${process.env.PUBLIC_PATH || ''}/${path}/${child.path}`} />
                             })}
                         </Switch>
                     </div>

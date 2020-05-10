@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
 
     textSize:{
       fontSize: '14px',
+    },
+    error:{
+      fontSize: '14px',
+      color:'red'
     }
   }));
   

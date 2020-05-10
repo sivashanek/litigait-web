@@ -14,6 +14,30 @@ const useStyles = makeStyles((theme) => ({
     },
     children: {
         padding: '25px'
+    },
+    body: {
+        paddingTop: '12px',
+        paddingBottom: '12px',
+        "& div":{
+            display:'flex'
+        }
+    },
+    button: {
+        fontWeight: 'bold',
+        borderRadius: '28px',
+        textTransform: 'none',
+        fontFamily: 'Avenir-Regular'
+    },
+    cards: {
+        boxShadow: '0px 0px 8px 1px lightgrey',
+        borderRadius: '8px',
+        paddingTop: '8px',
+        paddingBottom: '8px',
+        overflow: 'auto'
+    },
+    attach: {
+        width: '19px',
+        height: '19px'
     }
   }));
   

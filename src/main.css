@@ -175,3 +175,13 @@
       margin-left: 0px !important;
     }
   }
+
+
+  .MuiPickersDay-isSelected, .MuiPickersToolbar-toolbar {
+    background-color: #2ca01c !important;
+  }
+
+  .MuiButton-textPrimary {
+    color: #2ca01c !important;
+  }
+

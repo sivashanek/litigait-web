@@ -1,15 +1,14 @@
 
-
-
-
-
-
-
+/*
+ *
+ *   metaData
+ *
+ */
 
 function mapCases(metaData){
     if(metaData){
         const { clients = []} = metaData;
-        const clientsOptions = clients.map(c => Object.assign({}, {label: c.name, value: c.name}));
+        const clientsOptions = clients.map(c => Object.assign({}, {label: c.name, value: c.id}));
         return Object.assign({}, metaData, {clientsOptions})
     }
     return metaData;

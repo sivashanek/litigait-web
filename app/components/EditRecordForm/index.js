@@ -11,6 +11,8 @@ import { ImplementationFor } from 'components/CreateRecordForm/utils';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Styles from './styles';
+import validate from 'utils/validation'
+
 
 function editRecordForm(props) {
 
@@ -32,7 +34,7 @@ function editRecordForm(props) {
                     type="submit"
                     variant="contained"
                     color="primary"
-                    className={classes.submitBtn} >
+                    className={classes.submitBtn}>
                     Update
                 </Button>
                 <Link to={path}>
@@ -40,7 +42,7 @@ function editRecordForm(props) {
                         type="button"
                         variant="contained"
                         color="primary"
-                        className={classes.cancelBtn} >
+                        className={classes.cancelBtn}>
                         Cancel
                     </Button>
                 </Link>
@@ -51,9 +53,9 @@ function editRecordForm(props) {
 }
 
 
-
-
 export default reduxForm({
     form: 'EditRecord',
-    enableReinitialize: true
+    enableReinitialize: true,
+    validate,
+    touchOnChange: true,
 })(editRecordForm);

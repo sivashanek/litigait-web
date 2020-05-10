@@ -1,11 +1,17 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import { Route, Redirect } from 'react-router-dom';
 import * as Loads from 'react-loads';
 import HomePage from 'containers/HomePage';
-import { selectLoggedIn } from 'blocks/session/selectors';
+import { selectLoggedIn, selectLoading, selectUser, selectToken } from 'blocks/session/selectors';
+import { verifySession } from 'blocks/session/actions';
+import Spinner from 'components/Spinner';
+import store2 from 'store2';
 
-export default function ({ Component, path, exact = false, children, getState, data, childRoutes }) {
+function Auth({ Component, path, exact = false, children, data, childRoutes, loggedIn, dispatch, loading, user, token }) {
     const {
         response: Page,
         error,
@@ -13,32 +19,58 @@ export default function ({ Component, path, exact = false, children, getState, d
         isResolved,
         isRejected
     } = Loads.useLoads(path, Component);
-    const loggedIn = selectLoggedIn()(getState());
-    
+
+    useEffect(() => {
+        const secret = store2.get('secret');
+        if (loggedIn) {
+            dispatch(verifySession(secret || token))
+        }
+    }, []);
+
     return (
         <Route
             exact={exact}
             path={path}
             render={props => {
-                return loggedIn ? 
-                (<div>
-                    {isPending && 'Loading...'}
-                    {isRejected && 'Rejected'}
-                    {Page && <Page {...props}>{children}</Page>}
-                </div>) :
-                data && data.route ?
-                <HomePage {...props} /> :
-                <Redirect 
-                    to={{
-                        pathname: '/',
-                        state: {
-                            children: 'LoginForm',
-                            form: 'login'
-                        }
-                    }}
-                />
+                return loading ? <Spinner loading={loading} /> : loggedIn ?
+                    (<div>
+                        {isPending && 'Loading...'}
+                        {isRejected && 'Rejected'}
+                        {Page && <Page {...props}>{children}</Page>}
+                    </div>) :
+                    data && data.route ?
+                        <HomePage {...props} /> :
+                        <Redirect
+                            to={{
+                                pathname: '/',
+                                state: {
+                                    children: 'LoginForm',
+                                    form: 'login'
+                                }
+                            }}
+                        />
             }}
         />
     )
 
 }
+
+
+const mapStateToProps = createStructuredSelector({
+    loggedIn: selectLoggedIn(),
+    loading: selectLoading(),
+    user: selectUser(),
+    token: selectToken()
+});
+
+function mapDispatchToProps(dispatch) {
+    return {
+        dispatch
+    };
+}
+
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Auth);

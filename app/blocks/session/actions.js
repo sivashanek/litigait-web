@@ -30,7 +30,7 @@ export function verifySession(secret) {
 export function verifySessionSuccess(user) {
   return {
     type: VERIFY_SESSION_SUCCESS,
-    user,
+    user
   };
 }
 
@@ -58,10 +58,11 @@ export function logIn(identifier, secret, remember, form) {
   };
 }
 
-export function logInSuccess(user) {
+export function logInSuccess(user, token) {
   return {
     type: LOG_IN_SUCCESS,
     user,
+    token
   };
 }
 
@@ -99,10 +100,11 @@ export function signUp(record, form) {
   };
 }
 
-export function signUpSuccess(user) {
+export function signUpSuccess(user, token) {
   return {
     type: SIGN_UP_SUCCESS,
     user,
+    token
   };
 }
 

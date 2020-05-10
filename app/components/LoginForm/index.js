@@ -26,7 +26,7 @@ function LoginForm({ handleSubmit, errorMessage, clearError }) {
                     <Field name="email" label="Email" component={InputField} type="text" required autoFocus />
                 </Grid>
                 <Grid item xs={12}>
-                    <Field name="password" label="Password" component={PasswordField} type="text" required />
+                    <Field name="password" label="Password" component={PasswordField} type="text"  />
                 </Grid>
             </Grid>
             <Field name="remember" label="Remember Me" component={CheckboxField} type="checkbox" />
@@ -73,6 +73,34 @@ function LoginForm({ handleSubmit, errorMessage, clearError }) {
 }
 
 
+const validate = (values) => {
+    
+    const errors = {}
+
+    const requiredFields = ['email','password'];
+
+    requiredFields.forEach(field => {
+      if (!values[field]) {
+        errors[field] = 'Required'
+      }
+    })
+    if (
+      values.email &&
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+    ) {
+      errors.email = 'Invalid email address'
+    }
+
+    if(values.password && values.password.length<4){
+        errors.password = 'Password must be atleast 4 characters'
+    }
+
+    return errors
+  }
+
+
 export default reduxForm({
     form: 'login',
+    validate,
+    touchOnChange: true,
 })(LoginForm);

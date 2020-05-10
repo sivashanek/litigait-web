@@ -18,22 +18,15 @@ import moment from 'moment';
 export default function (name, path, columns, actions, selectors) {
 
     const { selectRecordsMetaData } = selectors;
+    
+    function handleCreate(record, dispatch, { form }) {        
 
-    function handleCreate(record, dispatch, { form }) {
         if(name === 'cases.create'){
-            if(record.start_date =='undefined' || record.start_date=='null'){
+            if(!record.start_date){
                 record.start_date = moment();
             }
-            record.status = changeStatus(record.status);
         }
         dispatch(actions.createRecord(record, form))
-    }
-
-    function changeStatus(status){
-        if(status=='New') return 'new';
-        if(status=='Active') return 'active';
-        if(status=='Close') return 'closed';
-        return;
     }
 
     const styles = {

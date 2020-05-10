@@ -31,10 +31,10 @@ function getTermsAccepted(hipaa_acceptance_status, fee_acceptance_status){
         return "Pending";
     }
     if(!hipaa_acceptance_status){
-        return "Pending Hipaa";
+        return "Pending HIPAA";
     }
     if(!fee_acceptance_status){
-        return "Pending Fee";
+        return "Pending Fee Terms";
     }
     return '';
 }
@@ -44,19 +44,12 @@ export function mapCases(records) {
     if (records && records.length > 0) {
         return records.map((record) => {
             record.start_date = record.start_date && moment(record.start_date).format('MM/DD/YYYY') || false;
-            record.status = changeStatus(record.status);
+            // record.status = changeStatus(record.status);
             return record;
         });
     }
     return records;
 
-}
-
-export function changeStatus(status){
-    if(status=='new') return 'New';
-    if(status=='active') return 'Active';
-    if(status=='close') return 'Closed';
-    return;
 }
 
 export function mapOrders(records) {

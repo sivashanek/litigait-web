@@ -14,7 +14,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Styles from './styles';
 
-export default function ({ input, label, required, meta: { touched, error } }) {
+export default function ({ input, label, required, meta: { touched, error, warning } }) {
     const classes = Styles();
     const [showPassword, setshowPassword] = useState(false);
 
@@ -28,25 +28,27 @@ export default function ({ input, label, required, meta: { touched, error } }) {
 
 
     return (
-        <FormControl className={classes.fieldColor}>
-            <InputLabel required>{<span className={classes.textSize} >{label}</span>}</InputLabel>
-            <Input
-                required={required}
-                type={showPassword ? 'text' : 'password'}
-                defaultValue={input.value || ''}
-                onChange={(e) => input.onChange(e.target.value)}
-                endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}>
-                            {showPassword ? <Visibility /> : <VisibilityOff />}
-                        </IconButton>
-                    </InputAdornment>
-                }
-            />
-        </FormControl>
+        <div>
+            <FormControl className={classes.fieldColor}>
+                <InputLabel >{<span className={classes.textSize} >{label}</span>}</InputLabel>
+                <Input
+                    type={showPassword ? 'text' : 'password'}
+                    defaultValue={input.value || ''}
+                    onChange={(e) => input.onChange(e.target.value)}
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}>
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                        </InputAdornment>
+                    }
+                />
+            </FormControl>
+            <div className={classes.error}>{touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}</div>
+        </div>
     )
 
 }

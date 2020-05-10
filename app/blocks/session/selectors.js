@@ -16,6 +16,16 @@ export const selectLoggedIn = () => createSelector(
   (sessionState) => sessionState && sessionState.loggedIn || false,
 );
 
+export const selectToken = () => createSelector(
+  selectSession(),
+  (sessionState) => sessionState && sessionState.secret || false,
+);
+
+export const selectLoading = () => createSelector(
+  selectSession(),
+  (sessionState) => sessionState && sessionState.loading || false,
+);
+
 export const selectUser = () => createSelector(
   selectSession(),
   (sessionState) => sessionState && sessionState.user || {},
@@ -39,6 +49,8 @@ export const selectLocation = () => createSelector(
 
 export default {
   selectSession,
+  selectLoading,
+  selectToken,
   selectLoggedIn,
   selectUser,
   selectError,
