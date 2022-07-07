@@ -89,7 +89,7 @@
     "lodash": "4.17.11",
     "material-ui-pickers": "^2.2.4",
     "minimist": "1.2.0",
-    "moment": "2.24.0",
+    "moment": "2.29.4",
     "prop-types": "15.7.2",
     "react": "16.8.6",
     "react-date-picker": "^8.0.1",
